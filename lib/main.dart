@@ -27,3 +27,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+    // final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+//     double screenWidth = MediaQuery.of(context).size.width;
+//     double screenHeight = MediaQuery.of(context).size.height;
+    

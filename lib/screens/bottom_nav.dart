@@ -1,3 +1,5 @@
+import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/screens/trang_chu_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -12,7 +14,7 @@ class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    Page1(),
+    TrangChuPage(),
     Page2(),
     Page3(),
     Page4(),
@@ -20,6 +22,7 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
+    final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
@@ -27,16 +30,33 @@ class _BottomNavState extends State<BottomNav> {
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        color: Colors.black,
+        decoration: BoxDecoration(
+          color: myColors.whiteOrBlack,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              spreadRadius: 1,
+              blurRadius: 1,
+              offset:
+                  Offset(0, -1), // this is the important line for the shadow
+            ),
+          ],
+        ),
         child: GNav(
           gap: 8,
           // backgroundColor: Colors.black,
-          color: Colors.white,
+          // color: Colors.white,
           activeColor: Colors.white,
           tabBackgroundColor: Colors.grey,
           padding: const EdgeInsets.all(15),
           hoverColor: Colors.blue,
-          tabs: [
+          selectedIndex: _selectedIndex,
+          onTabChange: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          tabs: const [
             GButton(
               icon: Icons.home_outlined,
               text: 'Trang chủ',
@@ -54,12 +74,6 @@ class _BottomNavState extends State<BottomNav> {
               text: 'Danh mục',
             ),
           ],
-          selectedIndex: _selectedIndex,
-          onTabChange: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
         ),
       ),
     );
