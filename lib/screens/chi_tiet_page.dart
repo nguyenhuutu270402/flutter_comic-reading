@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ChiTietPage extends StatefulWidget {
@@ -26,6 +27,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
     "ngaycapnhat": "2023-03-06T23:35:03.000Z",
     "chuongmoinhat": 6
   };
+  final isShowMota = false;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -46,7 +48,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                           EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                       // color: Colors.red,
                       width: screenWidth,
-                      alignment: Alignment.center,
+                      // alignment: Alignment.center,
                       child: Column(
                         children: [
                           Text(
@@ -62,7 +64,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
                             style: TextStyle(
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.italic),
+                                fontStyle: FontStyle.italic,
+                                color: Colors.grey),
                           ),
                           SizedBox(height: 10),
                           Image.network(
@@ -70,18 +73,311 @@ class _ChiTietPageState extends State<ChiTietPage> {
                             width: screenWidth * 0.5,
                             fit: BoxFit.contain,
                           ),
+                          SizedBox(height: 10),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                 flex: 3,
-                                child: Text('Tên khác'),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.add,
+                                      size: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    Text(
+                                      '   Tên khác',
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14),
+                                    ),
+                                  ],
+                                ),
                               ),
                               Expanded(
                                 flex: 7,
-                                child: Text(item['tenkhac'].toString()),
+                                child: Text(
+                                  item['tenkhac'].toString(),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 14),
+                                ),
                               ),
                             ],
                           ),
+                          SizedBox(height: 6),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      size: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    Text(
+                                      '   Tác giả',
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 7,
+                                child: InkWell(
+                                  onTap: () {
+                                    print('tap tac gia');
+                                  },
+                                  child: Text(
+                                    item['tacgia'].toString(),
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 14),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.signal_cellular_alt,
+                                      size: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    Text(
+                                      '   Tình trạng',
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 7,
+                                child: Text(
+                                  item['tinhtrang'] == 1
+                                      ? 'Đang tiến hành'
+                                      : 'Hoàn thành',
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.local_offer,
+                                      size: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    Text(
+                                      '   Thể loại',
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 7,
+                                child: Text(
+                                  item['theloai'].toString(),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.remove_red_eye,
+                                      size: 16,
+                                      color: Colors.grey,
+                                    ),
+                                    Text(
+                                      '   Lượt xem',
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 7,
+                                child: Text(
+                                  item['tongluotxem'].toString(),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            // color: Colors.red,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  child: Text(
+                                    'Đánh giá: ',
+                                    style: TextStyle(color: myColors.blueColor),
+                                  ),
+                                ),
+                                Text(
+                                  '${item['sosaotrungbinh']}/5 - ${item['tongdanhgia']} lượt đánh giá',
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 14),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            height: 30,
+                            child: Row(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Xử lý sự kiện khi nhấn nút
+                                  },
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Colors.white,
+                                        size: 18,
+                                      ),
+                                      Text('Theo dõi',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14)),
+                                    ],
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.green,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    fixedSize: Size(110, 30),
+                                  ),
+                                ),
+                                Text(
+                                  '   ${item['tongtheodoi'].toString()}',
+                                ),
+                                Text(
+                                  ' Lượt theo dõi',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            height: 30,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Xử lý sự kiện khi nhấn nút
+                              },
+                              child: Text(
+                                'Đọc từ đầu',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 14),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.ogrange,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                fixedSize: Size(110, 30),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            padding: EdgeInsets.only(bottom: 2),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                    width: 2.0, color: AppColors.blue),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.description,
+                                  color: AppColors.blue,
+                                  size: 20,
+                                ),
+                                Text(
+                                  'NỘI DUNG',
+                                  style: TextStyle(
+                                      color: AppColors.blue,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              item['mota'].toString(),
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: InkWell(
+                              child: Text(
+                                isShowMota ? 'Xem thêm>>' : '<<Rút gọn',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: isShowMota
+                                        ? AppColors.blue
+                                        : Colors.purpleAccent),
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -102,8 +398,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                           color: Colors.grey.withOpacity(0.1),
                           spreadRadius: 0.1,
                           blurRadius: 0.1,
-                          offset: Offset(0,
-                              1), // Tạo đổ bóng chỉ ở phần bottom của Container
+                          offset: Offset(0, 1),
                         ),
                       ],
                     ),
