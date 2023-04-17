@@ -9,7 +9,7 @@ extension ExtendedTheme on BuildContext {
 
 class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   static const lightMode = CustomThemeExtension(
-    circleImageColor: Color(0XFF25D366),
+    blackOrWhite: AppColors.black,
     whiteOrBlack: AppColors.white,
     blueColor: AppColors.blueLight,
     langBtnBgColor: Color(0XFFF7F8FA),
@@ -19,7 +19,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     backgroundColorBottomSheet: Colors.white,
   );
   static const darkMode = CustomThemeExtension(
-    circleImageColor: AppColors.greenDark,
+    blackOrWhite: AppColors.white,
     whiteOrBlack: AppColors.black,
     blueColor: AppColors.blueDark,
     langBtnBgColor: Color(0XFF182229),
@@ -28,7 +28,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     authAppbarTextColor: Colors.white,
     backgroundColorBottomSheet: Color(0XFF202C33),
   );
-  final Color? circleImageColor;
+  final Color? blackOrWhite;
   final Color? whiteOrBlack;
   final Color? blueColor;
   final Color? langBtnBgColor;
@@ -38,7 +38,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   final Color? backgroundColorBottomSheet;
 
   const CustomThemeExtension({
-    this.circleImageColor,
+    this.blackOrWhite,
     this.whiteOrBlack,
     this.blueColor,
     this.langBtnBgColor,
@@ -50,7 +50,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
 
   @override
   ThemeExtension<CustomThemeExtension> copyWith({
-    Color? circleImageColor,
+    Color? blackOrWhite,
     Color? whiteOrBlack,
     Color? blueColor,
     Color? langBtnBgColor,
@@ -60,7 +60,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     Color? backgroundColorBottomSheet,
   }) {
     return CustomThemeExtension(
-      circleImageColor: circleImageColor ?? this.circleImageColor,
+      blackOrWhite: blackOrWhite ?? this.blackOrWhite,
       whiteOrBlack: whiteOrBlack ?? this.whiteOrBlack,
       blueColor: blueColor ?? this.blueColor,
       langBtnBgColor: langBtnBgColor ?? this.langBtnBgColor,
@@ -78,7 +78,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
       covariant ThemeExtension<CustomThemeExtension>? other, double t) {
     if (other is! CustomThemeExtension) return this;
     return CustomThemeExtension(
-      circleImageColor: Color.lerp(circleImageColor, other.circleImageColor, t),
+      blackOrWhite: Color.lerp(blackOrWhite, other.blackOrWhite, t),
       whiteOrBlack: Color.lerp(whiteOrBlack, other.whiteOrBlack, t),
       blueColor: Color.lerp(blueColor, other.blueColor, t),
       langBtnBgColor: Color.lerp(langBtnBgColor, other.langBtnBgColor, t),
