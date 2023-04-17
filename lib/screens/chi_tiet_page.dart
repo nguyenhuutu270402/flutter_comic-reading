@@ -27,7 +27,100 @@ class _ChiTietPageState extends State<ChiTietPage> {
     "ngaycapnhat": "2023-03-06T23:35:03.000Z",
     "chuongmoinhat": 6
   };
-  final isShowMota = false;
+  List<Map<String, dynamic>> listChuong = [
+    {
+      "id": 67,
+      "tenchuong": "Chapter 6: Tôi vs Nanase vs Em gái",
+      "sochuong": 6,
+      "ngaycapnhat": "2023-03-06T23:35:03.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": null,
+      "tongsoluot": 7
+    },
+    {
+      "id": 5,
+      "tenchuong": "Chapter 5: Cuộc viếng thăm bất ngờ của cô em gái",
+      "sochuong": 5,
+      "ngaycapnhat": "2023-03-06T23:34:09.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 30
+    },
+    {
+      "id": 4,
+      "tenchuong": "Chapter 4: Hình phạt của Nanase",
+      "sochuong": 4,
+      "ngaycapnhat": "2023-03-06T23:32:31.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 20
+    },
+    {
+      "id": 3,
+      "tenchuong": "Chapter 3: Em yêu anh vì XX",
+      "sochuong": 3,
+      "ngaycapnhat": "2023-03-06T23:31:28.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 26
+    },
+    {
+      "id": 2,
+      "tenchuong": "Chapter 2: Nô lệ của công ty mất nhà",
+      "sochuong": 2,
+      "ngaycapnhat": "2023-03-06T23:29:53.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 36
+    },
+    {
+      "id": 1,
+      "tenchuong": "Chapter 1: Cô gái tên Nanase",
+      "sochuong": 1,
+      "ngaycapnhat": "2023-03-06T23:25:27.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 75
+    }
+  ];
+  List<Map<String, dynamic>> listTacGia = [
+    {"id": 1, "tentacgia": "Shinonome Toru"}
+  ];
+  List<Map<String, dynamic>> listTheLoai = [
+    {
+      "id": 6,
+      "tentheloai": "Comedy",
+      "mota":
+          "Thể loại có nội dung trong sáng và cảm động, thường có các tình tiết gây cười, các xung đột nhẹ nhàng"
+    },
+    {
+      "id": 11,
+      "tentheloai": "Drama",
+      "mota":
+          "Thể loại mang đến cho người xem những cảm xúc khác nhau: buồn bã, căng thẳng thậm chí là bi phẫn"
+    },
+    {"id": 21, "tentheloai": "Manga", "mota": "Truyện tranh của Nhật Bản"},
+    {
+      "id": 30,
+      "tentheloai": "Psychological",
+      "mota":
+          "Thể loại liên quan đến những vấn đề về tâm lý của nhân vật ( tâm thần bất ổn, điên cuồng ...)"
+    },
+    {
+      "id": 31,
+      "tentheloai": "Romance",
+      "mota":
+          "Thường là những câu chuyện về tình yêu, tình cảm lãng mạn. Ớ đây chúng ta sẽ lấy ví dụ như tình yêu giữa một người con trai và con gái, bên cạnh đó đặc điểm thể loại này là kích thích trí tưởng tượng của bạn về tình yêu"
+    },
+    {
+      "id": 34,
+      "tentheloai": "Seinen",
+      "mota":
+          "Thể loại của manga thường nhằm vào những đối tượng nam 18 đến 30 tuổi, nhưng người xem có thể lớn tuổi hơn, với một vài bộ truyện nhắm đến các doanh nhân nam quá 40. Thể loại này có nhiều phong cách riêng biệt , nhưng thể loại này có những nét riêng biệt, thường được phân vào những phong cách nghệ thuật rộng hơn và phong phú hơn về chủ đề, có các loại từ mới mẻ tiên tiến đến khiêu dâm"
+    }
+  ];
+
+  bool isShowMota = false;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -46,9 +139,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                     Container(
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      // color: Colors.red,
                       width: screenWidth,
-                      // alignment: Alignment.center,
                       child: Column(
                         children: [
                           Text(
@@ -127,15 +218,23 @@ class _ChiTietPageState extends State<ChiTietPage> {
                               ),
                               Expanded(
                                 flex: 7,
-                                child: InkWell(
-                                  onTap: () {
-                                    print('tap tac gia');
-                                  },
-                                  child: Text(
-                                    item['tacgia'].toString(),
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14),
-                                  ),
+                                child: Wrap(
+                                  children:
+                                      listTacGia.asMap().entries.map((entry) {
+                                    int index = entry.key;
+                                    dynamic item = entry.value;
+                                    return InkWell(
+                                      onTap: () {},
+                                      child: Text(
+                                        index == listTacGia.length - 1
+                                            ? '${item['tentacgia']}'
+                                            : '${item['tentacgia']} - ',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColors.blue),
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ],
@@ -200,10 +299,23 @@ class _ChiTietPageState extends State<ChiTietPage> {
                               ),
                               Expanded(
                                 flex: 7,
-                                child: Text(
-                                  item['theloai'].toString(),
-                                  style: TextStyle(
-                                      color: Colors.grey, fontSize: 14),
+                                child: Wrap(
+                                  children:
+                                      listTheLoai.asMap().entries.map((entry) {
+                                    int index = entry.key;
+                                    dynamic item = entry.value;
+                                    return InkWell(
+                                      onTap: () {},
+                                      child: Text(
+                                        index == listTheLoai.length - 1
+                                            ? '${item['tentheloai']}'
+                                            : '${item['tentheloai']} - ',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            color: AppColors.blue),
+                                      ),
+                                    );
+                                  }).toList(),
                                 ),
                               ),
                             ],
@@ -248,6 +360,14 @@ class _ChiTietPageState extends State<ChiTietPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return MyModal();
+                                      },
+                                    );
+                                  },
                                   child: Text(
                                     'Đánh giá: ',
                                     style: TextStyle(color: myColors.blueColor),
@@ -362,12 +482,18 @@ class _ChiTietPageState extends State<ChiTietPage> {
                             alignment: Alignment.topLeft,
                             child: Text(
                               item['mota'].toString(),
+                              maxLines: isShowMota ? 2000 : 3,
+                              overflow: TextOverflow.ellipsis,
                               style: TextStyle(fontSize: 14),
                             ),
                           ),
                           Container(
                             alignment: Alignment.topLeft,
                             child: InkWell(
+                              onTap: () {
+                                isShowMota = !isShowMota;
+                                setState(() {});
+                              },
                               child: Text(
                                 isShowMota ? 'Xem thêm>>' : '<<Rút gọn',
                                 style: TextStyle(
@@ -377,7 +503,111 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                         : Colors.purpleAccent),
                               ),
                             ),
-                          )
+                          ),
+                          SizedBox(height: 10),
+                          Container(
+                            alignment: Alignment.topLeft,
+                            padding: EdgeInsets.only(bottom: 2),
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                    width: 2.0, color: AppColors.blue),
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.description,
+                                  color: AppColors.blue,
+                                  size: 20,
+                                ),
+                                Text(
+                                  'DANH SÁCH CHƯƠNG',
+                                  style: TextStyle(
+                                      color: AppColors.blue,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: listChuong.length,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {},
+                                child: Container(
+                                  alignment: Alignment.topLeft,
+                                  margin: EdgeInsets.symmetric(vertical: 16),
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 5,
+                                        child: Container(
+                                          alignment: Alignment.topLeft,
+                                          // color: Colors.red,
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'Chapter ${listChuong[index]['sochuong']}',
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(
+                                                        color: listChuong[index]
+                                                                    [
+                                                                    'idnguoidung_da_doc'] !=
+                                                                null
+                                                            ? Colors.grey
+                                                            : myColors
+                                                                .blackOrWhite),
+                                                  ),
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.schedule,
+                                                    size: 14,
+                                                    color: Colors.grey,
+                                                  ),
+                                                  Text(
+                                                    ' 07/03/2023',
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(
+                                                        color: Colors.grey,
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.remove_red_eye,
+                                            color: Colors.grey,
+                                            size: 14,
+                                          ),
+                                          Text(
+                                            ' ${listChuong[index]['tongsoluot'].toString()}',
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -426,6 +656,74 @@ class _ChiTietPageState extends State<ChiTietPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MyModal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Stack(
+        children: [
+          Container(
+            color: Colors.black.withOpacity(0.1),
+          ),
+          Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width - 16,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(22),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Thông báo',
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 18,
+                          decoration: TextDecoration.none),
+                    ),
+                    const SizedBox(height: 22),
+                    const Text(
+                      'Chúng tôi không tìm thấy tài khoản với số điện thoại này',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 54, 54, 54),
+                          fontSize: 14,
+                          decoration: TextDecoration.none,
+                          fontStyle: FontStyle.normal,
+                          fontFamily: 'Roboto'),
+                    ),
+                    const SizedBox(height: 22),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Xử lý sự kiện khi nhấn nút
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Quay lại',
+                          style: TextStyle(color: Colors.white, fontSize: 16)),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFF4A62F),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          fixedSize: const Size(145, 48)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
