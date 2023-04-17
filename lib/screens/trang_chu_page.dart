@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/screens/chi_tiet_page.dart';
 import 'package:flutter/material.dart';
 
 class TrangChuPage extends StatefulWidget {
@@ -10,18 +12,90 @@ class TrangChuPage extends StatefulWidget {
 }
 
 class _TrangChuPageState extends State<TrangChuPage> {
-  final List<int> numbers = [1, 2, 3, 4, 5, 6, 7, 8];
-  final List<Color> colors = [
-    Colors.red,
-    Colors.green,
-    Colors.blue,
-    Colors.yellow,
-    Colors.purple,
-    Colors.orange,
-    Colors.grey,
-    Colors.pink,
-  ];
   List<Map<String, dynamic>> data = [
+    {
+      "id": 19,
+      "tentruyen": "AJIN-CHAN WA KATARITAI",
+      "tenkhac": "",
+      "tinhtrang": 1,
+      "mota":
+          "Nếu bạn là thầy giáo và học sinh đều là những em lai quỷ dễ thương, bạn sẽ làm gì? theo dõi để xem anh main chúng ta sẽ xử lí thế nào với những vấn đề hết sức cute của mấy em này nhé.",
+      "imagelink":
+          "https://st.nettruyenup.com/data/comics/177/ajin-chan-wa-kataritai.jpg",
+      "tongluotxem": 2,
+      "tongtheodoi": 0,
+      "tongdanhgia": 0,
+      "sosaotrungbinh": null,
+      "ngaycapnhat": "2023-03-07T02:15:42.000Z",
+      "chuongmoinhat": 3
+    },
+    {
+      "id": 5,
+      "tentruyen": "Ningen Fushin No Boukenshatachi Ga Sekai O Sukuu Youdesu ",
+      "tenkhac": "",
+      "tinhtrang": 1,
+      "mota":
+          "Câu chuyện về bốn nhà thám hiểm, tất cả những người đã trải qua sự phản bội và khó khăn, cùng nhau vươn lên trong xã hội. Nhóm dịch : Sứa fuho team",
+      "imagelink":
+          "https://st.nettruyenup.com/data/comics/227/ningen-fushin-no-boukenshatachi-ga-sekai-9739.jpeg",
+      "tongluotxem": 10,
+      "tongtheodoi": 2,
+      "tongdanhgia": 8,
+      "sosaotrungbinh": 3.125,
+      "ngaycapnhat": "2023-03-07T01:40:57.000Z",
+      "chuongmoinhat": 3
+    },
+    {
+      "id": 17,
+      "tentruyen": "DEAD MOUNT DEATH PLAY",
+      "tenkhac": "",
+      "tinhtrang": 1,
+      "mota":
+          "Một thể loại xuyên không nhưng là xuyên không từ thế giới fantasy sang thế giới hiện đại. một trò chơi hại não và kinh dị bắt đầu",
+      "imagelink":
+          "https://st.nettruyenup.com/data/comics/203/dead-mount-death-play.jpg",
+      "tongluotxem": 2,
+      "tongtheodoi": 2,
+      "tongdanhgia": 3,
+      "sosaotrungbinh": 4.3333,
+      "ngaycapnhat": "2023-03-07T01:34:50.000Z",
+      "chuongmoinhat": 3
+    },
+    {
+      "id": 22,
+      "tentruyen": "OTTOMAN: ÔNG CHỒNG QUỐC DÂN",
+      "tenkhac": "オットマン-OTTOMAN",
+      "tinhtrang": 1,
+      "mota":
+          "Soya là một nhân viên văn phòng, suốt ngày chỉ trải qua chuỗi ngày vô vị lặp đi lặp lại,làm con chó cụt đuôi cho sếp lớn , trong khi bản thân lại nuôi dưỡng ước mơ trở thành họa sĩ truyện tranh. Cho đến một ngày,anh bị xe tải đâm nát bét và bị một sinh vật ngoài hành tinh ký sinh vào cơ thể !? Hơn nữa,người vợ Yuka của anh còn bị lũ quái vật bắt nhốt với ý định ăn thịt...! Soya, với quyết tâm trở thành \"OTTOMAN\" đã chạy nhanh hết sức để có thể bảo vệ cho người vợ yêu dấu của mình!*Xuất bản trên tạp chí Weeky young jump bắt đầu từ 5/8",
+      "imagelink":
+          "https://storage.googleapis.com/app-comic-reading.appspot.com/truyen/1678171138712_ottoman-ong-chong-quoc-dan.jpg?GoogleAccessId=firebase-adminsdk-luh5y%40app-comic-reading.iam.gserviceaccount.com&Expires=16725225600&Signature=dfYqK1s33ReeWSQ3cyUX0H%2F2DLr4JB4x59Vi5umqjNLudgS47HjiBRLmIs8aPhRERrZSeCdLEDm%2F8si96SVeMRCnNpXzQtxvsmtDgw5wkFW8U25cillEZySlk5IyKbNoNXKpZDNoLl1AayC%2FWAtWivcmZNdv795WvV%2Fo4LITWKk6U06HQ%2B1Z23cxMoXi5wFFXqdPVl6fc3JubUUXaHZW0O5LKxWpE3aA1f0ZZKVdS7f91up8ifuQnDiBii33nrChm8zBnueRAZk1JlL4lDKs%2F0C7dw8uTXQgY5opxs9M6xg9tj1y3cr%2B4I6mdodDA1k%2Bnx2H4b5ZJ1ztP4DVlbX4Dw%3D%3D",
+      "tongluotxem": 19,
+      "tongtheodoi": 1,
+      "tongdanhgia": 0,
+      "sosaotrungbinh": null,
+      "ngaycapnhat": "2023-03-07T01:14:53.000Z",
+      "chuongmoinhat": 4
+    },
+    {
+      "id": 1,
+      "tentruyen": "Nanase-san no Koi ga Ijou",
+      "tenkhac": "Cô nàng cuồng tình Nanase",
+      "tinhtrang": 1,
+      "mota":
+          "Takahashi đã gặp được Nanase, một cô gái dễ thương và trong sáng thông qua ứng dụng hẹn hò. Quan hệ của cả hai ngày càng tiến triển một cách tốt đẹp rồi bỗng dưng một ngày nọ Takahashi được Nanase mời tới nhà mình chơi và chứng kiến một cảnh tượng bất ngờ",
+      "imagelink":
+          "https://storage.googleapis.com/app-comic-reading.appspot.com/truyen/1678169651281_co-nang-cuong-tinh-nanase.jpg?GoogleAccessId=firebase-adminsdk-luh5y%40app-comic-reading.iam.gserviceaccount.com&Expires=16725200400&Signature=H8p5Zwq4%2B90Li1i%2FkvglPeR6p4PjYqan4qoBsyeYqPUrWa9F%2FP41X%2FnK2SmYM9yC3eZgO6jNIJ4OCMo%2BdvZPRsHCEGlcSN9riP2hN3gIkEjqFi1U7B00W4KiDMf3qAOCE%2FmUryuH9OZ1j3prSmg6ZIqNnBiyb%2BtBuV4ZmP3rVH0DxLxvIHymVQPVS1LDEmCYQFm7Lh7sippEcn02j0h%2B2LoXib8nv43uOv%2FH9lYpsyWuGcRoSBxvSBnXy8nlrGIhjEKOJVlW1YzQRRkWYuEFATLU%2BLgogUNsaHzRgzU%2BNl0E3OLIlbIIhF3B9lhsSbd%2FtjpTJDHN1%2BKtpIxEts9DDQ%3D%3D",
+      "tongluotxem": 194,
+      "tongtheodoi": 8,
+      "tongdanhgia": 11,
+      "sosaotrungbinh": 3.8182,
+      "ngaycapnhat": "2023-03-06T23:35:03.000Z",
+      "chuongmoinhat": 6
+    }
+  ];
+
+  List<Map<String, dynamic>> data2 = [
     {
       "id": 21,
       "tentruyen": "ISEKAI SHOKUDOU",
@@ -375,6 +449,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
       "chuongmoinhat": 6
     }
   ];
+
   int pageNo = 0;
   late final Timer carasouelTimer;
 
@@ -413,110 +488,327 @@ class _TrangChuPageState extends State<TrangChuPage> {
     double hieghtBox = 200;
 
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+
     if (screenWidth > 600) {
       crossAxisCount = 4;
       hieghtBox = 300;
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text('shhhhh'),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 200,
-              child: PageView.builder(
-                controller: pageController,
-                itemCount: data.length,
-                onPageChanged: (index) {
-                  pageNo = index;
-                  setState(() {});
-                },
-                itemBuilder: (_, index) {
-                  return AnimatedBuilder(
-                    animation: pageController,
-                    builder: (cxt, child) {
-                      return child!;
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          right: 5, left: 5, top: 10, bottom: 10),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                      alignment: Alignment.topCenter,
-                      child: Stack(
-                        children: [
-                          Image.network(
-                            data[index]['imagelink'],
-                            fit: BoxFit.cover,
-                            width: 200,
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            child: Container(
-                              width: 200,
-                              color: Colors.black.withOpacity(0.5),
-                              child: Text(
-                                data[index]['tentruyen']
-                                    .toString()
-                                    .toUpperCase(),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    width: screenWidth,
+                    margin: EdgeInsets.only(top: 10, left: 10),
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Truyện đề cử',
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  Stack(
+                    children: [
+                      SizedBox(
+                        height: 180,
+                        child: PageView.builder(
+                          controller: pageController,
+                          itemCount: data.length,
+                          onPageChanged: (index) {
+                            pageNo = index;
+                            setState(() {});
+                          },
+                          itemBuilder: (_, index) {
+                            return AnimatedBuilder(
+                              animation: pageController,
+                              builder: (cxt, child) {
+                                return child!;
+                              },
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ChiTietPage(id: data2[index]['id']),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      right: 5, left: 5, top: 10, bottom: 10),
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    children: [
+                                      Image.network(
+                                        data[index]['imagelink'],
+                                        fit: BoxFit.cover,
+                                        width: 100,
+                                        height: 180,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          padding: EdgeInsets.all(10),
+                                          color: Colors.black.withOpacity(0.5),
+                                          child: Column(
+                                            children: [
+                                              Container(
+                                                alignment: Alignment.topLeft,
+                                                child: Text(
+                                                  data[index]['tentruyen']
+                                                      .toString()
+                                                      .toUpperCase(),
+                                                  maxLines: 2,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                alignment: Alignment.topLeft,
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical: 4),
+                                                child: Text(
+                                                  'Lượt xem: ${data[index]['tongluotxem']}',
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                alignment: Alignment.topLeft,
+                                                child: Text(
+                                                  data[index]['mota'],
+                                                  maxLines: 4,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                textAlign: TextAlign.center,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 20,
+                        child: SizedBox(
+                          width: screenWidth,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(
+                              data.length,
+                              (index) => Container(
+                                margin: EdgeInsets.all(1),
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 7,
+                                  color: pageNo == index
+                                      ? Colors.blue
+                                      : Colors.grey,
+                                ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Container(
+                    width: screenWidth,
+                    margin: EdgeInsets.only(top: 10, left: 10),
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Truyện mới cập nhật',
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600),
                     ),
-                  );
-                },
+                  ),
+                  // GridView
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: data2.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 0.6,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Material(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(5),
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChiTietPage(id: data2[index]['id']),
+                                ),
+                              );
+                            },
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 8,
+                                  child: Stack(
+                                    children: [
+                                      SizedBox(
+                                        height: screenHeight,
+                                        width: screenWidth,
+                                        child: Ink.image(
+                                          image: NetworkImage(
+                                            data2[index]['imagelink'],
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      Positioned(
+                                          top: 5,
+                                          left: 5,
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 7, vertical: 3),
+                                            decoration: BoxDecoration(
+                                              color: Colors.amber,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Text(
+                                              '07/03/2023',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ))
+                                    ],
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 3,
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 5),
+                                        width: screenWidth,
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          data2[index]['tentruyen'],
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      Container(
+                                        width: screenWidth,
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          'Chapter ${data2[index]['chuongmoinhat']}',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                data.length,
-                (index) => Container(
-                  margin: EdgeInsets.all(2),
-                  child: Icon(
-                    Icons.circle,
-                    size: 10,
-                    color: pageNo == index ? Colors.indigoAccent : Colors.grey,
+          ),
+          Positioned(
+            child: Stack(
+              children: [
+                Container(
+                  width: screenWidth,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: myColors.whiteOrBlack,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: Offset(0,
+                            2), // Tạo đổ bóng chỉ ở phần bottom của Container
+                      ),
+                    ],
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Trang chủ',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                   ),
                 ),
-              ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: IconButton(
+                    splashColor: Colors.transparent,
+                    splashRadius: 22,
+                    icon: Icon(Icons.search, color: Colors.white),
+                    onPressed: () {
+                      print('Button pressed');
+                    },
+                  ),
+                ),
+              ],
             ),
-
-            // GridView
-            GridView.builder(
-              shrinkWrap: true,
-              itemCount: colors.length,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 0.5,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 400,
-                  color: colors[index],
-                );
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:comic_reading/common/theme/dark_theme.dart';
 import 'package:comic_reading/common/theme/light_theme.dart';
-import 'package:comic_reading/screens/bottom_nav.dart';
+import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 void main() {
