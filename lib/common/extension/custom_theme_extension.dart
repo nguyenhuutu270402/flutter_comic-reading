@@ -26,7 +26,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     langBtnHighLightBgColor: Color(0XFF09141A),
     greyBackground: Color.fromARGB(255, 71, 93, 105),
     authAppbarTextColor: Colors.white,
-    backgroundColorBottomSheet: Color(0XFF202C33),
+    backgroundColorBottomSheet: Color(0XFF424242),
   );
   final Color? blackOrWhite;
   final Color? whiteOrBlack;

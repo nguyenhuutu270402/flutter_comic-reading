@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
+import 'package:comic_reading/widgets/comment_sliding_sheet_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class ChiTietChuongPage extends StatefulWidget {
   const ChiTietChuongPage({super.key, required this.id, required this.index});
@@ -15,6 +21,10 @@ class ChiTietChuongPage extends StatefulWidget {
 }
 
 class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
+  late final ScrollController _scrollController;
+  bool _showBoxPosition = false;
+  Timer? _timer;
+
   List<Map<String, dynamic>> listImage = [
     {
       "id": 296,
@@ -417,6 +427,42 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
+      _timer = Timer(Duration(milliseconds: 1000), () {
+        _showBoxPosition = true;
+        setState(() {});
+        print('Cuộn lên');
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      });
+    } else if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
+      _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
+      _timer = Timer(Duration(milliseconds: 1000), () {
+        _showBoxPosition = false;
+        setState(() {});
+        print('Cuộn xuống');
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -427,6 +473,7 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
         child: Stack(
           children: [
             SingleChildScrollView(
+              controller: _scrollController,
               child: Column(
                 children: [
                   Container(
@@ -453,7 +500,15 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                         ),
                         IconButton(
                           onPressed: () {
-                            print('tap');
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return DialogListChuong(
+                                  listChuong: listChuong,
+                                  index: widget.index,
+                                );
+                              },
+                            );
                           },
                           splashColor: Colors.black,
                           splashRadius: 22,
@@ -475,128 +530,131 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                 ],
               ),
             ),
-            Positioned(
-              child: Container(
-                height: screenHeight,
-                child: Stack(
-                  children: [
-                    Container(
-                      height: 50,
-                      color: myColors.whiteOrBlack,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            splashColor: Colors.black,
-                            splashRadius: 22,
-                            icon: Icon(Icons.arrow_back,
-                                color: myColors.blackOrWhite),
-                          ),
-                          Text(
-                            'ID chương ${widget.id}',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return DialogListChuong(
-                                      listChuong: listChuong);
-                                },
-                              );
-                            },
-                            splashColor: Colors.black,
-                            splashRadius: 22,
-                            icon:
-                                Icon(Icons.list, color: myColors.blackOrWhite),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
+            if (_showBoxPosition)
+              Positioned(
+                child: Container(
+                  height: screenHeight,
+                  child: Stack(
+                    children: [
+                      Container(
                         height: 50,
-                        width: screenWidth,
-                        color: Colors.black.withOpacity(0.7),
+                        color: myColors.whiteOrBlack,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            InkWell(
-                              onTap: () {
-                                print('trước sau');
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
                               },
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 16,
-                                    color: AppColors.ogrange,
-                                  ),
-                                  Text(
-                                    'Trước',
-                                    style: TextStyle(
-                                      color: AppColors.ogrange,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                              splashColor: Colors.black,
+                              splashRadius: 22,
+                              icon: Icon(Icons.arrow_back,
+                                  color: myColors.blackOrWhite),
                             ),
-                            InkWell(
-                              onTap: () {
-                                print('trước sau');
-                              },
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Sau ',
-                                    style: TextStyle(
-                                      color: AppColors.ogrange,
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 16,
-                                    color: AppColors.ogrange,
-                                  ),
-                                ],
+                            Text(
+                              'ID chương ${widget.id}',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             IconButton(
                               onPressed: () {
-                                print('tap favorite');
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return DialogListChuong(
+                                      listChuong: listChuong,
+                                      index: widget.index,
+                                    );
+                                  },
+                                );
                               },
                               splashColor: Colors.black,
                               splashRadius: 22,
-                              icon: Icon(
-                                Icons.favorite_outline,
-                                color: Colors.red,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                print('tap comment');
-                              },
-                              splashColor: Colors.black,
-                              splashRadius: 22,
-                              icon: Icon(Icons.message_outlined,
-                                  color: Colors.green),
+                              icon: Icon(Icons.list,
+                                  color: myColors.blackOrWhite),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          height: 50,
+                          width: screenWidth,
+                          color: Colors.black.withOpacity(0.7),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  print('trước sau');
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_back_ios,
+                                      size: 16,
+                                      color: AppColors.ogrange,
+                                    ),
+                                    Text(
+                                      'Trước',
+                                      style: TextStyle(
+                                        color: AppColors.ogrange,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  print('trước sau');
+                                },
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      'Sau ',
+                                      style: TextStyle(
+                                        color: AppColors.ogrange,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 16,
+                                      color: AppColors.ogrange,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  print('tap favorite');
+                                },
+                                splashColor: Colors.black,
+                                splashRadius: 22,
+                                icon: Icon(
+                                  Icons.favorite_outline,
+                                  color: Colors.red,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  showMySlidingSheet(context, listImage);
+                                },
+                                splashColor: Colors.black,
+                                splashRadius: 22,
+                                icon: Icon(Icons.message_outlined,
+                                    color: Colors.green),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ),
@@ -604,15 +662,34 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   }
 }
 
+// Widget buildSheet(BuildContext context, SheetState state) {
+//   return Material(
+//     child: Container(
+//       padding: EdgeInsets.all(10),
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(30),
+//       ),
+//       child: Column(
+//         children: [
+//           Container(
+//             height: 30,
+//             color: Colors.red,
+//           ),
+//         ],
+//       ),
+//     ),
+//   );
+// }
+
 class DialogListChuong extends StatefulWidget {
   const DialogListChuong({
     Key? key,
     required this.listChuong,
-    this.index,
+    required this.index,
   }) : super(key: key);
 
   final listChuong;
-  final index;
+  final int index;
 
   @override
   _DialogListChuongState createState() => _DialogListChuongState();
@@ -627,7 +704,7 @@ class _DialogListChuongState extends State<DialogListChuong> {
     _scrollController = ScrollController();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(
-        1 * 56, // Kích thước của mỗi item trong ListView
+        widget.index * 56, // Kích thước của mỗi item trong ListView
         duration: Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
@@ -643,7 +720,8 @@ class _DialogListChuongState extends State<DialogListChuong> {
   @override
   Widget build(BuildContext context) {
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
-
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
@@ -652,8 +730,9 @@ class _DialogListChuongState extends State<DialogListChuong> {
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.all(16),
       child: Container(
+        constraints: BoxConstraints(maxHeight: screenHeight * 0.6),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4.0),
+          borderRadius: BorderRadius.circular(10.0),
           color: myColors.backgroundColorBottomSheet,
         ),
         child: ListView.builder(
@@ -688,6 +767,7 @@ class _DialogListChuongState extends State<DialogListChuong> {
                   Expanded(
                     flex: 1,
                     child: Stack(
+                      alignment: Alignment.center,
                       children: [
                         Container(
                           width: 22,
@@ -696,16 +776,20 @@ class _DialogListChuongState extends State<DialogListChuong> {
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(color: Colors.grey, width: 2),
                           ),
-                          child: Container(
-                            width: 16,
-                            height: 16,
-                            decoration: BoxDecoration(
-                              color: index == 2
-                                  ? AppColors.ogrange
-                                  : Colors.transparent,
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(color: Colors.grey, width: 2),
-                            ),
+                        ),
+                        Container(
+                          width: 13,
+                          height: 13,
+                          decoration: BoxDecoration(
+                            color: index == widget.index
+                                ? AppColors.ogrange
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color: index == widget.index
+                                    ? Colors.grey
+                                    : Colors.transparent,
+                                width: 2),
                           ),
                         ),
                       ],

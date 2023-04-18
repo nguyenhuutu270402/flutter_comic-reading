@@ -10,16 +10,18 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // static const isDarkTheme = true;
-  static const isDarkTheme = false;
+  static const isDarkTheme = true;
+  // static const isDarkTheme = false;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     // Set status bar color to red
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.grey,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: Colors.grey,
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Comic Reading',
