@@ -1,3 +1,4 @@
+import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
@@ -12,6 +13,10 @@ void showMySlidingSheet(BuildContext context, List data) {
       ),
       builder: (context, state) => buildSheet(context, state, data),
       footerBuilder: (context, state) => buildFooter(
+        context,
+        state,
+      ),
+      headerBuilder: (context, state) => buildHeader(
         context,
         state,
       ),
@@ -141,6 +146,43 @@ Widget buildFooter(
             icon: Icon(Icons.send),
             color: AppColors.ogrange,
           )
+        ],
+      ),
+    ),
+  );
+}
+
+Widget buildHeader(
+  BuildContext context,
+  SheetState state,
+) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+  final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+
+  // sử dụng giá trị của data ở đây
+  return Material(
+    child: Container(
+      width: screenWidth,
+      // padding: EdgeInsets.all(8.0),
+      height: 40,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Text(
+            '676 bình luận',
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          // Text('676 bình luận'),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: IconButton(
+              splashRadius: 10,
+              onPressed: () {},
+              icon: Icon(Icons.clear),
+            ),
+          ),
         ],
       ),
     ),
