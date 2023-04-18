@@ -1,6 +1,8 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
+import 'package:comic_reading/screens/chi_tiet_chuong_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ChiTietPage extends StatefulWidget {
   const ChiTietPage({super.key, required this.id});
@@ -364,13 +366,13 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     showDialog(
                                       context: context,
                                       builder: (BuildContext context) {
-                                        return MyModal();
+                                        return DialogDanhGia();
                                       },
                                     );
                                   },
                                   child: Text(
                                     'Đánh giá: ',
-                                    style: TextStyle(color: myColors.blueColor),
+                                    style: TextStyle(color: AppColors.blue),
                                   ),
                                 ),
                                 Text(
@@ -434,7 +436,15 @@ class _ChiTietPageState extends State<ChiTietPage> {
                             height: 30,
                             child: ElevatedButton(
                               onPressed: () {
-                                // Xử lý sự kiện khi nhấn nút
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChiTietChuongPage(
+                                        id: listChuong[listChuong.length - 1]
+                                            ['id'],
+                                        index: listChuong.length - 1),
+                                  ),
+                                );
                               },
                               child: Text(
                                 'Đọc từ đầu',
@@ -537,7 +547,16 @@ class _ChiTietPageState extends State<ChiTietPage> {
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               return InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ChiTietChuongPage(
+                                          id: listChuong[index]['id'],
+                                          index: index),
+                                    ),
+                                  );
+                                },
                                 child: Container(
                                   alignment: Alignment.topLeft,
                                   margin: EdgeInsets.symmetric(vertical: 16),
@@ -661,70 +680,61 @@ class _ChiTietPageState extends State<ChiTietPage> {
   }
 }
 
-class MyModal extends StatelessWidget {
+class DialogDanhGia extends StatelessWidget {
+  const DialogDanhGia({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Stack(
+    return AlertDialog(
+      title: Text(
+        'Đánh giá',
+      ),
+      // contentPadding: EdgeInsets.all(30),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            color: Colors.black.withOpacity(0.1),
-          ),
-          Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width - 16,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(22),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'Thông báo',
-                      style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 18,
-                          decoration: TextDecoration.none),
-                    ),
-                    const SizedBox(height: 22),
-                    const Text(
-                      'Chúng tôi không tìm thấy tài khoản với số điện thoại này',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 54, 54, 54),
-                          fontSize: 14,
-                          decoration: TextDecoration.none,
-                          fontStyle: FontStyle.normal,
-                          fontFamily: 'Roboto'),
-                    ),
-                    const SizedBox(height: 22),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Xử lý sự kiện khi nhấn nút
-                        Navigator.pop(context);
-                      },
-                      child: const Text('Quay lại',
-                          style: TextStyle(color: Colors.white, fontSize: 16)),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF4A62F),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          fixedSize: const Size(145, 48)),
-                    ),
-                  ],
-                ),
-              ),
+          Text('Hãy cho chúng tôi biết đánh giá của bạn'),
+          SizedBox(height: 16),
+          RatingBar.builder(
+            initialRating: 2,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemSize: 36,
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: Colors.amber,
             ),
+            onRatingUpdate: (rating) {
+              // TODO: xử lý đánh giá của người dùng
+              print('rating>>> ${rating}');
+            },
           ),
         ],
       ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text('Hủy'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            // TODO: xử lý đánh giá của người dùng
+            Navigator.of(context).pop();
+          },
+          child: Text('Đánh giá'),
+        ),
+      ],
+      insetPadding: EdgeInsets.symmetric(
+        horizontal: 0,
+        vertical: 0,
+      ),
+      clipBehavior: Clip.antiAlias,
     );
   }
 }
