@@ -1,7 +1,9 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ChiTietChuongPage extends StatefulWidget {
   const ChiTietChuongPage({super.key, required this.id, required this.index});
@@ -303,6 +305,116 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
       "idchuong": 1
     }
   ];
+  List<Map<String, dynamic>> listChuong = [
+    {
+      "id": 67,
+      "tenchuong": "Chapter 6: Tôi vs Nanase vs Em gái",
+      "sochuong": 6,
+      "ngaycapnhat": "2023-03-06T23:35:03.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": null,
+      "tongsoluot": 7
+    },
+    {
+      "id": 5,
+      "tenchuong": "Chapter 5: Cuộc viếng thăm bất ngờ của cô em gái",
+      "sochuong": 5,
+      "ngaycapnhat": "2023-03-06T23:34:09.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 30
+    },
+    {
+      "id": 4,
+      "tenchuong": "Chapter 4: Hình phạt của Nanase",
+      "sochuong": 4,
+      "ngaycapnhat": "2023-03-06T23:32:31.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 20
+    },
+    {
+      "id": 3,
+      "tenchuong": "Chapter 3: Em yêu anh vì XX",
+      "sochuong": 3,
+      "ngaycapnhat": "2023-03-06T23:31:28.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 26
+    },
+    {
+      "id": 2,
+      "tenchuong": "Chapter 2: Nô lệ của công ty mất nhà",
+      "sochuong": 2,
+      "ngaycapnhat": "2023-03-06T23:29:53.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 36
+    },
+    {
+      "id": 1,
+      "tenchuong": "Chapter 1: Cô gái tên Nanase",
+      "sochuong": 1,
+      "ngaycapnhat": "2023-03-06T23:25:27.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 75
+    },
+    {
+      "id": 67,
+      "tenchuong": "Chapter 6: Tôi vs Nanase vs Em gái",
+      "sochuong": 6,
+      "ngaycapnhat": "2023-03-06T23:35:03.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": null,
+      "tongsoluot": 7
+    },
+    {
+      "id": 5,
+      "tenchuong": "Chapter 5: Cuộc viếng thăm bất ngờ của cô em gái",
+      "sochuong": 5,
+      "ngaycapnhat": "2023-03-06T23:34:09.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 30
+    },
+    {
+      "id": 4,
+      "tenchuong": "Chapter 4: Hình phạt của Nanase",
+      "sochuong": 4,
+      "ngaycapnhat": "2023-03-06T23:32:31.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 20
+    },
+    {
+      "id": 3,
+      "tenchuong": "Chapter 3: Em yêu anh vì XX",
+      "sochuong": 3,
+      "ngaycapnhat": "2023-03-06T23:31:28.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 26
+    },
+    {
+      "id": 2,
+      "tenchuong": "Chapter 2: Nô lệ của công ty mất nhà",
+      "sochuong": 2,
+      "ngaycapnhat": "2023-03-06T23:29:53.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 36
+    },
+    {
+      "id": 1,
+      "tenchuong": "Chapter 1: Cô gái tên Nanase",
+      "sochuong": 1,
+      "ngaycapnhat": "2023-03-06T23:25:27.000Z",
+      "idtruyen": 1,
+      "idnguoidung_da_doc": 1,
+      "tongsoluot": 75
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -314,30 +426,171 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
       body: SafeArea(
         child: Stack(
           children: [
-            ListView.builder(
-              itemCount: listImage.length,
-              itemBuilder: (context, index) {
-                return Container(
-                    color: Colors.grey,
-                    child: Image.network(listImage[index]['imagelink']));
-              },
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: 50,
+                    color: myColors.whiteOrBlack,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          splashColor: Colors.black,
+                          splashRadius: 22,
+                          icon: Icon(Icons.arrow_back,
+                              color: myColors.blackOrWhite),
+                        ),
+                        Text(
+                          'ID chương ${widget.id}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            print('tap');
+                          },
+                          splashColor: Colors.black,
+                          splashRadius: 22,
+                          icon: Icon(Icons.list, color: myColors.blackOrWhite),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListView.builder(
+                    itemCount: listImage.length,
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Container(
+                          color: Colors.grey,
+                          child: Image.network(listImage[index]['imagelink']));
+                    },
+                  ),
+                ],
+              ),
             ),
             Positioned(
               child: Container(
-                // color: Colors.red,
                 height: screenHeight,
                 child: Stack(
                   children: [
                     Container(
                       height: 50,
-                      color: Colors.amber,
+                      color: myColors.whiteOrBlack,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            splashColor: Colors.black,
+                            splashRadius: 22,
+                            icon: Icon(Icons.arrow_back,
+                                color: myColors.blackOrWhite),
+                          ),
+                          Text(
+                            'ID chương ${widget.id}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return DialogListChuong(
+                                      listChuong: listChuong);
+                                },
+                              );
+                            },
+                            splashColor: Colors.black,
+                            splashRadius: 22,
+                            icon:
+                                Icon(Icons.list, color: myColors.blackOrWhite),
+                          ),
+                        ],
+                      ),
                     ),
                     Positioned(
                       bottom: 0,
                       child: Container(
                         height: 50,
                         width: screenWidth,
-                        color: Colors.blue,
+                        color: Colors.black.withOpacity(0.7),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                print('trước sau');
+                              },
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.arrow_back_ios,
+                                    size: 16,
+                                    color: AppColors.ogrange,
+                                  ),
+                                  Text(
+                                    'Trước',
+                                    style: TextStyle(
+                                      color: AppColors.ogrange,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                print('trước sau');
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'Sau ',
+                                    style: TextStyle(
+                                      color: AppColors.ogrange,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 16,
+                                    color: AppColors.ogrange,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                print('tap favorite');
+                              },
+                              splashColor: Colors.black,
+                              splashRadius: 22,
+                              icon: Icon(
+                                Icons.favorite_outline,
+                                color: Colors.red,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                print('tap comment');
+                              },
+                              splashColor: Colors.black,
+                              splashRadius: 22,
+                              icon: Icon(Icons.message_outlined,
+                                  color: Colors.green),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -345,6 +598,123 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class DialogListChuong extends StatefulWidget {
+  const DialogListChuong({
+    Key? key,
+    required this.listChuong,
+    this.index,
+  }) : super(key: key);
+
+  final listChuong;
+  final index;
+
+  @override
+  _DialogListChuongState createState() => _DialogListChuongState();
+}
+
+class _DialogListChuongState extends State<DialogListChuong> {
+  late final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.animateTo(
+        1 * 56, // Kích thước của mỗi item trong ListView
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      elevation: 0.0,
+      backgroundColor: Colors.transparent,
+      insetPadding: EdgeInsets.all(16),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.0),
+          color: myColors.backgroundColorBottomSheet,
+        ),
+        child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: widget.listChuong.length,
+          controller: _scrollController, // Thêm ScrollController vào ListView
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 56,
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.grey,
+                    width: 1,
+                  ),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 9,
+                    child: Text(
+                      widget.listChuong[index]['tenchuong'],
+                      style:
+                          TextStyle(color: myColors.blackOrWhite, fontSize: 16),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 22,
+                          height: 22,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.grey, width: 2),
+                          ),
+                          child: Container(
+                            width: 16,
+                            height: 16,
+                            decoration: BoxDecoration(
+                              color: index == 2
+                                  ? AppColors.ogrange
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: Colors.grey, width: 2),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
