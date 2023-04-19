@@ -1,5 +1,6 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/screens/trang_chu_page.dart';
+import 'package:comic_reading/screens/xep_hang_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -15,7 +16,7 @@ class _BottomNavState extends State<BottomNav> {
 
   final List<Widget> _pages = [
     TrangChuPage(),
-    Page2(),
+    XepHangPage(),
     Page3(),
     Page4(),
   ];
@@ -75,34 +76,6 @@ class _BottomNavState extends State<BottomNav> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class Page1 extends StatelessWidget {
-  const Page1({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: Center(
-        child: Text('Trang chủ'),
-      ),
-    );
-  }
-}
-
-class Page2 extends StatelessWidget {
-  const Page2({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green,
-      child: Center(
-        child: Text('Xếp hạng'),
       ),
     );
   }

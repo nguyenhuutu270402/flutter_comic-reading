@@ -38,6 +38,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   flutter_rating_bar: ^4.0.1
   sliding_sheet: ^0.5.2
+  flutter_bloc: ^8.1.2
+  dio: ^5.1.1
 
 dev_dependencies:
   flutter_test:
