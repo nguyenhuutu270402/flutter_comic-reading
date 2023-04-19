@@ -22,18 +22,18 @@ class Truyen {
 }
 
 class Results {
-  int? id;
+  num? id;
   String? tentruyen;
   String? tenkhac;
-  int? tinhtrang;
+  num? tinhtrang;
   String? mota;
   String? imagelink;
-  int? tongluotxem;
-  int? tongtheodoi;
-  int? tongdanhgia;
-  double? sosaotrungbinh;
+  num? tongluotxem;
+  num? tongtheodoi;
+  num? tongdanhgia;
+  num? sosaotrungbinh;
   String? ngaycapnhat;
-  int? chuongmoinhat;
+  num? chuongmoinhat;
 
   Results(
       {this.id,

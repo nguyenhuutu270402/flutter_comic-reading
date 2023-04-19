@@ -1,13 +1,13 @@
 import 'dart:async';
-
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/screens/chi_tiet_page.dart';
+import 'package:comic_reading/screens/trang_chu/model/truyen.dart';
 import 'package:flutter/material.dart';
 
 class SlideViewWiget extends StatefulWidget {
   const SlideViewWiget({super.key, required this.data});
 
-  final List<Map<String, dynamic>> data;
+  final List<Results> data;
   @override
   State<SlideViewWiget> createState() => _SlideViewWigetState();
 }
@@ -71,8 +71,8 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            ChiTietPage(id: widget.data[index]['id']),
+                        builder: (context) => ChiTietPage(
+                            id: int.parse(widget.data[index].id.toString())),
                       ),
                     );
                   },
@@ -88,7 +88,7 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                     child: Row(
                       children: [
                         Image.network(
-                          widget.data[index]['imagelink'],
+                          widget.data[index].imagelink.toString(),
                           fit: BoxFit.cover,
                           width: 100,
                           height: 180,
@@ -102,7 +102,7 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                                 Container(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    widget.data[index]['tentruyen']
+                                    widget.data[index].tentruyen
                                         .toString()
                                         .toUpperCase(),
                                     maxLines: 2,
@@ -118,7 +118,7 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                                   alignment: Alignment.topLeft,
                                   margin: EdgeInsets.symmetric(vertical: 4),
                                   child: Text(
-                                    'Lượt xem: ${widget.data[index]['tongluotxem']}',
+                                    'Lượt xem: ${widget.data[index].tongluotxem}',
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
@@ -130,7 +130,7 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                                 Container(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    widget.data[index]['mota'],
+                                    widget.data[index].mota!,
                                     maxLines: 4,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(

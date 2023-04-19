@@ -1,4 +1,5 @@
 import 'package:comic_reading/screens/chi_tiet_page.dart';
+import 'package:comic_reading/screens/trang_chu/model/truyen.dart';
 import 'package:flutter/material.dart';
 
 class MyGridViewWidget extends StatelessWidget {
@@ -10,7 +11,7 @@ class MyGridViewWidget extends StatelessWidget {
     required this.screenWidth,
   });
 
-  final List<Map<String, dynamic>> data;
+  final List<Results> data;
   final int crossAxisCount;
   final double screenHeight;
   final double screenWidth;
@@ -39,7 +40,8 @@ class MyGridViewWidget extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ChiTietPage(id: data[index]['id']),
+                    builder: (context) =>
+                        ChiTietPage(id: int.parse(data[index].id.toString())),
                   ),
                 );
               },
@@ -54,7 +56,7 @@ class MyGridViewWidget extends StatelessWidget {
                           width: screenWidth,
                           child: Ink.image(
                             image: NetworkImage(
-                              data[index]['imagelink'],
+                              data[index].imagelink!,
                             ),
                             fit: BoxFit.cover,
                           ),
@@ -90,7 +92,7 @@ class MyGridViewWidget extends StatelessWidget {
                           width: screenWidth,
                           alignment: Alignment.topLeft,
                           child: Text(
-                            data[index]['tentruyen'],
+                            data[index].tentruyen!,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
@@ -103,7 +105,7 @@ class MyGridViewWidget extends StatelessWidget {
                           width: screenWidth,
                           alignment: Alignment.topLeft,
                           child: Text(
-                            'Chapter ${data[index]['chuongmoinhat']}',
+                            'Chapter ${data[index].chuongmoinhat!}',
                             style: TextStyle(
                               fontSize: 14,
                               overflow: TextOverflow.ellipsis,

@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
-import 'package:comic_reading/common/utils/app_colors.dart';
-import 'package:comic_reading/widgets/box_position_widget.dart';
-import 'package:comic_reading/widgets/comment_sliding_sheet_widget.dart';
-import 'package:comic_reading/widgets/dia_log_list_chuong_widget.dart';
+import 'package:comic_reading/common/widgets/box_position_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
