@@ -19,40 +19,37 @@ class HeaderBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      child: Container(
-        width: screenWidth,
-        height: 50,
-        decoration: BoxDecoration(
-          color: myColors.whiteOrBlack,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              spreadRadius: 0.1,
-              blurRadius: 0.1,
-              offset:
-                  Offset(0, 1), // Tạo đổ bóng chỉ ở phần bottom của Container
-            ),
-          ],
-        ),
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 50,
-              child: iconButtonLeft ?? null,
-            ),
-            Text(
-              title,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-            ),
-            Container(
-              width: 50,
-              child: iconButtonRight ?? null,
-            ),
-          ],
-        ),
+    return Container(
+      width: screenWidth,
+      height: 50,
+      decoration: BoxDecoration(
+        color: myColors.whiteOrBlack,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 0.1,
+            blurRadius: 0.1,
+            offset: Offset(0, 1), // Tạo đổ bóng chỉ ở phần bottom của Container
+          ),
+        ],
+      ),
+      alignment: Alignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            width: 50,
+            child: iconButtonLeft ?? null,
+          ),
+          Text(
+            title,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          ),
+          Container(
+            width: 50,
+            child: iconButtonRight ?? null,
+          ),
+        ],
       ),
     );
   }
