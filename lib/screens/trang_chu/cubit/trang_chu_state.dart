@@ -14,5 +14,7 @@ class TrangChuFailure extends TrangChuState {
 
 class TrangChuSuccess extends TrangChuState {
   final Truyen data;
-  TrangChuSuccess({required this.data});
+  final Truyen data2;
+
+  TrangChuSuccess({required this.data, required this.data2});
 }

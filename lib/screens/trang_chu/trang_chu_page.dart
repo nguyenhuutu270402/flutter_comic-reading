@@ -481,74 +481,71 @@ class _TrangChuPageState extends State<TrangChuPage> {
               return Text('Failure');
             } else if (state is TrangChuSuccess) {
               var data = state.data.results;
+              var data2 = state.data2.results;
+
               if (data!.isEmpty) {
                 return Text('Empty');
               } else {
-                return ListView.builder(
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      return Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: screenWidth,
-                                    margin: EdgeInsets.only(top: 16, left: 10),
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      'Truyện đề cử',
-                                      style: TextStyle(
-                                          color: Colors.amber,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  // slide view
-                                  SlideViewWiget(data: data),
-                                  Container(
-                                    width: screenWidth,
-                                    margin: EdgeInsets.only(
-                                        top: 10, left: 10, bottom: 16),
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      'Truyện mới cập nhật',
-                                      style: TextStyle(
-                                          color: Colors.amber,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  // GridView
-                                  MyGridViewWidget(
-                                      data: data,
-                                      crossAxisCount: crossAxisCount,
-                                      screenHeight: screenHeight,
-                                      screenWidth: screenWidth),
-                                ],
+                return Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: screenWidth,
+                              margin: EdgeInsets.only(top: 16, left: 10),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Truyện đề cử',
+                                style: TextStyle(
+                                    color: Colors.amber,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
-                          ),
-                          //header bar
-                          HeaderBarWidget(
-                            screenWidth: screenWidth,
-                            myColors: myColors,
-                            title: 'Trang chủ',
-                            iconButtonRight: IconButton(
-                              splashColor: Colors.black,
-                              splashRadius: 22,
-                              icon: Icon(Icons.search,
-                                  color: myColors.blackOrWhite),
-                              onPressed: () {
-                                print('Button timkiem pressed');
-                              },
+                            // slide view
+                            SlideViewWiget(data: data2!),
+                            Container(
+                              width: screenWidth,
+                              margin: EdgeInsets.only(
+                                  top: 10, left: 10, bottom: 16),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Truyện mới cập nhật',
+                                style: TextStyle(
+                                    color: Colors.amber,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
-                          ),
-                        ],
-                      );
-                    });
+                            // GridView
+                            MyGridViewWidget(
+                                data: data,
+                                crossAxisCount: crossAxisCount,
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth),
+                          ],
+                        ),
+                      ),
+                    ),
+                    //header bar
+                    HeaderBarWidget(
+                      screenWidth: screenWidth,
+                      myColors: myColors,
+                      title: 'Trang chủ',
+                      iconButtonRight: IconButton(
+                        splashColor: Colors.black,
+                        splashRadius: 22,
+                        icon: Icon(Icons.search, color: myColors.blackOrWhite),
+                        onPressed: () {
+                          print('Button timkiem pressed');
+                        },
+                      ),
+                    ),
+                  ],
+                );
               }
             } else {
               return const SizedBox.shrink();

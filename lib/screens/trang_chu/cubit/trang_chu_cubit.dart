@@ -13,7 +13,9 @@ class TrangChuCubit extends Cubit<TrangChuState> {
     try {
       emit(TrangChuLoading());
       var data = await onGetAllTruyen();
-      emit(TrangChuSuccess(data: data));
+      var data2 = await onGetTop10Truyen();
+
+      emit(TrangChuSuccess(data: data, data2: data2));
     } catch (e) {
       print(e);
       emit(TrangChuFailure(error: e.toString()));
@@ -23,6 +25,16 @@ class TrangChuCubit extends Cubit<TrangChuState> {
   Future<Truyen> onGetAllTruyen() async {
     try {
       var url = 'https://app-comic-reading.onrender.com/api/get-all-truyen';
+      var res = await dio.get(url);
+      return Truyen.fromJson(res.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  onGetTop10Truyen() async {
+    try {
+      var url = 'https://app-comic-reading.onrender.com/api/get-top10-truyen';
       var res = await dio.get(url);
       return Truyen.fromJson(res.data);
     } catch (e) {
