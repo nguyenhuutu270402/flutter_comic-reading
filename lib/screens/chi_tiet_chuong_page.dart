@@ -759,7 +759,6 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
       _timer = Timer(Duration(milliseconds: 1000), () {
         _showBoxPosition = true;
         setState(() {});
-        print('Cuộn lên');
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       });
     } else if (_scrollController.position.userScrollDirection ==
@@ -768,7 +767,6 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
       _timer = Timer(Duration(milliseconds: 1000), () {
         _showBoxPosition = false;
         setState(() {});
-        print('Cuộn xuống');
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
       });
     }

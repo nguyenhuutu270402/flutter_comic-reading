@@ -1,11 +1,11 @@
-import 'dart:async';
-
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
-import 'package:comic_reading/screens/chi_tiet_page.dart';
+import 'package:comic_reading/widgets/header_bar_widget.dart';
+import 'package:comic_reading/widgets/my_grid_view_widget.dart';
+import 'package:comic_reading/widgets/slide_view_widget.dart';
 import 'package:flutter/material.dart';
 
 class TrangChuPage extends StatefulWidget {
-  TrangChuPage({super.key});
+  const TrangChuPage({super.key});
 
   @override
   State<TrangChuPage> createState() => _TrangChuPageState();
@@ -450,42 +450,9 @@ class _TrangChuPageState extends State<TrangChuPage> {
     }
   ];
 
-  int pageNo = 0;
-  late final Timer carasouelTimer;
-
-  late final PageController pageController;
-
-  Timer getTimer() {
-    return Timer.periodic(const Duration(seconds: 2), (timer) {
-      if (pageNo == data.length) {
-        pageNo = 0;
-      }
-      pageController.animateToPage(
-        pageNo,
-        duration: const Duration(seconds: 1),
-        curve: Curves.easeInOutCirc,
-      );
-      pageNo++;
-    });
-  }
-
-  @override
-  void initState() {
-    pageController = PageController(initialPage: 0, viewportFraction: 0.75);
-    carasouelTimer = getTimer();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     int crossAxisCount = 2;
-    double hieghtBox = 200;
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -493,7 +460,6 @@ class _TrangChuPageState extends State<TrangChuPage> {
 
     if (screenWidth > 600) {
       crossAxisCount = 4;
-      hieghtBox = 300;
     }
     return Scaffold(
       body: SafeArea(
@@ -516,138 +482,8 @@ class _TrangChuPageState extends State<TrangChuPage> {
                             fontWeight: FontWeight.w600),
                       ),
                     ),
-                    Stack(
-                      children: [
-                        SizedBox(
-                          height: 180,
-                          child: PageView.builder(
-                            controller: pageController,
-                            itemCount: data.length,
-                            onPageChanged: (index) {
-                              pageNo = index;
-                              setState(() {});
-                            },
-                            itemBuilder: (_, index) {
-                              return AnimatedBuilder(
-                                animation: pageController,
-                                builder: (cxt, child) {
-                                  return child!;
-                                },
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ChiTietPage(id: data2[index]['id']),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        right: 5, left: 5, top: 10, bottom: 10),
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.5),
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
-                                    alignment: Alignment.topLeft,
-                                    child: Row(
-                                      children: [
-                                        Image.network(
-                                          data[index]['imagelink'],
-                                          fit: BoxFit.cover,
-                                          width: 100,
-                                          height: 180,
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            padding: EdgeInsets.all(10),
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            child: Column(
-                                              children: [
-                                                Container(
-                                                  alignment: Alignment.topLeft,
-                                                  child: Text(
-                                                    data[index]['tentruyen']
-                                                        .toString()
-                                                        .toUpperCase(),
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  alignment: Alignment.topLeft,
-                                                  margin: EdgeInsets.symmetric(
-                                                      vertical: 4),
-                                                  child: Text(
-                                                    'Lượt xem: ${data[index]['tongluotxem']}',
-                                                    maxLines: 1,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Container(
-                                                  alignment: Alignment.topLeft,
-                                                  child: Text(
-                                                    data[index]['mota'],
-                                                    maxLines: 4,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 20,
-                          child: SizedBox(
-                            width: screenWidth,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: List.generate(
-                                data.length,
-                                (index) => Container(
-                                  margin: EdgeInsets.all(1),
-                                  child: Icon(
-                                    Icons.circle,
-                                    size: 7,
-                                    color: pageNo == index
-                                        ? Colors.blue
-                                        : Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                    // slide view
+                    SlideViewWiget(data: data),
                     Container(
                       width: screenWidth,
                       margin: EdgeInsets.only(top: 10, left: 10, bottom: 16),
@@ -661,155 +497,27 @@ class _TrangChuPageState extends State<TrangChuPage> {
                       ),
                     ),
                     // GridView
-
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: data2.length,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: crossAxisCount,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          childAspectRatio: 0.6,
-                        ),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Material(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(5),
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        ChiTietPage(id: data2[index]['id']),
-                                  ),
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 8,
-                                    child: Stack(
-                                      children: [
-                                        SizedBox(
-                                          height: screenHeight,
-                                          width: screenWidth,
-                                          child: Ink.image(
-                                            image: NetworkImage(
-                                              data2[index]['imagelink'],
-                                            ),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Positioned(
-                                            top: 5,
-                                            left: 5,
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 7, vertical: 3),
-                                              decoration: BoxDecoration(
-                                                color: Colors.amber,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: Text(
-                                                '07/03/2023',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ))
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Column(
-                                      children: [
-                                        Container(
-                                          margin:
-                                              EdgeInsets.symmetric(vertical: 5),
-                                          width: screenWidth,
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            data2[index]['tentruyen'],
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Container(
-                                          width: screenWidth,
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            'Chapter ${data2[index]['chuongmoinhat']}',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    MyGridViewWidget(
+                        data: data2,
+                        crossAxisCount: crossAxisCount,
+                        screenHeight: screenHeight,
+                        screenWidth: screenWidth),
                   ],
                 ),
               ),
             ),
-            Positioned(
-              child: Stack(
-                children: [
-                  Container(
-                    width: screenWidth,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: myColors.whiteOrBlack,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 0.1,
-                          blurRadius: 0.1,
-                          offset: Offset(0,
-                              1), // Tạo đổ bóng chỉ ở phần bottom của Container
-                        ),
-                      ],
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Trang chủ',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  Positioned(
-                    // top: 10,
-                    right: 0,
-                    child: IconButton(
-                      splashColor: Colors.black,
-                      splashRadius: 22,
-                      icon: Icon(Icons.search, color: myColors.blackOrWhite),
-                      onPressed: () {
-                        print('Button pressed');
-                      },
-                    ),
-                  ),
-                ],
+            //header bar
+            HeaderBarWidget(
+              screenWidth: screenWidth,
+              myColors: myColors,
+              title: 'Trang chủ',
+              iconButtonRight: IconButton(
+                splashColor: Colors.black,
+                splashRadius: 22,
+                icon: Icon(Icons.search, color: myColors.blackOrWhite),
+                onPressed: () {
+                  print('Button timkiem pressed');
+                },
               ),
             ),
           ],

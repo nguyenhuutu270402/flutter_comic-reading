@@ -98,7 +98,6 @@ Widget buildFooter(
   BuildContext context,
   SheetState state,
 ) {
-  // sử dụng giá trị của data ở đây
   return Material(
     child: Container(
       height: 60,
@@ -124,7 +123,6 @@ Widget buildFooter(
           SizedBox(width: 16),
           Expanded(
             child: Container(
-              // color: Colors.yellow,
               child: TextField(
                 decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
@@ -160,11 +158,9 @@ Widget buildHeader(
   double screenHeight = MediaQuery.of(context).size.height;
   final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
 
-  // sử dụng giá trị của data ở đây
   return Material(
     child: Container(
       width: screenWidth,
-      // padding: EdgeInsets.all(8.0),
       height: 40,
       child: Stack(
         alignment: Alignment.center,
@@ -173,7 +169,6 @@ Widget buildHeader(
             '676 bình luận',
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
-          // Text('676 bình luận'),
           Positioned(
             top: 0,
             right: 0,
