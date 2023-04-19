@@ -12,7 +12,6 @@ class DialogDanhGia extends StatelessWidget {
       title: Text(
         'Đánh giá',
       ),
-      // contentPadding: EdgeInsets.all(30),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
