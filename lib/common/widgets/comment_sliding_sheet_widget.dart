@@ -16,10 +16,7 @@ void showMySlidingSheet(BuildContext context, List data) {
         context,
         state,
       ),
-      headerBuilder: (context, state) => buildHeader(
-        context,
-        state,
-      ),
+      headerBuilder: (context, state) => buildHeader(context, state, data),
     ),
   );
 }
@@ -39,7 +36,7 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: Image.network(
-                  data[index]['avatar'],
+                  data[index].avatar,
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
@@ -55,7 +52,7 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
                       children: [
                         Expanded(
                           child: Text(
-                            data[index]['tennguoidung'],
+                            data[index].tennguoidung,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -78,7 +75,7 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
                       children: [
                         Expanded(
                           child: Text(
-                            data[index]['noidung'],
+                            data[index].noidung,
                           ),
                         ),
                       ],
@@ -150,10 +147,7 @@ Widget buildFooter(
   );
 }
 
-Widget buildHeader(
-  BuildContext context,
-  SheetState state,
-) {
+Widget buildHeader(BuildContext context, SheetState state, List data) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
   final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
@@ -166,7 +160,7 @@ Widget buildHeader(
         alignment: Alignment.center,
         children: [
           Text(
-            '676 bình luận',
+            '${data.length} bình luận',
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
           Positioned(
@@ -174,7 +168,9 @@ Widget buildHeader(
             right: 0,
             child: IconButton(
               splashRadius: 10,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               icon: Icon(Icons.clear),
             ),
           ),

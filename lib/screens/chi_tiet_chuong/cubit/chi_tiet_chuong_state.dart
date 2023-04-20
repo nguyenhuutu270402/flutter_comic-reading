@@ -15,10 +15,11 @@ class ChiTietChuongFailure extends ChiTietChuongState {
 class ChiTietChuongSuccess extends ChiTietChuongState {
   final ListBinhLuan listBinhLuan;
   final ListImage listImage;
-  // final ListTacGia listTacGia;
+  final ListChuong listChuong;
   // final ListTheLoai listTheLoai;
   ChiTietChuongSuccess({
     required this.listImage,
     required this.listBinhLuan,
+    required this.listChuong,
   });
 }

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ListViewChuongWidget extends StatelessWidget {
   const ListViewChuongWidget(
       {super.key, required this.myColors, required this.listChuong});
-  final List<Results> listChuong;
+  final List<ResultsChuong> listChuong;
   final CustomThemeExtension myColors;
 
   @override

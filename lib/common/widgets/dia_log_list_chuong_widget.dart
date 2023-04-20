@@ -1,5 +1,6 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
+import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class DialogListChuong extends StatefulWidget {
     required this.index,
   }) : super(key: key);
 
-  final List<Map<String, dynamic>> listChuong;
+  final List<ResultsChuong> listChuong;
   final int index;
 
   @override
@@ -68,8 +69,8 @@ class _DialogListChuongState extends State<DialogListChuong> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => ChiTietChuongPage(
-                      idChuong: widget.listChuong[index]['id'],
-                      idTruyen: widget.listChuong[index]['idtruyen'],
+                      idChuong: widget.listChuong[index].id!,
+                      idTruyen: widget.listChuong[index].idtruyen!,
                       index: index,
                     ),
                   ),
@@ -92,7 +93,7 @@ class _DialogListChuongState extends State<DialogListChuong> {
                     Expanded(
                       flex: 9,
                       child: Text(
-                        widget.listChuong[index]['tenchuong'],
+                        widget.listChuong[index].tenchuong!,
                         style: TextStyle(
                             color: myColors.blackOrWhite, fontSize: 16),
                         maxLines: 2,

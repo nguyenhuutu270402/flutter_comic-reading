@@ -1,8 +1,10 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
+import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
 import 'package:comic_reading/common/widgets/comment_sliding_sheet_widget.dart';
 import 'package:comic_reading/common/widgets/dia_log_list_chuong_widget.dart';
+import 'package:comic_reading/screens/chi_tiet_chuong/model/list_binh_luan.dart';
 import 'package:flutter/material.dart';
 
 class BoxPosition extends StatelessWidget {
@@ -19,9 +21,9 @@ class BoxPosition extends StatelessWidget {
 
   final double screenHeight;
   final CustomThemeExtension myColors;
-  final List<Map<String, dynamic>> listChuong;
+  final List<ResultsChuong> listChuong;
   final double screenWidth;
-  final List<Map<String, dynamic>> listComment;
+  final List<Results> listComment;
   final int id;
   final int index;
 
@@ -87,7 +89,7 @@ class BoxPosition extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
-                                idChuong: listChuong[index + 1]['id'],
+                                idChuong: listChuong[index + 1].id!,
                                 idTruyen: id,
                                 index: index + 1,
                               ),
@@ -116,7 +118,7 @@ class BoxPosition extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
-                                idChuong: listChuong[index - 1]['id'],
+                                idChuong: listChuong[index - 1].id!,
                                 idTruyen: id,
                                 index: index - 1,
                               ),

@@ -1,13 +1,13 @@
 class ListChuong {
-  List<Results>? results;
+  List<ResultsChuong>? results;
 
   ListChuong({this.results});
 
   ListChuong.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <ResultsChuong>[];
       json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
+        results!.add(new ResultsChuong.fromJson(v));
       });
     }
   }
@@ -21,7 +21,7 @@ class ListChuong {
   }
 }
 
-class Results {
+class ResultsChuong {
   int? id;
   String? tenchuong;
   int? sochuong;
@@ -30,7 +30,7 @@ class Results {
   int? idnguoidungDaDoc;
   int? tongsoluot;
 
-  Results(
+  ResultsChuong(
       {this.id,
       this.tenchuong,
       this.sochuong,
@@ -39,7 +39,7 @@ class Results {
       this.idnguoidungDaDoc,
       this.tongsoluot});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  ResultsChuong.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     tenchuong = json['tenchuong'];
     sochuong = json['sochuong'];

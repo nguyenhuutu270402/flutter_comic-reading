@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/model/list_binh_luan.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/model/list_image.dart';
 import 'package:dio/dio.dart';
@@ -16,9 +17,12 @@ class ChiTietChuongCubit extends Cubit<ChiTietChuongState> {
 
       var listImage = await onGetListImage(idChuong);
       var listBinhLuan = await onGetListComment(idTruyen);
+      var listChuong = await onGetListChuong(idChuong, idNguoiDung);
 
       emit(ChiTietChuongSuccess(
-          listImage: listImage, listBinhLuan: listBinhLuan));
+          listImage: listImage,
+          listBinhLuan: listBinhLuan,
+          listChuong: listChuong));
     } catch (e) {
       print(e);
       emit(ChiTietChuongFailure(error: e.toString()));
@@ -42,6 +46,18 @@ class ChiTietChuongCubit extends Cubit<ChiTietChuongState> {
           'https://app-comic-reading.onrender.com/api/get-list-binh-luan-theo-id-truyen/$idTruyen';
       var res = await dio.get(url);
       return ListBinhLuan.fromJson(res.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<ListChuong> onGetListChuong(int id, int idNguoiDung) async {
+    try {
+      var url =
+          'https://app-comic-reading.onrender.com/api/get-list-chuong-theo-id-truyen/$id/$idNguoiDung';
+
+      var res = await dio.get(url);
+      return ListChuong.fromJson(res.data);
     } catch (e) {
       rethrow;
     }
