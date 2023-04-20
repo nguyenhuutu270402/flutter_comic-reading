@@ -87,7 +87,8 @@ class BoxPosition extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
-                                id: listChuong[index + 1]['id'],
+                                idChuong: listChuong[index + 1]['id'],
+                                idTruyen: id,
                                 index: index + 1,
                               ),
                             ),
@@ -115,7 +116,8 @@ class BoxPosition extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
-                                id: listChuong[index - 1]['id'],
+                                idChuong: listChuong[index - 1]['id'],
+                                idTruyen: id,
                                 index: index - 1,
                               ),
                             ),

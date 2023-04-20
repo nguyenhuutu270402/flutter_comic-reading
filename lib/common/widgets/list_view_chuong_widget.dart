@@ -47,8 +47,10 @@ class ListViewChuongWidget extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    ChiTietChuongPage(id: listChuong[index].id!, index: index),
+                builder: (context) => ChiTietChuongPage(
+                    idChuong: listChuong[index].id!,
+                    idTruyen: listChuong[index].idtruyen!,
+                    index: index),
               ),
             );
           },

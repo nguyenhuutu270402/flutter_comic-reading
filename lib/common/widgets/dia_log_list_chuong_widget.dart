@@ -68,7 +68,8 @@ class _DialogListChuongState extends State<DialogListChuong> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => ChiTietChuongPage(
-                      id: widget.listChuong[index]['id'],
+                      idChuong: widget.listChuong[index]['id'],
+                      idTruyen: widget.listChuong[index]['idtruyen'],
                       index: index,
                     ),
                   ),

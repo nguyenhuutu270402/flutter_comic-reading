@@ -26,7 +26,6 @@ class ChiTietCubit extends Cubit<ChiTietState> {
           listTheLoai: listTheLoai,
           listTacGia: listTacGia));
     } catch (e) {
-      print(e);
       emit(ChiTietFailure(error: e.toString()));
     }
   }

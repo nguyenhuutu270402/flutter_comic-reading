@@ -56,7 +56,6 @@ class _ChiTietPageState extends State<ChiTietPage> {
               if (ct_truyen == null) {
                 return Text('Empty');
               } else {
-                print('>>>>> ${listTheLoai![0].tentheloai}');
                 return Stack(
                   children: [
                     Padding(
@@ -231,7 +230,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   Expanded(
                                     flex: 7,
                                     child: Wrap(
-                                      children: listTheLoai
+                                      children: listTheLoai!
                                           .asMap()
                                           .entries
                                           .map((entry) {
@@ -374,11 +373,13 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ChiTietChuongPage(
-                                            id: int.parse(listChuong![
-                                                    listChuong.length - 1]
-                                                .id
-                                                .toString()),
-                                            index: listChuong.length - 1),
+                                          idChuong: int.parse(
+                                              listChuong![listChuong.length - 1]
+                                                  .id
+                                                  .toString()),
+                                          idTruyen: widget.id,
+                                          index: listChuong.length - 1,
+                                        ),
                                       ),
                                     );
                                   },
