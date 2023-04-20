@@ -11,6 +11,32 @@ class ListViewChuongWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formatDateTime(String dateString) {
+      DateTime dateCurr = DateTime.now();
+      DateTime dateTimeData = DateTime.parse(dateString);
+      int intDateCurr = dateCurr.millisecondsSinceEpoch;
+      int intDateData = dateTimeData.millisecondsSinceEpoch;
+      int hieuSoDateTime = intDateCurr - intDateData;
+      if (hieuSoDateTime < 3600000 && hieuSoDateTime > 0) {
+        var minute = (hieuSoDateTime / 60000);
+        return '${minute.toInt()} phút trước';
+      } else if (hieuSoDateTime < 86400000 && hieuSoDateTime > 0) {
+        var hours = (hieuSoDateTime / 3600000);
+        return '${hours.toInt()} giờ trước';
+      } else if (hieuSoDateTime < 2592000000) {
+        var date = (hieuSoDateTime / 86400000);
+        return '${date.toInt()}  ngày trước';
+      } else if (hieuSoDateTime > 2592000000) {
+        var date = dateTimeData.day;
+        var month = dateTimeData.month;
+        var year = dateTimeData.year;
+        String dateFormat =
+            '${date.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/${year}';
+        return dateFormat;
+      }
+      return 'Null';
+    }
+
     return ListView.builder(
       shrinkWrap: true,
       itemCount: listChuong.length,
@@ -60,7 +86,8 @@ class ListViewChuongWidget extends StatelessWidget {
                               color: Colors.grey,
                             ),
                             Text(
-                              ' 07/03/2023',
+                              formatDateTime(
+                                  listChuong[index].ngaycapnhat.toString()),
                               textAlign: TextAlign.left,
                               style:
                                   TextStyle(color: Colors.grey, fontSize: 12),

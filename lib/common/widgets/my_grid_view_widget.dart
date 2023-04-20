@@ -23,7 +23,6 @@ class MyGridViewWidget extends StatelessWidget {
       DateTime dateTimeData = DateTime.parse(dateString);
       int intDateCurr = dateCurr.millisecondsSinceEpoch;
       int intDateData = dateTimeData.millisecondsSinceEpoch;
-      // int hieuSoDateTime = intDateCurr - (intDateCurr - 100000);
       int hieuSoDateTime = intDateCurr - intDateData;
       if (hieuSoDateTime < 3600000 && hieuSoDateTime > 0) {
         var minute = (hieuSoDateTime / 60000);

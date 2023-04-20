@@ -163,7 +163,7 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                   margin: EdgeInsets.all(1),
                   child: Icon(
                     Icons.circle,
-                    size: 7,
+                    size: pageNo == index ? 7 : 5,
                     color: pageNo == index ? Colors.blue : Colors.grey,
                   ),
                 ),
