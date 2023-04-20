@@ -21,13 +21,18 @@ class _ChiTietPageState extends State<ChiTietPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    bloc.initData(widget.id, 2);
+    bloc.initData(widget.id, 1);
   }
 
   bool isShowMota = false;
 
   @override
   Widget build(BuildContext context) {
+    String formatDateCapNhat(String ngaycapnhat) {
+      DateTime dateTimeData = DateTime.parse(ngaycapnhat);
+      return '[Cập nhật lúc: ${dateTimeData.hour.toString().padLeft(2, '0')}:${dateTimeData.minute.toString().padLeft(2, '0')} ${dateTimeData.day.toString().padLeft(2, '0')}/${dateTimeData.month.toString().padLeft(2, '0')}/${dateTimeData.year}]';
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
 
@@ -73,7 +78,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
                               ),
                               SizedBox(height: 3),
                               Text(
-                                'Cập nhật lúc: 17:44 07/03/2023',
+                                formatDateCapNhat(
+                                    ct_truyen.ngaycapnhat.toString()),
                                 style: TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
@@ -482,7 +488,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                     HeaderBarWidget(
                       screenWidth: screenWidth,
                       myColors: myColors,
-                      title: 'ID truyện ${widget.id}',
+                      title: 'Thông tin truyện',
                       iconButtonLeft: IconButton(
                         splashColor: Colors.black,
                         splashRadius: 22,

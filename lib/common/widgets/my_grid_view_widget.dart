@@ -18,7 +18,7 @@ class MyGridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String testDateTime(String dateString) {
+    String formatDateTime(String dateString) {
       DateTime dateCurr = DateTime.now();
       DateTime dateTimeData = DateTime.parse(dateString);
       int intDateCurr = dateCurr.millisecondsSinceEpoch;
@@ -98,7 +98,7 @@ class MyGridViewWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Text(
-                                testDateTime(data[index].ngaycapnhat!),
+                                formatDateTime(data[index].ngaycapnhat!),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
