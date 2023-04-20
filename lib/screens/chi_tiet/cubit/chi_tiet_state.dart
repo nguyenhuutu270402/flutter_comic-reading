@@ -14,6 +14,12 @@ class ChiTietFailure extends ChiTietState {
 
 class ChiTietSuccess extends ChiTietState {
   final CT_Truyen ct_truyen;
-
-  ChiTietSuccess({required this.ct_truyen});
+  final ListChuong listChuong;
+  final ListTacGia listTacGia;
+  final ListTheLoai listTheLoai;
+  ChiTietSuccess(
+      {required this.ct_truyen,
+      required this.listChuong,
+      required this.listTheLoai,
+      required this.listTacGia});
 }

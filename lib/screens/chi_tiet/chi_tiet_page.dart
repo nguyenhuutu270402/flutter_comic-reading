@@ -21,7 +21,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    bloc.initData(widget.id);
+    bloc.initData(widget.id, 2);
   }
 
   List<Map<String, dynamic>> listChuong = [
