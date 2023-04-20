@@ -17,7 +17,7 @@ class ChiTietChuongCubit extends Cubit<ChiTietChuongState> {
 
       var listImage = await onGetListImage(idChuong);
       var listBinhLuan = await onGetListComment(idTruyen);
-      var listChuong = await onGetListChuong(idChuong, idNguoiDung);
+      var listChuong = await onGetListChuong(idTruyen, idNguoiDung);
 
       emit(ChiTietChuongSuccess(
           listImage: listImage,
@@ -51,11 +51,10 @@ class ChiTietChuongCubit extends Cubit<ChiTietChuongState> {
     }
   }
 
-  Future<ListChuong> onGetListChuong(int id, int idNguoiDung) async {
+  Future<ListChuong> onGetListChuong(int idTruyen, int idNguoiDung) async {
     try {
       var url =
-          'https://app-comic-reading.onrender.com/api/get-list-chuong-theo-id-truyen/$id/$idNguoiDung';
-
+          'https://app-comic-reading.onrender.com/api/get-list-chuong-theo-id-truyen/$idTruyen/$idNguoiDung';
       var res = await dio.get(url);
       return ListChuong.fromJson(res.data);
     } catch (e) {

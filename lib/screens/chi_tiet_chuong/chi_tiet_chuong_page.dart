@@ -83,7 +83,10 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
               var listChuong = state.listChuong.results;
 
               if (listImage!.isEmpty) {
-                return Text('Empty');
+                return Text('Empty listImage');
+              }
+              if (listChuong!.isEmpty) {
+                return Text('Empty listChuong');
               } else {
                 return Stack(
                   children: [
@@ -109,7 +112,7 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                       BoxPosition(
                         screenHeight: screenHeight,
                         myColors: myColors,
-                        listChuong: listChuong!,
+                        listChuong: listChuong,
                         screenWidth: screenWidth,
                         listComment: listComment!,
                         id: widget.idChuong,

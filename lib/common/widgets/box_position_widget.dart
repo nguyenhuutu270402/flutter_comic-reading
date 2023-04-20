@@ -49,7 +49,9 @@ class BoxPosition extends StatelessWidget {
                     icon: Icon(Icons.arrow_back, color: myColors.blackOrWhite),
                   ),
                   Text(
-                    'ID chương ${id} index ${index}',
+                    'Chapter ${listChuong[index].sochuong}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -90,7 +92,7 @@ class BoxPosition extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
                                 idChuong: listChuong[index + 1].id!,
-                                idTruyen: id,
+                                idTruyen: listChuong[index + 1].idtruyen!,
                                 index: index + 1,
                               ),
                             ),
@@ -119,7 +121,7 @@ class BoxPosition extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
                                 idChuong: listChuong[index - 1].id!,
-                                idTruyen: id,
+                                idTruyen: listChuong[index - 1].idtruyen!,
                                 index: index - 1,
                               ),
                             ),
