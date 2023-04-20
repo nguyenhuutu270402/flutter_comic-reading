@@ -24,99 +24,6 @@ class _ChiTietPageState extends State<ChiTietPage> {
     bloc.initData(widget.id, 2);
   }
 
-  List<Map<String, dynamic>> listChuong = [
-    {
-      "id": 67,
-      "tenchuong": "Chapter 6: Tôi vs Nanase vs Em gái",
-      "sochuong": 6,
-      "ngaycapnhat": "2023-03-06T23:35:03.000Z",
-      "idtruyen": 1,
-      "idnguoidung_da_doc": null,
-      "tongsoluot": 7
-    },
-    {
-      "id": 5,
-      "tenchuong": "Chapter 5: Cuộc viếng thăm bất ngờ của cô em gái",
-      "sochuong": 5,
-      "ngaycapnhat": "2023-03-06T23:34:09.000Z",
-      "idtruyen": 1,
-      "idnguoidung_da_doc": 1,
-      "tongsoluot": 30
-    },
-    {
-      "id": 4,
-      "tenchuong": "Chapter 4: Hình phạt của Nanase",
-      "sochuong": 4,
-      "ngaycapnhat": "2023-03-06T23:32:31.000Z",
-      "idtruyen": 1,
-      "idnguoidung_da_doc": 1,
-      "tongsoluot": 20
-    },
-    {
-      "id": 3,
-      "tenchuong": "Chapter 3: Em yêu anh vì XX",
-      "sochuong": 3,
-      "ngaycapnhat": "2023-03-06T23:31:28.000Z",
-      "idtruyen": 1,
-      "idnguoidung_da_doc": 1,
-      "tongsoluot": 26
-    },
-    {
-      "id": 2,
-      "tenchuong": "Chapter 2: Nô lệ của công ty mất nhà",
-      "sochuong": 2,
-      "ngaycapnhat": "2023-03-06T23:29:53.000Z",
-      "idtruyen": 1,
-      "idnguoidung_da_doc": 1,
-      "tongsoluot": 36
-    },
-    {
-      "id": 1,
-      "tenchuong": "Chapter 1: Cô gái tên Nanase",
-      "sochuong": 1,
-      "ngaycapnhat": "2023-03-06T23:25:27.000Z",
-      "idtruyen": 1,
-      "idnguoidung_da_doc": 1,
-      "tongsoluot": 75
-    }
-  ];
-  List<Map<String, dynamic>> listTacGia = [
-    {"id": 1, "tentacgia": "Shinonome Toru"}
-  ];
-  List<Map<String, dynamic>> listTheLoai = [
-    {
-      "id": 6,
-      "tentheloai": "Comedy",
-      "mota":
-          "Thể loại có nội dung trong sáng và cảm động, thường có các tình tiết gây cười, các xung đột nhẹ nhàng"
-    },
-    {
-      "id": 11,
-      "tentheloai": "Drama",
-      "mota":
-          "Thể loại mang đến cho người xem những cảm xúc khác nhau: buồn bã, căng thẳng thậm chí là bi phẫn"
-    },
-    {"id": 21, "tentheloai": "Manga", "mota": "Truyện tranh của Nhật Bản"},
-    {
-      "id": 30,
-      "tentheloai": "Psychological",
-      "mota":
-          "Thể loại liên quan đến những vấn đề về tâm lý của nhân vật ( tâm thần bất ổn, điên cuồng ...)"
-    },
-    {
-      "id": 31,
-      "tentheloai": "Romance",
-      "mota":
-          "Thường là những câu chuyện về tình yêu, tình cảm lãng mạn. Ớ đây chúng ta sẽ lấy ví dụ như tình yêu giữa một người con trai và con gái, bên cạnh đó đặc điểm thể loại này là kích thích trí tưởng tượng của bạn về tình yêu"
-    },
-    {
-      "id": 34,
-      "tentheloai": "Seinen",
-      "mota":
-          "Thể loại của manga thường nhằm vào những đối tượng nam 18 đến 30 tuổi, nhưng người xem có thể lớn tuổi hơn, với một vài bộ truyện nhắm đến các doanh nhân nam quá 40. Thể loại này có nhiều phong cách riêng biệt , nhưng thể loại này có những nét riêng biệt, thường được phân vào những phong cách nghệ thuật rộng hơn và phong phú hơn về chủ đề, có các loại từ mới mẻ tiên tiến đến khiêu dâm"
-    }
-  ];
-
   bool isShowMota = false;
 
   @override
@@ -135,11 +42,16 @@ class _ChiTietPageState extends State<ChiTietPage> {
               return Text('Failure');
             } else if (state is ChiTietSuccess) {
               var ct_truyen = state.ct_truyen.results;
+              var listTheLoai = state.listTheLoai.results;
+              var listTacGia = state.listTacGia.results;
+              var listChuong = state.listChuong.results;
+
               // var data2 = state.data2.results;
 
               if (ct_truyen == null) {
                 return Text('Empty');
               } else {
+                print('>>>>> ${listTheLoai![0].tentheloai}');
                 return Stack(
                   children: [
                     Padding(
@@ -229,18 +141,17 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   Expanded(
                                     flex: 7,
                                     child: Wrap(
-                                      children: listTacGia
+                                      children: listTacGia!
                                           .asMap()
                                           .entries
                                           .map((entry) {
                                         int index = entry.key;
-                                        dynamic item = entry.value;
                                         return InkWell(
                                           onTap: () {},
                                           child: Text(
                                             index == listTacGia.length - 1
-                                                ? '${item['tentacgia']}'
-                                                : '${item['tentacgia']} - ',
+                                                ? '${listTacGia[index].tentacgia}'
+                                                : '${listTacGia[index].tentacgia} - ',
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: AppColors.blue),
@@ -324,8 +235,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                           onTap: () {},
                                           child: Text(
                                             index == listTheLoai.length - 1
-                                                ? '${item['tentheloai']}'
-                                                : '${item['tentheloai']} - ',
+                                                ? '${listTheLoai[index].tentheloai.toString()}'
+                                                : '${listTheLoai[index].tentheloai.toString()} - ',
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 color: AppColors.blue),
@@ -457,8 +368,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => ChiTietChuongPage(
-                                            id: listChuong[
-                                                listChuong.length - 1]['id'],
+                                            id: int.parse(listChuong![
+                                                    listChuong.length - 1]
+                                                .id
+                                                .toString()),
                                             index: listChuong.length - 1),
                                       ),
                                     );
@@ -522,7 +435,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     setState(() {});
                                   },
                                   child: Text(
-                                    isShowMota ? 'Xem thêm>>' : '<<Rút gọn',
+                                    isShowMota ? 'Xem thêm>' : '<Thu gọn',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: isShowMota
@@ -559,7 +472,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                 ),
                               ),
                               ListViewChuongWidget(
-                                  myColors: myColors, listChuong: listChuong),
+                                  myColors: myColors, listChuong: listChuong!),
                             ],
                           ),
                         ),

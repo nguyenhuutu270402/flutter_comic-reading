@@ -1,11 +1,12 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong_page.dart';
 import 'package:flutter/material.dart';
 
 class ListViewChuongWidget extends StatelessWidget {
   const ListViewChuongWidget(
       {super.key, required this.myColors, required this.listChuong});
-  final List<Map<String, dynamic>> listChuong;
+  final List<Results> listChuong;
   final CustomThemeExtension myColors;
 
   @override
@@ -20,8 +21,8 @@ class ListViewChuongWidget extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ChiTietChuongPage(
-                    id: listChuong[index]['id'], index: index),
+                builder: (context) =>
+                    ChiTietChuongPage(id: listChuong[index].id!, index: index),
               ),
             );
           },
@@ -41,14 +42,13 @@ class ListViewChuongWidget extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Chapter ${listChuong[index]['sochuong']}',
+                              'Chapter ${listChuong[index].sochuong!}',
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                  color: listChuong[index]
-                                              ['idnguoidung_da_doc'] !=
-                                          null
-                                      ? Colors.grey
-                                      : myColors.blackOrWhite),
+                                  color:
+                                      listChuong[index].idnguoidungDaDoc != null
+                                          ? Colors.grey
+                                          : myColors.blackOrWhite),
                             ),
                           ],
                         ),
@@ -79,7 +79,7 @@ class ListViewChuongWidget extends StatelessWidget {
                       size: 14,
                     ),
                     Text(
-                      ' ${listChuong[index]['tongsoluot'].toString()}',
+                      ' ${listChuong[index].tongsoluot.toString()}',
                       style: TextStyle(
                         color: Colors.grey,
                       ),
