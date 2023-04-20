@@ -1,6 +1,6 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/screens/trang_chu/trang_chu_page.dart';
-import 'package:comic_reading/screens/xep_hang_page.dart';
+import 'package:comic_reading/screens/xep_hang/xep_hang_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 

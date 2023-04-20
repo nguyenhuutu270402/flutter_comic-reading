@@ -1,6 +1,6 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
-import 'package:comic_reading/screens/chi_tiet_chuong_page.dart';
+import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
 import 'package:flutter/material.dart';
 
 class DialogListChuong extends StatefulWidget {
