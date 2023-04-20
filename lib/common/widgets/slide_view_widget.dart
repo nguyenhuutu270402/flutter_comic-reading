@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
-import 'package:comic_reading/screens/chi_tiet_page.dart';
+import 'package:comic_reading/screens/chi_tiet/chi_tiet_page.dart';
 import 'package:comic_reading/screens/trang_chu/model/truyen.dart';
 import 'package:flutter/material.dart';
 

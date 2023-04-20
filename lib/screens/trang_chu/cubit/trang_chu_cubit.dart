@@ -32,7 +32,7 @@ class TrangChuCubit extends Cubit<TrangChuState> {
     }
   }
 
-  onGetTop10Truyen() async {
+  Future<Truyen> onGetTop10Truyen() async {
     try {
       var url = 'https://app-comic-reading.onrender.com/api/get-top10-truyen';
       var res = await dio.get(url);
