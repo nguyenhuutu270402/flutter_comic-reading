@@ -5,6 +5,7 @@ import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart'
 import 'package:comic_reading/common/widgets/dia_log_danh_gia_widget.dart';
 import 'package:comic_reading/common/widgets/header_bar_widget.dart';
 import 'package:comic_reading/common/widgets/list_view_chuong_widget.dart';
+import 'package:comic_reading/screens/the_loai/the_loai_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,13 +20,11 @@ class _ChiTietPageState extends State<ChiTietPage> {
   var bloc = ChiTietCubit();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     bloc.initData(widget.id, 1);
   }
 
-  bool isShowMota = false;
-
+  ValueNotifier<bool> isShowMota = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
     String formatDateCapNhat(String ngaycapnhat) {
@@ -122,7 +121,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 6),
+                              SizedBox(height: 10),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -152,7 +151,15 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                           .map((entry) {
                                         int index = entry.key;
                                         return InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    TheLoaiPage(),
+                                              ),
+                                            );
+                                          },
                                           child: Text(
                                             index == listTacGia.length - 1
                                                 ? '${listTacGia[index].tentacgia}'
@@ -288,7 +295,6 @@ class _ChiTietPageState extends State<ChiTietPage> {
                               ),
                               SizedBox(height: 10),
                               Container(
-                                // color: Colors.red,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -307,7 +313,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                       ),
                                     ),
                                     Text(
-                                      '${ct_truyen.sosaotrungbinh}/5 - ${ct_truyen.tongdanhgia} lượt đánh giá',
+                                      '${ct_truyen.sosaotrungbinh ?? 0}/5 - ${ct_truyen.tongdanhgia} lượt đánh giá',
                                       style: TextStyle(
                                           color: Colors.grey, fontSize: 14),
                                     )
@@ -425,32 +431,46 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                 ),
                               ),
                               SizedBox(height: 10),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  ct_truyen.mota.toString(),
-                                  maxLines: isShowMota ? 2000 : 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(fontSize: 14),
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: InkWell(
-                                  onTap: () {
-                                    isShowMota = !isShowMota;
-                                    setState(() {});
-                                  },
-                                  child: Text(
-                                    isShowMota ? 'Xem thêm>' : '<Thu gọn',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: isShowMota
-                                            ? AppColors.blue
-                                            : Colors.purpleAccent),
-                                  ),
-                                ),
-                              ),
+                              ValueListenableBuilder<bool>(
+                                  valueListenable: isShowMota,
+                                  builder: (context, value, child) {
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          child: Text(
+                                            ct_truyen.mota.toString(),
+                                            maxLines: value ? null : 3,
+                                            overflow: value
+                                                ? null
+                                                : TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                                fontSize: 14, height: 1.3),
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          child: InkWell(
+                                            onTap: () {
+                                              isShowMota.value =
+                                                  !isShowMota.value;
+                                              // setState(() {});
+                                            },
+                                            child: Text(
+                                              isShowMota.value
+                                                  ? '<Thu gọn'
+                                                  : 'Xem thêm>',
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: isShowMota.value
+                                                      ? Colors.purpleAccent
+                                                      : AppColors.blue),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    );
+                                  }),
                               SizedBox(height: 10),
                               Container(
                                 alignment: Alignment.topLeft,
