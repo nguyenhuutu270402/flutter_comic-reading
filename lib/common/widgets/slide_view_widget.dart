@@ -52,7 +52,7 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
     return Stack(
       children: [
         SizedBox(
-          height: 180,
+          height: 190,
           child: PageView.builder(
             controller: pageController,
             itemCount: widget.data.length,
@@ -127,15 +127,17 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                                     ),
                                   ),
                                 ),
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    widget.data[index].mota!,
-                                    maxLines: 4,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
+                                Expanded(
+                                  child: Container(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      widget.data[index].mota!,
+                                      maxLines: 4,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                      ),
                                     ),
                                   ),
                                 ),

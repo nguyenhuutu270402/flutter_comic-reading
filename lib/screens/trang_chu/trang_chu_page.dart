@@ -32,6 +32,17 @@ class _TrangChuPageState extends State<TrangChuPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text('Trang chủ'),
+      //   actions: [
+      //     IconButton(
+      //       icon: Icon(Icons.search),
+      //       onPressed: () {
+      //         // Handle search action
+      //       },
+      //     ),
+      //   ],
+      // ),
       body: SafeArea(
         child: BlocBuilder(
           bloc: bloc,
