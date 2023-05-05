@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Comic Reading',
       theme: isDarkTheme == false ? lightTheme() : darkTheme(),
-      // darkTheme: a == false ? lightTheme() : darkTheme(),
+      // darkTheme: isDarkTheme == true ? lightTheme() : darkTheme(),
       themeMode: ThemeMode.system,
       home: BottomNav(),
     );

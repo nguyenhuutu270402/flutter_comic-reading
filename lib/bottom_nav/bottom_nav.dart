@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/screens/danh_muc/danh_muc_page.dart';
 import 'package:comic_reading/screens/trang_chu/trang_chu_page.dart';
 import 'package:comic_reading/screens/xep_hang/xep_hang_page.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _BottomNavState extends State<BottomNav> {
     TrangChuPage(),
     XepHangPage(),
     Page3(),
-    Page4(),
+    DanhMucPage(),
   ];
 
   @override
@@ -90,20 +91,6 @@ class Page3 extends StatelessWidget {
       color: Colors.blue,
       child: Center(
         child: Text('Theo dõi'),
-      ),
-    );
-  }
-}
-
-class Page4 extends StatelessWidget {
-  const Page4({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.yellow,
-      child: Center(
-        child: Text('Danh mục'),
       ),
     );
   }

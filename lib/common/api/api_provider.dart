@@ -33,8 +33,7 @@ class ApiProvider {
 
   Future<CT_Truyen> onGetOneTruyenByID(int id) async {
     try {
-      var url =
-          'https://app-comic-reading.onrender.com/api/get-one-truyen-by-id/$id';
+      var url = '$baseUrl/get-one-truyen-by-id/$id';
 
       var res = await dio.get(url);
       return CT_Truyen.fromJson(res.data);
@@ -45,8 +44,7 @@ class ApiProvider {
 
   Future<ListChuong> onGetListChuong(int id, int idNguoiDung) async {
     try {
-      var url =
-          'https://app-comic-reading.onrender.com/api/get-list-chuong-theo-id-truyen/$id/$idNguoiDung';
+      var url = '$baseUrl/get-list-chuong-theo-id-truyen/$id/$idNguoiDung';
 
       var res = await dio.get(url);
       return ListChuong.fromJson(res.data);
@@ -57,8 +55,7 @@ class ApiProvider {
 
   Future<ListTheLoai> onGetListTheLoai(int id) async {
     try {
-      var url =
-          'https://app-comic-reading.onrender.com/api/get-list-the-loai-theo-id-truyen/$id';
+      var url = '$baseUrl/get-list-the-loai-theo-id-truyen/$id';
       var res = await dio.get(url);
       return ListTheLoai.fromJson(res.data);
     } catch (e) {
@@ -68,8 +65,7 @@ class ApiProvider {
 
   Future<ListTacGia> onGetListTacGia(int id) async {
     try {
-      var url =
-          'https://app-comic-reading.onrender.com/api/get-list-tac-gia-theo-id-truyen/$id';
+      var url = '$baseUrl/get-list-tac-gia-theo-id-truyen/$id';
       var res = await dio.get(url);
       return ListTacGia.fromJson(res.data);
     } catch (e) {
@@ -79,8 +75,7 @@ class ApiProvider {
 
   Future<ListImage> onGetListImage(int idChuong) async {
     try {
-      var url =
-          'https://app-comic-reading.onrender.com/api/get-get-list-image-chuong-theo-id-chuong/$idChuong';
+      var url = '$baseUrl/get-get-list-image-chuong-theo-id-chuong/$idChuong';
       var res = await dio.get(url);
       return ListImage.fromJson(res.data);
     } catch (e) {
@@ -90,8 +85,7 @@ class ApiProvider {
 
   Future<ListBinhLuan> onGetListComment(int idTruyen) async {
     try {
-      var url =
-          'https://app-comic-reading.onrender.com/api/get-list-binh-luan-theo-id-truyen/$idTruyen';
+      var url = '$baseUrl/get-list-binh-luan-theo-id-truyen/$idTruyen';
       var res = await dio.get(url);
       return ListBinhLuan.fromJson(res.data);
     } catch (e) {
@@ -100,4 +94,8 @@ class ApiProvider {
   }
 
   // Các phương thức gọi API khác ở đây...
+  // Future<Response> postData(dynamic data) async {
+  //   final response = await dio.post('$baseUrl/some-endpoint', data: data);
+  //   return response;
+  // }
 }
