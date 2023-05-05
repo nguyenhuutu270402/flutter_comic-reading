@@ -27,11 +27,7 @@ class _DangKyPageState extends State<DangKyPage> {
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
     final apiProvider = ApiProvider();
 
-    void onDangKy() {
-      // print(email.value);
-      // print(matKhau.value);
-      // print(matKhauLai.value);
-
+    void onDangKy() async {
       final RegExp regex =
           RegExp(r'^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$');
       bool checkEmail = regex.hasMatch(email.value.toLowerCase());
@@ -80,7 +76,33 @@ class _DangKyPageState extends State<DangKyPage> {
         );
         return;
       }
-      // apiProvider.
+      final response =
+          await apiProvider.checkRegister(email.value.toLowerCase());
+      print('check>>>> ${response.data['results']}');
+      if (response.data['results'] == false) {
+        Fluttertoast.showToast(
+          msg: "Email này đã được đăng ký",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromARGB(255, 52, 52, 52),
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        return;
+      }
+      final response2 =
+          await apiProvider.addUser(email.value.toLowerCase(), matKhau.value);
+      Fluttertoast.showToast(
+        msg: "Đăng ký thành công",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 52, 52, 52),
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+      Navigator.pop(context);
     }
 
     return Scaffold(

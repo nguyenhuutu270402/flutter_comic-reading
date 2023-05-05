@@ -98,4 +98,16 @@ class ApiProvider {
   //   final response = await dio.post('$baseUrl/some-endpoint', data: data);
   //   return response;
   // }
+
+  Future<Response> checkRegister(String email) async {
+    final data = {'email': email};
+    final response = await dio.post('$baseUrl/check-register', data: data);
+    return response;
+  }
+
+  Future<Response> addUser(String email, String matkhau) async {
+    final data = {'email': email, 'matkhau': matkhau};
+    final response = await dio.post('$baseUrl/add-user', data: data);
+    return response;
+  }
 }
