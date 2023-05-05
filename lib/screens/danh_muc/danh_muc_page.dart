@@ -1,5 +1,6 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/header_bar_widget.dart';
+import 'package:comic_reading/common/widgets/item_khac_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -26,43 +27,136 @@ class _DanhMucPageState extends State<DanhMucPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      color: Colors.black,
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                "Tài khoản",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.amber,
-                                ),
-                              ),
-                            ],
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            top: 20,
+                            bottom: 10,
                           ),
-                          Row(
-                            children: [
-                              Image.network(
-                                "https://bizweb.dktcdn.net/100/303/962/files/87126502-2509242206005371-2073523065622364160-n-f697e400-e8b2-4bb1-9698-d00b50b2d9c3.jpg?v=1627804121650",
-                                width: 100,
-                                height: 100,
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Column(
-                                children: [
-                                  Text("Nguyen Van A"),
-                                  Text("Nguyen Van A"),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    )
+                          child: Text(
+                            "Tài khoản",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.amber,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.network(
+                                    "https://bizweb.dktcdn.net/100/303/962/files/87126502-2509242206005371-2073523065622364160-n-f697e400-e8b2-4bb1-9698-d00b50b2d9c3.jpg?v=1627804121650",
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                SizedBox(width: 20),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Nguyen Van A",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          // color: Colors.grey,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(height: 3),
+                                    Text(
+                                      "example1@gmail.com",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                      ],
+                    ),
+                    Container(
+                      color: Colors.grey,
+                      height: 0.2,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            top: 20,
+                            bottom: 10,
+                          ),
+                          child: Text(
+                            "Khác",
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.amber,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        ItemKhacWidget(
+                          icon: Icon(
+                            Icons.category_outlined,
+                            size: 28,
+                            color: Colors.green,
+                          ),
+                          title: "Thể loại",
+                          onTap: () {
+                            print("Thể loại");
+                          },
+                        ),
+                        ItemKhacWidget(
+                          icon: Icon(
+                            Icons.history,
+                            size: 28,
+                            color: Colors.green,
+                          ),
+                          title: "Lịch sử",
+                          onTap: () {
+                            print("Lịch sử");
+                          },
+                        ),
+                        ItemKhacWidget(
+                          icon: Icon(
+                            Icons.manage_search_sharp,
+                            size: 28,
+                            color: Colors.green,
+                          ),
+                          title: "Tìm truyện",
+                          onTap: () {
+                            print("Tìm truyện");
+                          },
+                        ),
+                        ItemKhacWidget(
+                          icon: Icon(
+                            Icons.login_outlined,
+                            size: 28,
+                            color: Colors.blue,
+                          ),
+                          title: "Đăng nhập",
+                          onTap: () {
+                            print("Đăng nhập");
+                          },
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
