@@ -2,6 +2,7 @@ import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/button_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_change_screen_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_field_login_widget.dart';
+import 'package:comic_reading/screens/dang_ky/dang_ky_page.dart';
 import 'package:flutter/material.dart';
 
 class DangNhapPage extends StatefulWidget {
@@ -55,7 +56,12 @@ class _DangNhapPageState extends State<DangNhapPage> {
                   TextChangeScreenLoginWidget(
                     textAsk: "Chưa có tài khoản?",
                     textButton: "Đăng ký ngay",
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => DangKyPage()),
+                      );
+                    },
                   )
                 ],
               ),

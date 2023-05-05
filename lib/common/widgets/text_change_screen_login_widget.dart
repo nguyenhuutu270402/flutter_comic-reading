@@ -23,7 +23,7 @@ class TextChangeScreenLoginWidget extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: onPress,
           child: Text(
             textButton,
             style: TextStyle(
