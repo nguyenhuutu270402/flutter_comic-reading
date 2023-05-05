@@ -1,6 +1,7 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/header_bar_widget.dart';
 import 'package:comic_reading/common/widgets/item_khac_widget.dart';
+import 'package:comic_reading/screens/dang_nhap/dang_nhap_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -152,7 +153,12 @@ class _DanhMucPageState extends State<DanhMucPage> {
                           ),
                           title: "Đăng nhập",
                           onTap: () {
-                            print("Đăng nhập");
+                            // pushReplacement
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DangNhapPage()),
+                            );
                           },
                         ),
                       ],
