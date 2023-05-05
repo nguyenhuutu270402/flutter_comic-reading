@@ -78,7 +78,6 @@ class _DangKyPageState extends State<DangKyPage> {
       }
       final response =
           await apiProvider.checkRegister(email.value.toLowerCase());
-      print('check>>>> ${response.data['results']}');
       if (response.data['results'] == false) {
         Fluttertoast.showToast(
           msg: "Email này đã được đăng ký",
