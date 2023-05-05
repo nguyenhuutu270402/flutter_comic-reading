@@ -25,7 +25,6 @@ class TextFieldRegisterWidget extends StatelessWidget {
           TextField(
             onChanged: (value) {
               email.value = value;
-              print(email);
             },
             decoration: InputDecoration(
               hintText: 'Email',

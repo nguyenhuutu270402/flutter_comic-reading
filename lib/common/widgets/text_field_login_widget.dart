@@ -8,8 +8,8 @@ class TextFieldLoginWidget extends StatelessWidget {
     required this.isShowMatKhau,
   });
 
-  String email;
-  String matKhau;
+  ValueNotifier<String> email;
+  ValueNotifier<String> matKhau;
   ValueNotifier<bool> isShowMatKhau;
 
   @override
@@ -20,7 +20,7 @@ class TextFieldLoginWidget extends StatelessWidget {
         children: [
           TextField(
             onChanged: (value) {
-              email = value;
+              email.value = value;
             },
             decoration: InputDecoration(
               hintText: 'Email',
@@ -49,7 +49,7 @@ class TextFieldLoginWidget extends StatelessWidget {
               builder: (context, value, child) {
                 return TextField(
                   onChanged: (value) {
-                    matKhau = value;
+                    matKhau.value = value;
                   },
                   decoration: InputDecoration(
                     hintText: 'Mật khẩu',

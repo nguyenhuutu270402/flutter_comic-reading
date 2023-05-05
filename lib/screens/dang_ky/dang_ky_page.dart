@@ -1,10 +1,10 @@
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/button_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_change_screen_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_field_register_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DangKyPage extends StatefulWidget {
   const DangKyPage({super.key});
@@ -25,11 +25,62 @@ class _DangKyPageState extends State<DangKyPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+    final apiProvider = ApiProvider();
 
     void onDangKy() {
-      print(email.value);
-      print(matKhau.value);
-      print(matKhauLai.value);
+      // print(email.value);
+      // print(matKhau.value);
+      // print(matKhauLai.value);
+
+      final RegExp regex =
+          RegExp(r'^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$');
+      bool checkEmail = regex.hasMatch(email.value.toLowerCase());
+      if (checkEmail == false) {
+        Fluttertoast.showToast(
+          msg: "Vui lòng nhập đúng email",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromARGB(255, 52, 52, 52),
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        return;
+      } else if (matKhau.value.indexOf(' ') != -1) {
+        Fluttertoast.showToast(
+          msg: "Mật khẩu không được chứa dấu cách",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromARGB(255, 52, 52, 52),
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        return;
+      } else if (matKhau.value.length < 6) {
+        Fluttertoast.showToast(
+          msg: "Mật khẩu phải có ít nhất 6 ký tự",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromARGB(255, 52, 52, 52),
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        return;
+      } else if (matKhau.value != matKhauLai.value) {
+        Fluttertoast.showToast(
+          msg: "Mật khẩu không trùng khớp",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromARGB(255, 52, 52, 52),
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        return;
+      }
+      // apiProvider.
     }
 
     return Scaffold(

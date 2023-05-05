@@ -14,15 +14,13 @@ class DangNhapPage extends StatefulWidget {
 
 class _DangNhapPageState extends State<DangNhapPage> {
   ValueNotifier<bool> isShowMatKhau = ValueNotifier(false);
-
+  ValueNotifier<String> email = ValueNotifier("");
+  ValueNotifier<String> matKhau = ValueNotifier("");
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
-
-    String email = "";
-    String matKhau = "";
 
     return Scaffold(
       body: Stack(
