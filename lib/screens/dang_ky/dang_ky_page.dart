@@ -16,15 +16,21 @@ class DangKyPage extends StatefulWidget {
 class _DangKyPageState extends State<DangKyPage> {
   ValueNotifier<bool> isShowMatKhau = ValueNotifier(false);
   ValueNotifier<bool> isShowMatKhauLai = ValueNotifier(false);
+  ValueNotifier<String> email = ValueNotifier("");
+  ValueNotifier<String> matKhau = ValueNotifier("");
+  ValueNotifier<String> matKhauLai = ValueNotifier("");
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
 
-    String email = "";
-    String matKhau = "";
-    String matKhauLai = "";
+    void onDangKy() {
+      print(email.value);
+      print(matKhau.value);
+      print(matKhauLai.value);
+    }
 
     return Scaffold(
       body: Stack(
@@ -37,18 +43,13 @@ class _DangKyPageState extends State<DangKyPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Đăng nhập",
+                    "Đăng ký",
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF1eac7c),
                     ),
                   ),
-                  // TextFieldLoginWidget(
-                  //   email: email,
-                  //   matKhau: matKhau,
-                  //   isShowMatKhau: isShowMatKhau,
-                  // ),
                   TextFieldRegisterWidget(
                     email: email,
                     matKhau: matKhau,
@@ -57,15 +58,16 @@ class _DangKyPageState extends State<DangKyPage> {
                     isShowMatKhauLai: isShowMatKhauLai,
                   ),
                   ButtonLoginWidget(
-                    screenWidth: screenWidth,
-                    title: "Đăng nhập",
-                    onPress: () {},
-                  ),
+                      screenWidth: screenWidth,
+                      title: "Đăng ký",
+                      onPress: onDangKy),
                   SizedBox(height: 30),
                   TextChangeScreenLoginWidget(
                     textAsk: "Đã có tài khoản?",
-                    textButton: "Đăng nhập ngay",
-                    onPress: () {},
+                    textButton: "Đăng nhập",
+                    onPress: () {
+                      Navigator.pop(context);
+                    },
                   )
                 ],
               ),

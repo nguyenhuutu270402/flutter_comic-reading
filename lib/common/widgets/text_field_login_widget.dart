@@ -21,7 +21,6 @@ class TextFieldLoginWidget extends StatelessWidget {
           TextField(
             onChanged: (value) {
               email = value;
-              print(email);
             },
             decoration: InputDecoration(
               hintText: 'Email',
@@ -51,7 +50,6 @@ class TextFieldLoginWidget extends StatelessWidget {
                 return TextField(
                   onChanged: (value) {
                     matKhau = value;
-                    print(matKhau);
                   },
                   decoration: InputDecoration(
                     hintText: 'Mật khẩu',

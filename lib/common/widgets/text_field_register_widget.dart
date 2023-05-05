@@ -10,9 +10,9 @@ class TextFieldRegisterWidget extends StatelessWidget {
     required this.isShowMatKhauLai,
   });
 
-  String email;
-  String matKhau;
-  String matKhauLai;
+  ValueNotifier<String> email;
+  ValueNotifier<String> matKhau;
+  ValueNotifier<String> matKhauLai;
   ValueNotifier<bool> isShowMatKhau;
   ValueNotifier<bool> isShowMatKhauLai;
 
@@ -24,7 +24,7 @@ class TextFieldRegisterWidget extends StatelessWidget {
         children: [
           TextField(
             onChanged: (value) {
-              email = value;
+              email.value = value;
               print(email);
             },
             decoration: InputDecoration(
@@ -54,18 +54,14 @@ class TextFieldRegisterWidget extends StatelessWidget {
               builder: (context, value, child) {
                 return TextField(
                   onChanged: (value) {
-                    matKhau = value;
-                    print(matKhau);
+                    matKhau.value = value;
                   },
                   decoration: InputDecoration(
                     hintText: 'Mật khẩu',
                     filled: true,
                     fillColor: Colors.black,
                     border: OutlineInputBorder(
-                      // borderRadius: BorderRadius.only(
-                      //   bottomLeft: Radius.circular(20),
-                      //   bottomRight: Radius.circular(20),
-                      // ),
+                      borderRadius: BorderRadius.zero,
                       borderSide: BorderSide.none,
                     ),
                     prefixIcon: Icon(
@@ -98,8 +94,7 @@ class TextFieldRegisterWidget extends StatelessWidget {
               builder: (context, value, child) {
                 return TextField(
                   onChanged: (value) {
-                    matKhauLai = value;
-                    print(matKhauLai);
+                    matKhauLai.value = value;
                   },
                   decoration: InputDecoration(
                     hintText: 'Nhập lại mật khẩu',
