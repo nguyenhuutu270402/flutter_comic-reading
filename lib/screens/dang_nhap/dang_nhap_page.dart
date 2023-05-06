@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
@@ -11,7 +10,6 @@ import 'package:comic_reading/screens/dang_ky/dang_ky_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // example1@gmail.com
 // password123
