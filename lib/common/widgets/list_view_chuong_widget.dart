@@ -56,7 +56,7 @@ class ListViewChuongWidget extends StatelessWidget {
           },
           child: Container(
             alignment: Alignment.topLeft,
-            margin: EdgeInsets.symmetric(vertical: 16),
+            margin: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
             width: MediaQuery.of(context).size.width,
             child: Row(
               children: [

@@ -2,6 +2,7 @@ import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/header_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_widget.dart';
 import 'package:comic_reading/common/widgets/slide_view_widget.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/trang_chu/cubit/trang_chu_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -107,13 +108,14 @@ class _TrangChuPageState extends State<TrangChuPage> {
                       screenWidth: screenWidth,
                       myColors: myColors,
                       title: 'Trang chủ',
-                      iconButtonRight: IconButton(
-                        splashColor: Colors.black,
-                        splashRadius: 22,
-                        icon: Icon(Icons.search, color: myColors.blackOrWhite),
-                        onPressed: () {
-                          print('Button timkiem pressed');
+                      iconButtonRight: TouchOpacityWidget(
+                        onTap: () {
+                          print("tap icon seacrh");
                         },
+                        child: Icon(
+                          Icons.search,
+                          size: 26,
+                        ),
                       ),
                     ),
                   ],

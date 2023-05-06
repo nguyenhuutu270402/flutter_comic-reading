@@ -14,8 +14,8 @@ class HeaderBarWidget extends StatelessWidget {
   final double screenWidth;
   final CustomThemeExtension myColors;
   final String title;
-  final IconButton? iconButtonRight;
-  final IconButton? iconButtonLeft;
+  final Widget? iconButtonRight;
+  final Widget? iconButtonLeft;
 
   @override
   Widget build(BuildContext context) {

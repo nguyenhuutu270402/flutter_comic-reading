@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/chi_tiet_page.dart';
 import 'package:comic_reading/screens/trang_chu/model/truyen.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                 builder: (cxt, child) {
                   return child!;
                 },
-                child: InkWell(
+                child: TouchOpacityWidget(
                   onTap: () {
                     Navigator.push(
                       context,
