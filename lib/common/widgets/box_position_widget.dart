@@ -1,5 +1,6 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
 import 'package:comic_reading/common/widgets/comment_sliding_sheet_widget.dart';
@@ -30,7 +31,7 @@ class BoxPosition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      child: Container(
+      child: SizedBox(
         height: screenHeight,
         child: Stack(
           children: [
@@ -40,25 +41,27 @@ class BoxPosition extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(
-                    onPressed: () {
+                  TouchOpacityWidget(
+                    onTap: () {
                       Navigator.pop(context);
                     },
-                    splashColor: Colors.black,
-                    splashRadius: 22,
-                    icon: Icon(Icons.arrow_back, color: myColors.blackOrWhite),
+                    child: SizedBox(
+                      width: 50,
+                      child:
+                          Icon(Icons.arrow_back, color: myColors.blackOrWhite),
+                    ),
                   ),
                   Text(
                     'Chapter ${listChuong[index].sochuong}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
+                  TouchOpacityWidget(
+                    onTap: () {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -69,9 +72,10 @@ class BoxPosition extends StatelessWidget {
                         },
                       );
                     },
-                    splashColor: Colors.black,
-                    splashRadius: 22,
-                    icon: Icon(Icons.list, color: myColors.blackOrWhite),
+                    child: SizedBox(
+                      width: 50,
+                      child: Icon(Icons.list, color: myColors.blackOrWhite),
+                    ),
                   ),
                 ],
               ),
@@ -86,7 +90,7 @@ class BoxPosition extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     if (index < listChuong.length - 1)
-                      InkWell(
+                      TouchOpacityWidget(
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
@@ -115,7 +119,7 @@ class BoxPosition extends StatelessWidget {
                         ),
                       ),
                     if (index > 0)
-                      InkWell(
+                      TouchOpacityWidget(
                         onTap: () {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
@@ -143,24 +147,20 @@ class BoxPosition extends StatelessWidget {
                           ],
                         ),
                       ),
-                    IconButton(
-                      onPressed: () {
+                    TouchOpacityWidget(
+                      onTap: () {
                         print('tap favorite');
                       },
-                      splashColor: Colors.black,
-                      splashRadius: 22,
-                      icon: Icon(
+                      child: Icon(
                         Icons.favorite_outline,
                         color: Colors.red,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
+                    TouchOpacityWidget(
+                      onTap: () {
                         showMySlidingSheet(context, listComment);
                       },
-                      splashColor: Colors.black,
-                      splashRadius: 22,
-                      icon: Icon(Icons.message_outlined, color: Colors.green),
+                      child: Icon(Icons.message_outlined, color: Colors.green),
                     ),
                   ],
                 ),

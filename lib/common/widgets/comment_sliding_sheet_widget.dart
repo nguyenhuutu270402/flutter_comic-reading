@@ -1,5 +1,6 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
@@ -134,13 +135,14 @@ Widget buildFooter(
               ),
             ),
           ),
-          // SizedBox(width: 16),
-          IconButton(
-            onPressed: () {},
-            splashRadius: 22,
-            icon: Icon(Icons.send),
-            color: AppColors.ogrange,
-          )
+          TouchOpacityWidget(
+            onTap: () {},
+            child: Icon(
+              Icons.send,
+              color: AppColors.ogrange,
+            ),
+          ),
+          SizedBox(width: 10),
         ],
       ),
     ),
@@ -164,14 +166,13 @@ Widget buildHeader(BuildContext context, SheetState state, List data) {
             style: TextStyle(fontWeight: FontWeight.w600),
           ),
           Positioned(
-            top: 0,
-            right: 0,
-            child: IconButton(
-              splashRadius: 10,
-              onPressed: () {
+            top: 6,
+            right: 6,
+            child: TouchOpacityWidget(
+              onTap: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.clear),
+              child: Icon(Icons.clear),
             ),
           ),
         ],

@@ -37,7 +37,7 @@ class HeaderBarWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: 50,
             child: iconButtonLeft ?? null,
           ),
@@ -45,7 +45,7 @@ class HeaderBarWidget extends StatelessWidget {
             title,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
-          Container(
+          SizedBox(
             width: 50,
             child: iconButtonRight ?? null,
           ),
