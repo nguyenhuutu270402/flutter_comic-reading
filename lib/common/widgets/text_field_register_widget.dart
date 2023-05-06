@@ -1,3 +1,4 @@
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldRegisterWidget extends StatelessWidget {
@@ -67,7 +68,7 @@ class TextFieldRegisterWidget extends StatelessWidget {
                       Icons.lock_outline,
                       color: Colors.white,
                     ),
-                    suffixIcon: InkWell(
+                    suffixIcon: TouchOpacityWidget(
                       onTap: () {
                         isShowMatKhau.value = !isShowMatKhau.value;
                       },
@@ -77,8 +78,6 @@ class TextFieldRegisterWidget extends StatelessWidget {
                             : Icons.visibility_off,
                         color: Colors.white,
                       ),
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.transparent),
                     ),
                     hintStyle: TextStyle(color: Colors.grey),
                   ),
@@ -110,7 +109,7 @@ class TextFieldRegisterWidget extends StatelessWidget {
                       Icons.lock_outline,
                       color: Colors.white,
                     ),
-                    suffixIcon: InkWell(
+                    suffixIcon: TouchOpacityWidget(
                       onTap: () {
                         isShowMatKhauLai.value = !isShowMatKhauLai.value;
                       },
@@ -120,8 +119,6 @@ class TextFieldRegisterWidget extends StatelessWidget {
                             : Icons.visibility_off,
                         color: Colors.white,
                       ),
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.transparent),
                     ),
                     hintStyle: TextStyle(color: Colors.grey),
                   ),

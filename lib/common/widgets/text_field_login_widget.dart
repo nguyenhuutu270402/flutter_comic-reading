@@ -1,3 +1,4 @@
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldLoginWidget extends StatelessWidget {
@@ -66,7 +67,7 @@ class TextFieldLoginWidget extends StatelessWidget {
                       Icons.lock_outline,
                       color: Colors.white,
                     ),
-                    suffixIcon: InkWell(
+                    suffixIcon: TouchOpacityWidget(
                       onTap: () {
                         isShowMatKhau.value = !isShowMatKhau.value;
                       },
@@ -76,8 +77,6 @@ class TextFieldLoginWidget extends StatelessWidget {
                             : Icons.visibility_off,
                         color: Colors.white,
                       ),
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.transparent),
                     ),
                     hintStyle: TextStyle(color: Colors.grey),
                   ),

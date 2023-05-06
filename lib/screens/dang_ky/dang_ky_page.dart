@@ -135,7 +135,7 @@ class _DangKyPageState extends State<DangKyPage> {
                       onPress: onDangKy),
                   SizedBox(height: 30),
                   TextChangeScreenLoginWidget(
-                    textAsk: "Đã có tài khoản?",
+                    textAsk: "Đã có tài khoản?  ",
                     textButton: "Đăng nhập",
                     onPress: () {
                       Navigator.pop(context);

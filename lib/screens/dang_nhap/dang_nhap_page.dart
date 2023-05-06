@@ -3,6 +3,7 @@ import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/button_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_change_screen_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_field_login_widget.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/dang_ky/dang_ky_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -82,7 +83,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
                       onPress: onDangNhap),
                   SizedBox(height: 30),
                   TextChangeScreenLoginWidget(
-                    textAsk: "Chưa có tài khoản?",
+                    textAsk: "Chưa có tài khoản? ",
                     textButton: "Đăng ký ngay",
                     onPress: () {
                       Navigator.push(
@@ -96,12 +97,13 @@ class _DangNhapPageState extends State<DangNhapPage> {
             ),
           ),
           Positioned(
-            top: 20,
-            child: IconButton(
-              onPressed: () {
+            top: 40,
+            left: 16,
+            child: TouchOpacityWidget(
+              onTap: () {
                 Navigator.pop(context);
               },
-              icon: Container(
+              child: Container(
                 width: 24,
                 height: 24,
                 decoration: BoxDecoration(

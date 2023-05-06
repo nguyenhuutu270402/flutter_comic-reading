@@ -1,3 +1,4 @@
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 
 class TextChangeScreenLoginWidget extends StatelessWidget {
@@ -22,8 +23,8 @@ class TextChangeScreenLoginWidget extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        TextButton(
-          onPressed: onPress,
+        TouchOpacityWidget(
+          onTap: onPress,
           child: Text(
             textButton,
             style: TextStyle(
