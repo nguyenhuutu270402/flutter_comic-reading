@@ -1,3 +1,4 @@
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
@@ -10,6 +11,8 @@ import 'package:comic_reading/common/widgets/list_view_chuong_widget.dart';
 import 'package:comic_reading/screens/the_loai/the_loai_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ChiTietPage extends StatefulWidget {
   const ChiTietPage({super.key, required this.id});
@@ -30,10 +33,16 @@ class _ChiTietPageState extends State<ChiTietPage> {
 
   void initData() async {
     userInfor = await MySharedPrefes().readUserInfo();
-    bloc.initData(widget.id, userInfor['id']);
+    if (userInfor != null) {
+      bloc.initData(widget.id, userInfor['id']);
+    } else {
+      bloc.initData(widget.id, 1);
+    }
   }
 
   ValueNotifier<bool> isShowMota = ValueNotifier(false);
+  ValueNotifier<bool> isFollow = ValueNotifier(false);
+
   @override
   Widget build(BuildContext context) {
     String formatDateCapNhat(String ngaycapnhat) {
@@ -43,7 +52,29 @@ class _ChiTietPageState extends State<ChiTietPage> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
-    bool isFollow = false;
+
+    void onTheoDoi() async {
+      if (userInfor == null) {
+        Fluttertoast.showToast(
+          msg: "Chưa đăng nhập",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromARGB(255, 52, 52, 52),
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        return;
+      }
+      EasyLoading.show(status: 'Loading...');
+      if (isFollow.value == false) {
+        await ApiProvider().addTheoDoi(userInfor['id'], widget.id);
+      } else {
+        await ApiProvider().deleteTheoDoi(userInfor['id'], widget.id);
+      }
+      isFollow.value = !isFollow.value;
+      EasyLoading.dismiss();
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -59,8 +90,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
               var listTheLoai = state.listTheLoai.results;
               var listTacGia = state.listTacGia.results;
               var listChuong = state.listChuong.results;
-              print(state.isFollow.data);
-              isFollow = state.isFollow.data['results'];
+              isFollow.value = state.isFollow.data['results'];
+              print(isFollow.value);
               if (ct_truyen == null) {
                 return Text('Empty');
               } else {
@@ -371,36 +402,45 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     height: 30,
                                     child: Row(
                                       children: [
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            // Xử lý sự kiện khi nhấn nút
-                                          },
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.favorite,
-                                                color: Colors.white,
-                                                size: 18,
-                                              ),
-                                              Text('Theo dõi',
-                                                  style: TextStyle(
+                                        ValueListenableBuilder<bool>(
+                                            valueListenable: isFollow,
+                                            builder: (context, value, child) {
+                                              return ElevatedButton(
+                                                onPressed: onTheoDoi,
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.favorite,
                                                       color: Colors.white,
-                                                      fontSize: 14)),
-                                            ],
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: AppColors.green,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                            ),
-                                            fixedSize: Size(110, 30),
-                                          ),
-                                        ),
+                                                      size: 18,
+                                                    ),
+                                                    Text(
+                                                        isFollow.value == false
+                                                            ? 'Theo dõi'
+                                                            : 'Bỏ theo dõi',
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14)),
+                                                  ],
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      isFollow.value == false
+                                                          ? AppColors.green
+                                                          : Colors.red,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                  ),
+                                                  // fixedSize: Size(110, 30),
+                                                ),
+                                              );
+                                            }),
                                         Text(
                                           '   ${ct_truyen.tongtheodoi.toString()}',
                                         ),

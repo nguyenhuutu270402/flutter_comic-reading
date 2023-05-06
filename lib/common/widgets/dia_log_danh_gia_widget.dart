@@ -8,6 +8,7 @@ class DialogDanhGia extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void onDanhGia() {}
     return AlertDialog(
       title: Text(
         'Đánh giá',
@@ -18,7 +19,7 @@ class DialogDanhGia extends StatelessWidget {
           Text('Hãy cho chúng tôi biết đánh giá của bạn'),
           SizedBox(height: 16),
           RatingBar.builder(
-            initialRating: 2,
+            initialRating: 0,
             minRating: 1,
             direction: Axis.horizontal,
             allowHalfRating: true,
@@ -29,7 +30,6 @@ class DialogDanhGia extends StatelessWidget {
               color: Colors.amber,
             ),
             onRatingUpdate: (rating) {
-              // TODO: xử lý đánh giá của người dùng
               print('rating>>> ${rating}');
             },
           ),
