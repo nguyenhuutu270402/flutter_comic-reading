@@ -1,4 +1,7 @@
+import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
+import 'package:comic_reading/common/widgets/box_thong_tin_tai_khoan.dart';
 import 'package:comic_reading/common/widgets/header_bar_widget.dart';
 import 'package:comic_reading/common/widgets/item_khac_widget.dart';
 import 'package:comic_reading/screens/dang_nhap/dang_nhap_page.dart';
@@ -26,6 +29,7 @@ class _DanhMucPageState extends State<DanhMucPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+    final mySharedPrefes = MySharedPrefes();
     return Scaffold(
       body: SafeArea(
         child: BlocBuilder(
@@ -37,7 +41,7 @@ class _DanhMucPageState extends State<DanhMucPage> {
                 return const Text('Failure');
               } else if (state is DanhMucSuccess) {
                 var userInfor = state.userInfor;
-                print("user ở danh mục $userInfor");
+                print(userInfor);
                 return Stack(
                   children: [
                     Padding(
@@ -62,51 +66,21 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 20,
-                                      vertical: 10,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          child: Image.network(
-                                            "https://bizweb.dktcdn.net/100/303/962/files/87126502-2509242206005371-2073523065622364160-n-f697e400-e8b2-4bb1-9698-d00b50b2d9c3.jpg?v=1627804121650",
-                                            width: 60,
-                                            height: 60,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        SizedBox(width: 20),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Nguyen Van A",
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  // color: Colors.grey,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            SizedBox(height: 3),
-                                            Text(
-                                              "example1@gmail.com",
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                if (userInfor != null)
+                                  BoxThongTinTaiKhoan(
+                                    userInfor: userInfor,
+                                    onTap: () {},
+                                  )
+                                else
+                                  Row(
+                                    children: [
+                                      SizedBox(width: 20),
+                                      Text(
+                                        "Chưa đăng nhập",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ],
                                   ),
-                                ),
                                 SizedBox(height: 10),
                               ],
                             ),
@@ -164,22 +138,40 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                     print("Tìm truyện");
                                   },
                                 ),
-                                ItemKhacWidget(
-                                  icon: Icon(
-                                    Icons.login_outlined,
-                                    size: 28,
-                                    color: Colors.blue,
-                                  ),
-                                  title: "Đăng nhập",
-                                  onTap: () {
-                                    // pushReplacement
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DangNhapPage()),
-                                    );
-                                  },
-                                ),
+                                userInfor == null
+                                    ? ItemKhacWidget(
+                                        icon: Icon(
+                                          Icons.login_outlined,
+                                          size: 28,
+                                          color: Colors.blue,
+                                        ),
+                                        title: "Đăng nhập",
+                                        onTap: () {
+                                          // pushReplacement
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DangNhapPage()),
+                                          );
+                                        },
+                                      )
+                                    : ItemKhacWidget(
+                                        icon: Icon(
+                                          Icons.logout_outlined,
+                                          size: 28,
+                                          color: Colors.red,
+                                        ),
+                                        title: "Đăng xuất",
+                                        onTap: () async {
+                                          await mySharedPrefes.removeUserInfo();
+                                          Navigator.of(context).pushReplacement(
+                                            MaterialPageRoute(
+                                              builder: (context) => BottomNav(),
+                                            ),
+                                          );
+                                        },
+                                      ),
                               ],
                             ),
                           ],
