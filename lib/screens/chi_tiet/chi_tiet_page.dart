@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/cubit/chi_tiet_cubit.dart';
@@ -19,10 +20,17 @@ class ChiTietPage extends StatefulWidget {
 
 class _ChiTietPageState extends State<ChiTietPage> {
   var bloc = ChiTietCubit();
+  var userInfor;
+
   @override
   void initState() {
     super.initState();
-    bloc.initData(widget.id, 1);
+    initData();
+  }
+
+  void initData() async {
+    userInfor = await MySharedPrefes().readUserInfo();
+    bloc.initData(widget.id, userInfor['id']);
   }
 
   ValueNotifier<bool> isShowMota = ValueNotifier(false);
@@ -35,6 +43,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+    bool isFollow = false;
 
     return Scaffold(
       body: SafeArea(
@@ -50,9 +59,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
               var listTheLoai = state.listTheLoai.results;
               var listTacGia = state.listTacGia.results;
               var listChuong = state.listChuong.results;
-
-              // var data2 = state.data2.results;
-
+              print(state.isFollow.data);
+              isFollow = state.isFollow.data['results'];
               if (ct_truyen == null) {
                 return Text('Empty');
               } else {

@@ -12,19 +12,20 @@ class ChiTietCubit extends Cubit<ChiTietState> {
   ChiTietCubit() : super(ChiTietInitial());
   final apiProvider = ApiProvider();
 
-  Future<void> initData(int id, int idNguoiDung) async {
+  Future<void> initData(int idTruyen, int idNguoiDung) async {
     try {
       emit(ChiTietLoading());
-      var ct_truyen = await apiProvider.onGetOneTruyenByID(id);
-      var listChuong = await apiProvider.onGetListChuong(id, idNguoiDung);
-      var listTheLoai = await apiProvider.onGetListTheLoai(id);
-      var listTacGia = await apiProvider.onGetListTacGia(id);
-
+      var ct_truyen = await apiProvider.onGetOneTruyenByID(idTruyen);
+      var listChuong = await apiProvider.onGetListChuong(idTruyen, idNguoiDung);
+      var listTheLoai = await apiProvider.onGetListTheLoai(idTruyen);
+      var listTacGia = await apiProvider.onGetListTacGia(idTruyen);
+      var isFollow = await apiProvider.kiemTraTheoDoi(idNguoiDung, idTruyen);
       emit(ChiTietSuccess(
           ct_truyen: ct_truyen,
           listChuong: listChuong,
           listTheLoai: listTheLoai,
-          listTacGia: listTacGia));
+          listTacGia: listTacGia,
+          isFollow: isFollow));
     } catch (e) {
       emit(ChiTietFailure(error: e.toString()));
     }

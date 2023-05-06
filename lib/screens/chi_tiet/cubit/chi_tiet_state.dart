@@ -17,9 +17,11 @@ class ChiTietSuccess extends ChiTietState {
   final ListChuong listChuong;
   final ListTacGia listTacGia;
   final ListTheLoai listTheLoai;
+  final isFollow;
   ChiTietSuccess(
       {required this.ct_truyen,
       required this.listChuong,
       required this.listTheLoai,
-      required this.listTacGia});
+      required this.listTacGia,
+      required this.isFollow});
 }

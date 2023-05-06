@@ -18,7 +18,6 @@ class MySharedPrefes {
     dynamic data;
     if (jsonString != null) {
       data = jsonDecode(jsonString);
-      print(data);
     } else {
       data = null;
       print('Không tìm thấy dữ liệu người dùng');
