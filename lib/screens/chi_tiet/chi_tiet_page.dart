@@ -94,7 +94,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     width: screenWidth * 0.5,
                                     fit: BoxFit.contain,
                                   ),
-                                  SizedBox(height: 10),
+                                  SizedBox(height: 20),
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -112,7 +112,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                               '   Tên khác',
                                               style: TextStyle(
                                                   color: Colors.grey,
-                                                  fontSize: 14),
+                                                  fontSize: 14,
+                                                  height: 1.5),
                                             ),
                                           ],
                                         ),
@@ -122,7 +123,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                         child: Text(
                                           ct_truyen.tenkhac.toString(),
                                           style: TextStyle(
-                                              color: Colors.grey, fontSize: 14),
+                                            color: Colors.grey,
+                                            fontSize: 14,
+                                            height: 1.5,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -144,8 +148,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             Text(
                                               '   Tác giả',
                                               style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                                height: 1.5,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -175,6 +181,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   color: AppColors.blue,
+                                                  height: 1.5,
                                                 ),
                                               ),
                                             );
@@ -203,8 +210,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             Text(
                                               '   Tình trạng',
                                               style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                                height: 1.5,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -216,7 +225,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                               ? 'Đang tiến hành'
                                               : 'Hoàn thành',
                                           style: TextStyle(
-                                              color: Colors.grey, fontSize: 14),
+                                            color: Colors.grey,
+                                            fontSize: 14,
+                                            height: 1.5,
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -241,8 +253,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             Text(
                                               '   Thể loại',
                                               style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                                height: 1.5,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -265,6 +279,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   color: AppColors.blue,
+                                                  height: 1.5,
                                                 ),
                                               ),
                                             );
@@ -293,8 +308,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             Text(
                                               '   Lượt xem',
                                               style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 14),
+                                                color: Colors.grey,
+                                                fontSize: 14,
+                                                height: 1.5,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -304,7 +321,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                         child: Text(
                                           ct_truyen.tongluotxem.toString(),
                                           style: TextStyle(
-                                              color: Colors.grey, fontSize: 14),
+                                            color: Colors.grey,
+                                            fontSize: 14,
+                                            height: 1.5,
+                                          ),
                                         ),
                                       ),
                                     ],

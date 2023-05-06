@@ -1,3 +1,4 @@
+import 'package:comic_reading/models/search_truyen.dart';
 import 'package:dio/dio.dart';
 import 'package:comic_reading/screens/trang_chu/model/truyen.dart';
 import 'package:comic_reading/screens/chi_tiet/model/ct_truyen.dart';
@@ -15,6 +16,39 @@ class ApiProvider {
   final baseUrl = 'http://192.168.43.213:3000/api';
 
   // final baseUrl = 'https://app-comic-reading.onrender.com/api';
+
+  Future<Response> checkRegister(String email) async {
+    try {
+      final data = {'email': email};
+      final response = await dio.post('$baseUrl/check-register', data: data);
+      return response;
+    } catch (e) {
+      print("API error checkRegister: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> addUser(String email, String matkhau) async {
+    try {
+      final data = {'email': email, 'matkhau': matkhau};
+      final response = await dio.post('$baseUrl/add-user', data: data);
+      return response;
+    } catch (e) {
+      print("API error addUser: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> loginUser(String email, String matkhau) async {
+    try {
+      final data = {'email': email, 'matkhau': matkhau};
+      final response = await dio.post('$baseUrl/login', data: data);
+      return response;
+    } catch (e) {
+      print("API error loginUser: $e");
+      rethrow;
+    }
+  }
 
   Future<Truyen> onGetAllTruyen() async {
     try {
@@ -106,10 +140,11 @@ class ApiProvider {
     }
   }
 
-  Future<Response> checkRegister(String email) async {
+  Future<Response> updatePasswordUser(String matkhau, int id) async {
     try {
-      final data = {'email': email};
-      final response = await dio.post('$baseUrl/check-register', data: data);
+      final data = {'matkhau': matkhau, 'id': id};
+      final response =
+          await dio.post('$baseUrl/update-password-user', data: data);
       return response;
     } catch (e) {
       print("API error checkRegister: $e");
@@ -117,24 +152,175 @@ class ApiProvider {
     }
   }
 
-  Future<Response> addUser(String email, String matkhau) async {
+  Future<SearchTruyen> searchTruyen(String search) async {
     try {
-      final data = {'email': email, 'matkhau': matkhau};
-      final response = await dio.post('$baseUrl/add-user', data: data);
-      return response;
+      var url = '$baseUrl/search-truyen?search=$search';
+      var res = await dio.get(url);
+      return SearchTruyen.fromJson(res.data);
     } catch (e) {
-      print("API error addUser: $e");
+      print("API error searchTruyen: $e");
       rethrow;
     }
   }
 
-  Future<Response> loginUser(String email, String matkhau) async {
+  Future<Response> addTheoDoi(int idnguoidung, int idtruyen) async {
     try {
-      final data = {'email': email, 'matkhau': matkhau};
-      final response = await dio.post('$baseUrl/login', data: data);
+      final data = {'idnguoidung': idnguoidung, 'idtruyen': idtruyen};
+      final response = await dio.post('$baseUrl/add-theo-doi', data: data);
       return response;
     } catch (e) {
-      print("API error loginUser: $e");
+      print("API error addTheoDoi: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> kiemTraTheoDoi(int idnguoidung, int idtruyen) async {
+    try {
+      final data = {'idnguoidung': idnguoidung, 'idtruyen': idtruyen};
+      final response = await dio.post('$baseUrl/kiem-tra-theo-doi', data: data);
+      return response;
+    } catch (e) {
+      print("API error kiemTraTheoDoi: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> deleteTheoDoi(int idnguoidung, int idtruyen) async {
+    try {
+      final data = {'idnguoidung': idnguoidung, 'idtruyen': idtruyen};
+      final response = await dio.post('$baseUrl/delete-theo-doi', data: data);
+      return response;
+    } catch (e) {
+      print("API error deleteTheoDoi: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> addDanhGia(
+      int idnguoidung, int idtruyen, double sosao) async {
+    try {
+      final data = {
+        'idnguoidung': idnguoidung,
+        'idtruyen': idtruyen,
+        'sosao': sosao
+      };
+      final response = await dio.post('$baseUrl/add-danh-gia', data: data);
+      return response;
+    } catch (e) {
+      print("API error addDanhGia: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> addLuotXem(int idnguoidung, int idchuong) async {
+    try {
+      final data = {
+        'idnguoidung': idnguoidung,
+        'idchuong': idchuong,
+      };
+      final response = await dio.post('$baseUrl/add-luot-xem', data: data);
+      return response;
+    } catch (e) {
+      print("API error addLuotXem: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> updateDanhGia(
+      int idnguoidung, int idtruyen, double sosao) async {
+    try {
+      final data = {
+        'idnguoidung': idnguoidung,
+        'idtruyen': idtruyen,
+        'sosao': sosao
+      };
+      final response = await dio.post('$baseUrl/update-danh-gia', data: data);
+      return response;
+    } catch (e) {
+      print("API error addDanhGia: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> addBinhLuan(
+      int idnguoidung, int idtruyen, String noidung) async {
+    try {
+      final data = {
+        'idnguoidung': idnguoidung,
+        'idtruyen': idtruyen,
+        'noidung': noidung,
+      };
+      final response = await dio.post('$baseUrl/add-binh-luan', data: data);
+      return response;
+    } catch (e) {
+      print("API error addBinhLuan: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> layListTruyenTheoLoai(String lastquery) async {
+    try {
+      final data = {
+        'lastquery': lastquery,
+      };
+      final response =
+          await dio.post('$baseUrl/lay-list-truyen-theo-loai', data: data);
+      return response;
+    } catch (e) {
+      print("API error layListTruyenTheoLoai: $e");
+      rethrow;
+    }
+  }
+
+  Future<SearchTruyen> getListLichSuTheoIdNguoiDung(int id) async {
+    try {
+      var url = '$baseUrl/get-list-lich-su-theo-id-nguoi-dung/$id';
+      var res = await dio.get(url);
+      return SearchTruyen.fromJson(res.data);
+    } catch (e) {
+      print("API error getListLichSuTheoIdNguoiDung: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> kiemTraLichSu(
+      int idnguoidung, int idtruyen, int idchuong) async {
+    try {
+      final data = {
+        'idnguoidung': idnguoidung,
+        'idtruyen': idtruyen,
+        'idchuong': idchuong,
+      };
+      final response = await dio.post('$baseUrl/kiem-tra-lich-su', data: data);
+      return response;
+    } catch (e) {
+      print("API error kiemTraLichSu: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> kiemTraLichSuXemChuong(int idnguoidung, int idchuong) async {
+    try {
+      final data = {
+        'idnguoidung': idnguoidung,
+        'idchuong': idchuong,
+      };
+      final response =
+          await dio.post('$baseUrl/kiem-tra-lich-su-xem-chuong', data: data);
+      return response;
+    } catch (e) {
+      print("API error kiemTraLichSuXemChuong: $e");
+      rethrow;
+    }
+  }
+
+  Future<Response> deleteLichSu(int idnguoidung, int idtruyen) async {
+    try {
+      final data = {'idnguoidung': idnguoidung, 'idtruyen': idtruyen};
+      final response = await dio.post('$baseUrl/delete-lich-su', data: data);
+      return response;
+    } catch (e) {
+      print("API error deleteLichSu: $e");
       rethrow;
     }
   }

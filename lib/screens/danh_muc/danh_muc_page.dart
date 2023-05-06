@@ -41,7 +41,6 @@ class _DanhMucPageState extends State<DanhMucPage> {
                 return const Text('Failure');
               } else if (state is DanhMucSuccess) {
                 var userInfor = state.userInfor;
-                print(userInfor);
                 return Stack(
                   children: [
                     Padding(
@@ -138,25 +137,43 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                     print("Tìm truyện");
                                   },
                                 ),
-                                userInfor == null
-                                    ? ItemKhacWidget(
+                                if (userInfor == null)
+                                  ItemKhacWidget(
+                                    icon: Icon(
+                                      Icons.login_outlined,
+                                      size: 28,
+                                      color: Colors.blue,
+                                    ),
+                                    title: "Đăng nhập",
+                                    onTap: () {
+                                      // pushReplacement
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                DangNhapPage()),
+                                      );
+                                    },
+                                  )
+                                else
+                                  Column(
+                                    children: [
+                                      ItemKhacWidget(
                                         icon: Icon(
-                                          Icons.login_outlined,
+                                          Icons.change_circle_outlined,
                                           size: 28,
                                           color: Colors.blue,
                                         ),
-                                        title: "Đăng nhập",
-                                        onTap: () {
-                                          // pushReplacement
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DangNhapPage()),
-                                          );
+                                        title: "Đổi mật khẩu",
+                                        onTap: () async {
+                                          // Navigator.of(context).pushReplacement(
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) => BottomNav(),
+                                          //   ),
+                                          // );
                                         },
-                                      )
-                                    : ItemKhacWidget(
+                                      ),
+                                      ItemKhacWidget(
                                         icon: Icon(
                                           Icons.logout_outlined,
                                           size: 28,
@@ -172,6 +189,8 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                           );
                                         },
                                       ),
+                                    ],
+                                  ),
                               ],
                             ),
                           ],
