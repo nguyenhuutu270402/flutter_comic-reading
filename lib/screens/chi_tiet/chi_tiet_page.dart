@@ -592,7 +592,9 @@ class _ChiTietPageState extends State<ChiTietPage> {
                               ),
                             ),
                             ListViewChuongWidget(
-                                myColors: myColors, listChuong: listChuong!),
+                                myColors: myColors,
+                                listChuong: listChuong!,
+                                userInfor: userInfor),
                           ],
                         ),
                       ),

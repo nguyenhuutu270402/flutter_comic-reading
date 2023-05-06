@@ -1,14 +1,19 @@
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ListViewChuongWidget extends StatelessWidget {
   const ListViewChuongWidget(
-      {super.key, required this.myColors, required this.listChuong});
+      {super.key,
+      required this.myColors,
+      required this.listChuong,
+      required this.userInfor});
   final List<ResultsChuong> listChuong;
   final CustomThemeExtension myColors;
-
+  final userInfor;
   @override
   Widget build(BuildContext context) {
     String formatDateTime(String dateString) {
@@ -37,6 +42,16 @@ class ListViewChuongWidget extends StatelessWidget {
       return 'Null';
     }
 
+    void addLuotXem(int idChuong, int idTruyen) async {
+      if (userInfor == null) {
+        await ApiProvider().addLuotXem(1, idChuong);
+      } else {
+        await ApiProvider().addLuotXem(userInfor['id'], idChuong);
+        await ApiProvider().kiemTraLichSu(userInfor['id'], idTruyen, idChuong);
+        await ApiProvider().kiemTraLichSuXemChuong(userInfor['id'], idChuong);
+      }
+    }
+
     return ListView.builder(
       shrinkWrap: true,
       itemCount: listChuong.length,
@@ -44,6 +59,7 @@ class ListViewChuongWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
+            addLuotXem(listChuong[index].id!, listChuong[index].idtruyen!);
             Navigator.push(
               context,
               MaterialPageRoute(
