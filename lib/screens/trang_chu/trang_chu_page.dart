@@ -18,7 +18,6 @@ class _TrangChuPageState extends State<TrangChuPage> {
   var bloc = TrangChuCubit();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     bloc.initData();
   }
@@ -49,15 +48,15 @@ class _TrangChuPageState extends State<TrangChuPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is TrangChuLoading) {
-              return Text('Loading');
+              return const Text('Loading');
             } else if (state is TrangChuFailure) {
-              return Text('Failure');
+              return const Text('Failure');
             } else if (state is TrangChuSuccess) {
               var data = state.data.results;
               var data2 = state.data2.results;
 
               if (data!.isEmpty) {
-                return Text('Empty');
+                return const Text('Empty');
               } else {
                 return Stack(
                   children: [
@@ -68,9 +67,9 @@ class _TrangChuPageState extends State<TrangChuPage> {
                           children: [
                             Container(
                               width: screenWidth,
-                              margin: EdgeInsets.only(top: 16, left: 10),
+                              margin: const EdgeInsets.only(top: 16, left: 10),
                               alignment: Alignment.topLeft,
-                              child: Text(
+                              child: const Text(
                                 'Truyện đề cử',
                                 style: TextStyle(
                                     color: Colors.amber,
@@ -82,10 +81,10 @@ class _TrangChuPageState extends State<TrangChuPage> {
                             SlideViewWiget(data: data2!),
                             Container(
                               width: screenWidth,
-                              margin: EdgeInsets.only(
+                              margin: const EdgeInsets.only(
                                   top: 10, left: 10, bottom: 16),
                               alignment: Alignment.topLeft,
-                              child: Text(
+                              child: const Text(
                                 'Truyện mới cập nhật',
                                 style: TextStyle(
                                     color: Colors.amber,
@@ -112,7 +111,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
                         onTap: () {
                           print("tap icon seacrh");
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.search,
                           size: 26,
                         ),

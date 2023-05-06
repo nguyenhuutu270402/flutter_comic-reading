@@ -3,8 +3,6 @@ import 'package:comic_reading/common/widgets/header_bar_widget.dart';
 import 'package:comic_reading/common/widgets/item_khac_widget.dart';
 import 'package:comic_reading/screens/dang_nhap/dang_nhap_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class DanhMucPage extends StatefulWidget {
   const DanhMucPage({super.key});

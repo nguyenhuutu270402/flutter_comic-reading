@@ -22,6 +22,7 @@ class ApiProvider {
       var res = await dio.get(url);
       return Truyen.fromJson(res.data);
     } catch (e) {
+      print("API error onGetAllTruyen: $e");
       rethrow;
     }
   }
@@ -32,6 +33,7 @@ class ApiProvider {
       var res = await dio.get(url);
       return Truyen.fromJson(res.data);
     } catch (e) {
+      print("API error onGetTop10Truyen: $e");
       rethrow;
     }
   }
@@ -43,6 +45,7 @@ class ApiProvider {
       var res = await dio.get(url);
       return CT_Truyen.fromJson(res.data);
     } catch (e) {
+      print("API error onGetOneTruyenByID: $e");
       rethrow;
     }
   }
@@ -54,6 +57,7 @@ class ApiProvider {
       var res = await dio.get(url);
       return ListChuong.fromJson(res.data);
     } catch (e) {
+      print("API error onGetListChuong: $e");
       rethrow;
     }
   }
@@ -64,6 +68,7 @@ class ApiProvider {
       var res = await dio.get(url);
       return ListTheLoai.fromJson(res.data);
     } catch (e) {
+      print("API error onGetListTheLoai: $e");
       rethrow;
     }
   }
@@ -74,6 +79,7 @@ class ApiProvider {
       var res = await dio.get(url);
       return ListTacGia.fromJson(res.data);
     } catch (e) {
+      print("API error onGetListTacGia: $e");
       rethrow;
     }
   }
@@ -84,6 +90,7 @@ class ApiProvider {
       var res = await dio.get(url);
       return ListImage.fromJson(res.data);
     } catch (e) {
+      print("API error onGetListImage: $e");
       rethrow;
     }
   }
@@ -94,31 +101,41 @@ class ApiProvider {
       var res = await dio.get(url);
       return ListBinhLuan.fromJson(res.data);
     } catch (e) {
+      print("API error onGetListComment: $e");
       rethrow;
     }
   }
 
-  // Các phương thức gọi API khác ở đây...
-  // Future<Response> postData(dynamic data) async {
-  //   final response = await dio.post('$baseUrl/some-endpoint', data: data);
-  //   return response;
-  // }
-
   Future<Response> checkRegister(String email) async {
-    final data = {'email': email};
-    final response = await dio.post('$baseUrl/check-register', data: data);
-    return response;
+    try {
+      final data = {'email': email};
+      final response = await dio.post('$baseUrl/check-register', data: data);
+      return response;
+    } catch (e) {
+      print("API error checkRegister: $e");
+      rethrow;
+    }
   }
 
   Future<Response> addUser(String email, String matkhau) async {
-    final data = {'email': email, 'matkhau': matkhau};
-    final response = await dio.post('$baseUrl/add-user', data: data);
-    return response;
+    try {
+      final data = {'email': email, 'matkhau': matkhau};
+      final response = await dio.post('$baseUrl/add-user', data: data);
+      return response;
+    } catch (e) {
+      print("API error addUser: $e");
+      rethrow;
+    }
   }
 
   Future<Response> loginUser(String email, String matkhau) async {
-    final data = {'email': email, 'matkhau': matkhau};
-    final response = await dio.post('$baseUrl/login', data: data);
-    return response;
+    try {
+      final data = {'email': email, 'matkhau': matkhau};
+      final response = await dio.post('$baseUrl/login', data: data);
+      return response;
+    } catch (e) {
+      print("API error loginUser: $e");
+      rethrow;
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/widgets/button_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_change_screen_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_field_login_widget.dart';
@@ -33,33 +34,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
     final apiProvider = ApiProvider();
-
-    void saveNguoiDung(dynamic data) async {
-      // Khởi tạo một đối tượng SharedPreferences
-      final prefs = await SharedPreferences.getInstance();
-      // Chuyển đổi đối tượng Map JSON thành chuỗi JSON
-      final jsonString = jsonEncode(data);
-      // Lưu trữ chuỗi JSON vào SharedPreferences
-      await prefs.setString('nguoidung', jsonString);
-    }
-
-    // void readnguoidung() async {
-    //   final prefs = await SharedPreferences.getInstance();
-    //   final jsonString = prefs.getString('nguoidung');
-    //   if (jsonString != null) {
-    //     final data = jsonDecode(jsonString);
-    //     print(data['id']); // in ra giá trị của thuộc tính 'id'
-    //     print(data['email']); // in ra giá trị của thuộc tính 'email'
-    //     print(data['tennguoidung']);
-    //   } else {
-    //     print('Không tìm thấy dữ liệu người dùng');
-    //   }
-    // }
-
-    // void removeNguoiDung() async {
-    //   final prefs = await SharedPreferences.getInstance();
-    //   prefs.remove('nguoidung');
-    // }
+    final mySharedPrefes = MySharedPrefes();
 
     void onDangNhap() async {
       EasyLoading.show(status: 'Loading...');
@@ -91,7 +66,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
         EasyLoading.dismiss();
         return;
       }
-      saveNguoiDung(response.data['results']);
+      await mySharedPrefes.saveUserInfo(response.data['results']);
       Fluttertoast.showToast(
         msg: "Đăng nhập thành công",
         toastLength: Toast.LENGTH_SHORT,
@@ -103,7 +78,6 @@ class _DangNhapPageState extends State<DangNhapPage> {
       );
       EasyLoading.dismiss();
       Navigator.pop(context);
-
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => BottomNav(),
