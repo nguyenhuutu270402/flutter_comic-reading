@@ -62,8 +62,6 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
               return const Text('Failure');
             } else if (state is TheLoaiSuccess) {
               var data = state.data.data["results"];
-              print(">>>>> $data");
-
               if (data!.isEmpty) {
                 return const Text('Empty');
               } else {
