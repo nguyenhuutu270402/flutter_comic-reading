@@ -378,7 +378,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
-                                                return DialogDanhGia();
+                                                return DialogDanhGia(
+                                                  userInfor: userInfor,
+                                                  idTruyen: widget.id,
+                                                );
                                               },
                                             );
                                           },

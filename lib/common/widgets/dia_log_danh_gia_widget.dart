@@ -1,14 +1,51 @@
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DialogDanhGia extends StatelessWidget {
   const DialogDanhGia({
     super.key,
+    required this.userInfor,
+    required this.idTruyen,
   });
+  final userInfor;
+  final idTruyen;
 
   @override
   Widget build(BuildContext context) {
-    void onDanhGia() {}
+    double sosao = 1;
+    void onDanhGia() async {
+      if (userInfor == null) {
+        Fluttertoast.showToast(
+          msg: "Chưa đăng nhập",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromARGB(255, 52, 52, 52),
+          textColor: Colors.white,
+          fontSize: 14.0,
+        );
+        Navigator.of(context).pop();
+
+        return;
+      }
+      EasyLoading.show(status: 'Loading...');
+      final response =
+          await ApiProvider().kiemTraDanhGia(userInfor['id'], idTruyen);
+      bool isDanhGia = response.data['results'];
+      if (isDanhGia == false) {
+        await ApiProvider().addDanhGia(userInfor['id'], idTruyen, sosao);
+      } else {
+        await ApiProvider().updateDanhGia(userInfor['id'], idTruyen, sosao);
+      }
+      EasyLoading.dismiss();
+      Navigator.of(context).pop();
+
+      // print("${sosao} :sosao: ${response.data['results']}");
+    }
+
     return AlertDialog(
       title: Text(
         'Đánh giá',
@@ -30,7 +67,7 @@ class DialogDanhGia extends StatelessWidget {
               color: Colors.amber,
             ),
             onRatingUpdate: (rating) {
-              print('rating>>> ${rating}');
+              sosao = rating;
             },
           ),
         ],
@@ -44,8 +81,7 @@ class DialogDanhGia extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            // TODO: xử lý đánh giá của người dùng
-            Navigator.of(context).pop();
+            onDanhGia();
           },
           child: Text('Đánh giá'),
         ),

@@ -185,6 +185,17 @@ class ApiProvider {
     }
   }
 
+  Future<Response> kiemTraDanhGia(int idnguoidung, int idtruyen) async {
+    try {
+      final data = {'idnguoidung': idnguoidung, 'idtruyen': idtruyen};
+      final response = await dio.post('$baseUrl/kiem-tra-danh-gia', data: data);
+      return response;
+    } catch (e) {
+      print("API error kiemTraTheoDoi: $e");
+      rethrow;
+    }
+  }
+
   Future<Response> deleteTheoDoi(int idnguoidung, int idtruyen) async {
     try {
       final data = {'idnguoidung': idnguoidung, 'idtruyen': idtruyen};
