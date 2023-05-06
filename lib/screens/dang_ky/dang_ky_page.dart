@@ -4,6 +4,7 @@ import 'package:comic_reading/common/widgets/button_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_change_screen_login_widget.dart';
 import 'package:comic_reading/common/widgets/text_field_register_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class DangKyPage extends StatefulWidget {
@@ -28,6 +29,7 @@ class _DangKyPageState extends State<DangKyPage> {
     final apiProvider = ApiProvider();
 
     void onDangKy() async {
+      EasyLoading.show(status: 'Loading...');
       final RegExp regex =
           RegExp(r'^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$');
       bool checkEmail = regex.hasMatch(email.value.toLowerCase());
@@ -41,6 +43,7 @@ class _DangKyPageState extends State<DangKyPage> {
           textColor: Colors.white,
           fontSize: 14.0,
         );
+        EasyLoading.dismiss();
         return;
       } else if (matKhau.value.indexOf(' ') != -1) {
         Fluttertoast.showToast(
@@ -52,6 +55,7 @@ class _DangKyPageState extends State<DangKyPage> {
           textColor: Colors.white,
           fontSize: 14.0,
         );
+        EasyLoading.dismiss();
         return;
       } else if (matKhau.value.length < 6) {
         Fluttertoast.showToast(
@@ -63,6 +67,7 @@ class _DangKyPageState extends State<DangKyPage> {
           textColor: Colors.white,
           fontSize: 14.0,
         );
+        EasyLoading.dismiss();
         return;
       } else if (matKhau.value != matKhauLai.value) {
         Fluttertoast.showToast(
@@ -74,6 +79,7 @@ class _DangKyPageState extends State<DangKyPage> {
           textColor: Colors.white,
           fontSize: 14.0,
         );
+        EasyLoading.dismiss();
         return;
       }
       final response =
@@ -88,6 +94,7 @@ class _DangKyPageState extends State<DangKyPage> {
           textColor: Colors.white,
           fontSize: 14.0,
         );
+        EasyLoading.dismiss();
         return;
       }
       final response2 =
@@ -101,6 +108,7 @@ class _DangKyPageState extends State<DangKyPage> {
         textColor: Colors.white,
         fontSize: 14.0,
       );
+      EasyLoading.dismiss();
       Navigator.pop(context);
     }
 

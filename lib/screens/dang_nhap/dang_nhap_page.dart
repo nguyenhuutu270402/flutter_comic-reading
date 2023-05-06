@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/button_login_widget.dart';
@@ -7,8 +7,8 @@ import 'package:comic_reading/common/widgets/text_change_screen_login_widget.dar
 import 'package:comic_reading/common/widgets/text_field_login_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/dang_ky/dang_ky_page.dart';
-import 'package:comic_reading/screens/danh_muc/danh_muc_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,6 +26,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
   ValueNotifier<bool> isShowMatKhau = ValueNotifier(false);
   ValueNotifier<String> email = ValueNotifier("");
   ValueNotifier<String> matKhau = ValueNotifier("");
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -61,6 +62,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
     // }
 
     void onDangNhap() async {
+      EasyLoading.show(status: 'Loading...');
       if (email.value == "" || matKhau.value == "") {
         Fluttertoast.showToast(
           msg: "Email và mật khẩu không được để trống",
@@ -71,6 +73,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
           textColor: Colors.white,
           fontSize: 14.0,
         );
+        EasyLoading.dismiss();
         return;
       }
 
@@ -85,6 +88,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
           textColor: Colors.white,
           fontSize: 14.0,
         );
+        EasyLoading.dismiss();
         return;
       }
       saveNguoiDung(response.data['results']);
@@ -97,11 +101,12 @@ class _DangNhapPageState extends State<DangNhapPage> {
         textColor: Colors.white,
         fontSize: 14.0,
       );
+      EasyLoading.dismiss();
       Navigator.pop(context);
 
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => DanhMucPage(),
+          builder: (context) => BottomNav(),
         ),
       );
     }
