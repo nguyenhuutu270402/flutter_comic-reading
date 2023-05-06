@@ -1,3 +1,4 @@
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 
 class XepHangPage extends StatefulWidget {
@@ -13,9 +14,18 @@ class _XepHangPageState extends State<XepHangPage> {
     return Container(
       color: Colors.green,
       child: Center(
-        child: TextButton(
-          onPressed: () {},
-          child: Text('Xếp hạng'),
+        child: TouchOpacityWidget(
+          // activeOpacity: 0.9,
+          onTap: () {
+            print("tap xep hang opacity");
+          },
+          onLongPress: () {
+            print("long press ne");
+          },
+          child: Container(
+            // color: Colors.red,
+            child: Text('Xếp hạng'),
+          ),
         ),
       ),
     );
