@@ -35,6 +35,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
     final mySharedPrefes = MySharedPrefes();
 
     void onDangNhap() async {
+      await mySharedPrefes.removeUserInfo();
       EasyLoading.show(status: 'Loading...');
       if (email.value == "" || matKhau.value == "") {
         Fluttertoast.showToast(
@@ -49,7 +50,6 @@ class _DangNhapPageState extends State<DangNhapPage> {
         EasyLoading.dismiss();
         return;
       }
-
       final response = await apiProvider.loginUser(email.value, matKhau.value);
       if (response.data['results'] == false) {
         Fluttertoast.showToast(

@@ -26,7 +26,7 @@ class MySharedPrefes {
     return data;
   }
 
-  Future<dynamic> removeUserInfo(dynamic data) async {
+  Future<dynamic> removeUserInfo() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('nguoidung');
   }
