@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/button_login_widget.dart';
@@ -5,8 +7,13 @@ import 'package:comic_reading/common/widgets/text_change_screen_login_widget.dar
 import 'package:comic_reading/common/widgets/text_field_login_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/dang_ky/dang_ky_page.dart';
+import 'package:comic_reading/screens/danh_muc/danh_muc_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// example1@gmail.com
+// password123
 
 class DangNhapPage extends StatefulWidget {
   const DangNhapPage({super.key});
@@ -26,6 +33,33 @@ class _DangNhapPageState extends State<DangNhapPage> {
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
     final apiProvider = ApiProvider();
 
+    void saveNguoiDung(dynamic data) async {
+      // Khởi tạo một đối tượng SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      // Chuyển đổi đối tượng Map JSON thành chuỗi JSON
+      final jsonString = jsonEncode(data);
+      // Lưu trữ chuỗi JSON vào SharedPreferences
+      await prefs.setString('nguoidung', jsonString);
+    }
+
+    // void readnguoidung() async {
+    //   final prefs = await SharedPreferences.getInstance();
+    //   final jsonString = prefs.getString('nguoidung');
+    //   if (jsonString != null) {
+    //     final data = jsonDecode(jsonString);
+    //     print(data['id']); // in ra giá trị của thuộc tính 'id'
+    //     print(data['email']); // in ra giá trị của thuộc tính 'email'
+    //     print(data['tennguoidung']);
+    //   } else {
+    //     print('Không tìm thấy dữ liệu người dùng');
+    //   }
+    // }
+
+    // void removeNguoiDung() async {
+    //   final prefs = await SharedPreferences.getInstance();
+    //   prefs.remove('nguoidung');
+    // }
+
     void onDangNhap() async {
       if (email.value == "" || matKhau.value == "") {
         Fluttertoast.showToast(
@@ -39,6 +73,7 @@ class _DangNhapPageState extends State<DangNhapPage> {
         );
         return;
       }
+
       final response = await apiProvider.loginUser(email.value, matKhau.value);
       if (response.data['results'] == false) {
         Fluttertoast.showToast(
@@ -52,6 +87,23 @@ class _DangNhapPageState extends State<DangNhapPage> {
         );
         return;
       }
+      saveNguoiDung(response.data['results']);
+      Fluttertoast.showToast(
+        msg: "Đăng nhập thành công",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 52, 52, 52),
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+      Navigator.pop(context);
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => DanhMucPage(),
+        ),
+      );
     }
 
     return Scaffold(

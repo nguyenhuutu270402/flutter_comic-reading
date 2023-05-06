@@ -9,7 +9,12 @@ import 'package:comic_reading/screens/chi_tiet_chuong/model/list_image.dart';
 
 class ApiProvider {
   Dio dio = Dio();
-  final baseUrl = 'https://app-comic-reading.onrender.com/api';
+
+  // chạy sever trên local
+  // mở cmd gõ ipconfig copy dòng IPv4 Address quăn vô http://IPv4 Address:3000/
+  final baseUrl = 'http://192.168.43.213:3000/api';
+
+  // final baseUrl = 'https://app-comic-reading.onrender.com/api';
 
   Future<Truyen> onGetAllTruyen() async {
     try {
