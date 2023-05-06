@@ -3,7 +3,6 @@ import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ListViewChuongWidget extends StatelessWidget {
   const ListViewChuongWidget(

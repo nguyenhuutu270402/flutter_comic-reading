@@ -91,7 +91,6 @@ class _ChiTietPageState extends State<ChiTietPage> {
               var listTacGia = state.listTacGia.results;
               var listChuong = state.listChuong.results;
               isFollow.value = state.isFollow.data['results'];
-              print(isFollow.value);
               if (ct_truyen == null) {
                 return Text('Empty');
               } else {
@@ -209,7 +208,11 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        TheLoaiPage(),
+                                                        TheLoaiPage(
+                                                      idTacGia:
+                                                          listTacGia[index].id,
+                                                      idTheLoai: 0,
+                                                    ),
                                                   ),
                                                 );
                                               },
@@ -310,7 +313,19 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             int index = entry.key;
                                             dynamic item = entry.value;
                                             return TouchOpacityWidget(
-                                              onTap: () {},
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        TheLoaiPage(
+                                                      idTheLoai:
+                                                          listTheLoai[index].id,
+                                                      idTacGia: 0,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
                                               child: Text(
                                                 index == listTheLoai.length - 1
                                                     ? '${listTheLoai[index].tentheloai.toString()}'
