@@ -1,13 +1,13 @@
 class ListTacGia {
-  List<Results>? results;
+  List<ResultsTacGia>? results;
 
   ListTacGia({this.results});
 
   ListTacGia.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <ResultsTacGia>[];
       json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
+        results!.add(new ResultsTacGia.fromJson(v));
       });
     }
   }
@@ -21,13 +21,13 @@ class ListTacGia {
   }
 }
 
-class Results {
+class ResultsTacGia {
   int? id;
   String? tentacgia;
 
-  Results({this.id, this.tentacgia});
+  ResultsTacGia({this.id, this.tentacgia});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  ResultsTacGia.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     tentacgia = json['tentacgia'];
   }

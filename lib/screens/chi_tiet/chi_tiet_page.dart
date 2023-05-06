@@ -209,9 +209,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         TheLoaiPage(
-                                                      idTacGia:
-                                                          listTacGia[index].id,
-                                                      idTheLoai: 0,
+                                                      tacGia: listTacGia[index],
+                                                      theLoai: null,
                                                     ),
                                                   ),
                                                 );
@@ -319,9 +318,9 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         TheLoaiPage(
-                                                      idTheLoai:
-                                                          listTheLoai[index].id,
-                                                      idTacGia: 0,
+                                                      theLoai:
+                                                          listTheLoai[index],
+                                                      // tacGia: null,
                                                     ),
                                                   ),
                                                 );

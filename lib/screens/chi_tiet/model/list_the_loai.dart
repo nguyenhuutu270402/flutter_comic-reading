@@ -1,13 +1,13 @@
 class ListTheLoai {
-  List<Results>? results;
+  List<ResultsTheLoai>? results;
 
   ListTheLoai({this.results});
 
   ListTheLoai.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <ResultsTheLoai>[];
       json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
+        results!.add(new ResultsTheLoai.fromJson(v));
       });
     }
   }
@@ -21,14 +21,14 @@ class ListTheLoai {
   }
 }
 
-class Results {
+class ResultsTheLoai {
   int? id;
   String? tentheloai;
   String? mota;
 
-  Results({this.id, this.tentheloai, this.mota});
+  ResultsTheLoai({this.id, this.tentheloai, this.mota});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  ResultsTheLoai.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     tentheloai = json['tentheloai'];
     mota = json['mota'];
