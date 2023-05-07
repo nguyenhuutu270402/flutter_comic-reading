@@ -472,6 +472,13 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     height: 30,
                                     child: ElevatedButton(
                                       onPressed: () {
+                                        MyFunction().addLuotXem(
+                                            userInfor,
+                                            int.parse(listChuong![
+                                                    listChuong.length - 1]
+                                                .id
+                                                .toString()),
+                                            widget.id);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
