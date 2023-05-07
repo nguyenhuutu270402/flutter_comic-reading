@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/box_position_widget.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/cubit/chi_tiet_chuong_cubit.dart';
@@ -28,6 +29,8 @@ class ChiTietChuongPage extends StatefulWidget {
 class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   late final ScrollController _scrollController;
   bool _showBoxPosition = true;
+  bool isFollow = false;
+
   Timer? _timer;
   var bloc = ChiTietChuongCubit();
   @override
@@ -35,7 +38,19 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
-    bloc.initData(widget.idChuong, widget.idTruyen, 1);
+    initData();
+  }
+
+  void initData() async {
+    if (widget.userInfor != null) {
+      final response = await ApiProvider()
+          .kiemTraTheoDoi(widget.userInfor['id'], widget.idTruyen);
+      bloc.initData(widget.idChuong, widget.idTruyen, widget.userInfor['id']);
+      isFollow = response.data['results'];
+      print(isFollow);
+    } else {
+      bloc.initData(widget.idChuong, widget.idTruyen, 1);
+    }
   }
 
   @override
@@ -137,7 +152,8 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                           listComment: listComment!,
                           id: widget.idChuong,
                           index: widget.index,
-                          userInfor: widget.userInfor),
+                          userInfor: widget.userInfor,
+                          isFollow: isFollow),
                   ],
                 );
               }

@@ -10,181 +10,6 @@ import 'package:comic_reading/common/widgets/dia_log_list_chuong_widget.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/model/list_binh_luan.dart';
 import 'package:flutter/material.dart';
 
-// class BoxPosition extends StatelessWidget {
-//   const BoxPosition({
-//     super.key,
-//     required this.screenHeight,
-//     required this.myColors,
-//     required this.listChuong,
-//     required this.screenWidth,
-//     required this.listComment,
-//     required this.id,
-//     required this.index,
-//     required this.userInfor,
-//   });
-
-//   final double screenHeight;
-//   final CustomThemeExtension myColors;
-//   final List<ResultsChuong> listChuong;
-//   final double screenWidth;
-//   final List<Results> listComment;
-//   final int id;
-//   final int index;
-//   final userInfor;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Positioned(
-//       child: SizedBox(
-//         height: screenHeight,
-//         child: Stack(
-//           children: [
-//             Container(
-//               height: 50,
-//               color: myColors.whiteOrBlack,
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   TouchOpacityWidget(
-//                     onTap: () {
-//                       Navigator.pop(context);
-//                     },
-//                     child: SizedBox(
-//                       width: 50,
-//                       child:
-//                           Icon(Icons.arrow_back, color: myColors.blackOrWhite),
-//                     ),
-//                   ),
-//                   Text(
-//                     'Chapter ${listChuong[index].sochuong}',
-//                     maxLines: 1,
-//                     overflow: TextOverflow.ellipsis,
-//                     style: const TextStyle(
-//                       fontSize: 18,
-//                       fontWeight: FontWeight.w600,
-//                     ),
-//                   ),
-//                   TouchOpacityWidget(
-//                     onTap: () {
-//                       showDialog(
-//                         context: context,
-//                         builder: (BuildContext context) {
-//                           return DialogListChuong(
-//                             listChuong: listChuong,
-//                             index: index,
-//                             userInfor: userInfor,
-//                           );
-//                         },
-//                       );
-//                     },
-//                     child: SizedBox(
-//                       width: 50,
-//                       child: Icon(Icons.list, color: myColors.blackOrWhite),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             Positioned(
-//               bottom: 0,
-//               child: Container(
-//                 height: 50,
-//                 width: screenWidth,
-//                 color: Colors.black.withOpacity(0.7),
-//                 child: Row(
-//                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                   children: [
-//                     if (index < listChuong.length - 1)
-//                       TouchOpacityWidget(
-//                         onTap: () {
-//                           if (listChuong != null && listChuong.isNotEmpty) {
-//                             MyFunction().addLuotXem(
-//                               userInfor,
-//                               listChuong[index + 1].id!,
-//                               listChuong[index + 1].idtruyen!,
-//                             );
-//                           }
-//                           Navigator.of(context).pushReplacement(
-//                             MaterialPageRoute(
-//                               builder: (context) => ChiTietChuongPage(
-//                                   idChuong: listChuong[index + 1].id!,
-//                                   idTruyen: listChuong[index + 1].idtruyen!,
-//                                   index: index + 1,
-//                                   userInfor: userInfor),
-//                             ),
-//                           );
-//                         },
-//                         child: Row(
-//                           children: [
-//                             Icon(
-//                               Icons.arrow_back_ios,
-//                               size: 16,
-//                               color: AppColors.ogrange,
-//                             ),
-//                             Text(
-//                               'Trước',
-//                               style: TextStyle(
-//                                 color: AppColors.ogrange,
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     if (index > 0)
-//                       TouchOpacityWidget(
-//                         onTap: () {
-//                           Navigator.of(context).pushReplacement(
-//                             MaterialPageRoute(
-//                               builder: (context) => ChiTietChuongPage(
-//                                   idChuong: listChuong[index - 1].id!,
-//                                   idTruyen: listChuong[index - 1].idtruyen!,
-//                                   index: index - 1,
-//                                   userInfor: userInfor),
-//                             ),
-//                           );
-//                         },
-//                         child: Row(
-//                           children: [
-//                             Text(
-//                               'Sau ',
-//                               style: TextStyle(
-//                                 color: AppColors.ogrange,
-//                               ),
-//                             ),
-//                             Icon(
-//                               Icons.arrow_forward_ios,
-//                               size: 16,
-//                               color: AppColors.ogrange,
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                     TouchOpacityWidget(
-//                       onTap: () {
-//                         print('tap favorite');
-//                       },
-//                       child: Icon(
-//                         Icons.favorite_outline,
-//                         color: Colors.red,
-//                       ),
-//                     ),
-//                     TouchOpacityWidget(
-//                       onTap: () {
-//                         showMySlidingSheet(context, listComment);
-//                       },
-//                       child: Icon(Icons.message_outlined, color: Colors.green),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 class BoxPosition extends StatefulWidget {
   const BoxPosition(
       {super.key,
@@ -195,7 +20,8 @@ class BoxPosition extends StatefulWidget {
       required this.listComment,
       required this.id,
       required this.index,
-      required this.userInfor});
+      required this.userInfor,
+      required this.isFollow});
 
   final double screenHeight;
   final CustomThemeExtension myColors;
@@ -205,6 +31,7 @@ class BoxPosition extends StatefulWidget {
   final int id;
   final int index;
   final userInfor;
+  final bool isFollow;
   @override
   State<BoxPosition> createState() => _BoxPositionState();
 }
@@ -219,11 +46,12 @@ class _BoxPositionState extends State<BoxPosition> {
   }
 
   void initData() async {
-    if (widget.userInfor != null) {
-      final response = await ApiProvider().kiemTraTheoDoi(
-          widget.userInfor['id'], widget.listChuong[widget.index].idtruyen!);
-      isFollow.value = response.data['results'];
-    }
+    // if (widget.userInfor != null) {
+    //   final response = await ApiProvider().kiemTraTheoDoi(
+    //       widget.userInfor['id'], widget.listChuong[widget.index].idtruyen!);
+    //   isFollow.value = response.data['results'];
+    // }
+    isFollow.value = widget.isFollow;
   }
 
   @override
@@ -359,15 +187,27 @@ class _BoxPositionState extends State<BoxPosition> {
                           ],
                         ),
                       ),
-                    TouchOpacityWidget(
-                      onTap: () {
-                        print('tap favorite');
-                      },
-                      child: Icon(
-                        Icons.favorite_outline,
-                        color: Colors.red,
-                      ),
-                    ),
+                    ValueListenableBuilder<bool>(
+                        valueListenable: isFollow,
+                        builder: (context, value, child) {
+                          return TouchOpacityWidget(
+                            onTap: () async {
+                              print('tap favorite');
+                              bool success = await MyFunction().onTheoDoi(
+                                  widget.userInfor, isFollow.value, widget.id);
+                              if (success) {
+                                isFollow.value = !isFollow.value;
+                              }
+                              // isFollow.value = !isFollow.value;
+                            },
+                            child: Icon(
+                              isFollow.value == false
+                                  ? Icons.favorite_outline
+                                  : Icons.favorite,
+                              color: Colors.red,
+                            ),
+                          );
+                        }),
                     TouchOpacityWidget(
                       onTap: () {
                         showMySlidingSheet(context, widget.listComment);
