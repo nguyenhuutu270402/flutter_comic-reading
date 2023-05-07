@@ -9,8 +9,33 @@ class MyFunction {
     return '[Cập nhật lúc: ${dateTimeData.hour.toString().padLeft(2, '0')}:${dateTimeData.minute.toString().padLeft(2, '0')} ${dateTimeData.day.toString().padLeft(2, '0')}/${dateTimeData.month.toString().padLeft(2, '0')}/${dateTimeData.year}]';
   }
 
-  Future<bool> onTheoDoi(
-      dynamic userInfor, bool isFollow, dynamic idTruyen) async {
+  String formatDateTime(String dateString) {
+    DateTime dateCurr = DateTime.now();
+    DateTime dateTimeData = DateTime.parse(dateString);
+    int intDateCurr = dateCurr.millisecondsSinceEpoch;
+    int intDateData = dateTimeData.millisecondsSinceEpoch;
+    int hieuSoDateTime = intDateCurr - intDateData;
+    if (hieuSoDateTime < 3600000 && hieuSoDateTime > 0) {
+      var minute = (hieuSoDateTime / 60000);
+      return '${minute.toInt()} phút trước';
+    } else if (hieuSoDateTime < 86400000 && hieuSoDateTime > 0) {
+      var hours = (hieuSoDateTime / 3600000);
+      return '${hours.toInt()} giờ trước';
+    } else if (hieuSoDateTime < 2592000000) {
+      var date = (hieuSoDateTime / 86400000);
+      return '${date.toInt()}  ngày trước';
+    } else if (hieuSoDateTime > 2592000000) {
+      var date = dateTimeData.day;
+      var month = dateTimeData.month;
+      var year = dateTimeData.year;
+      String dateFormat =
+          '${date.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/${year}';
+      return dateFormat;
+    }
+    return 'Null';
+  }
+
+  Future<bool> onTheoDoi(dynamic userInfor, bool isFollow, int idTruyen) async {
     if (userInfor == null) {
       Fluttertoast.showToast(
         msg: "Chưa đăng nhập",
@@ -35,6 +60,17 @@ class MyFunction {
     } catch (e) {
       EasyLoading.dismiss();
       return false;
+    }
+  }
+
+  Future<dynamic> addLuotXem(
+      dynamic userInfor, int idChuong, int idTruyen) async {
+    if (userInfor == null) {
+      await ApiProvider().addLuotXem(1, idChuong);
+    } else {
+      await ApiProvider().addLuotXem(userInfor['id'], idChuong);
+      await ApiProvider().kiemTraLichSu(userInfor['id'], idTruyen, idChuong);
+      await ApiProvider().kiemTraLichSuXemChuong(userInfor['id'], idChuong);
     }
   }
 }

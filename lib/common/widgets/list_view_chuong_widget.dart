@@ -1,5 +1,6 @@
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
 import 'package:flutter/material.dart';
@@ -15,42 +16,6 @@ class ListViewChuongWidget extends StatelessWidget {
   final userInfor;
   @override
   Widget build(BuildContext context) {
-    String formatDateTime(String dateString) {
-      DateTime dateCurr = DateTime.now();
-      DateTime dateTimeData = DateTime.parse(dateString);
-      int intDateCurr = dateCurr.millisecondsSinceEpoch;
-      int intDateData = dateTimeData.millisecondsSinceEpoch;
-      int hieuSoDateTime = intDateCurr - intDateData;
-      if (hieuSoDateTime < 3600000 && hieuSoDateTime > 0) {
-        var minute = (hieuSoDateTime / 60000);
-        return '${minute.toInt()} phút trước';
-      } else if (hieuSoDateTime < 86400000 && hieuSoDateTime > 0) {
-        var hours = (hieuSoDateTime / 3600000);
-        return '${hours.toInt()} giờ trước';
-      } else if (hieuSoDateTime < 2592000000) {
-        var date = (hieuSoDateTime / 86400000);
-        return '${date.toInt()}  ngày trước';
-      } else if (hieuSoDateTime > 2592000000) {
-        var date = dateTimeData.day;
-        var month = dateTimeData.month;
-        var year = dateTimeData.year;
-        String dateFormat =
-            '${date.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/${year}';
-        return dateFormat;
-      }
-      return 'Null';
-    }
-
-    void addLuotXem(int idChuong, int idTruyen) async {
-      if (userInfor == null) {
-        await ApiProvider().addLuotXem(1, idChuong);
-      } else {
-        await ApiProvider().addLuotXem(userInfor['id'], idChuong);
-        await ApiProvider().kiemTraLichSu(userInfor['id'], idTruyen, idChuong);
-        await ApiProvider().kiemTraLichSuXemChuong(userInfor['id'], idChuong);
-      }
-    }
-
     return ListView.builder(
       shrinkWrap: true,
       itemCount: listChuong.length,
@@ -58,7 +23,8 @@ class ListViewChuongWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () {
-            addLuotXem(listChuong[index].id!, listChuong[index].idtruyen!);
+            MyFunction().addLuotXem(
+                userInfor, listChuong[index].id!, listChuong[index].idtruyen!);
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -103,7 +69,7 @@ class ListViewChuongWidget extends StatelessWidget {
                               color: Colors.grey,
                             ),
                             Text(
-                              formatDateTime(
+                              MyFunction().formatDateTime(
                                   listChuong[index].ngaycapnhat.toString()),
                               textAlign: TextAlign.left,
                               style:
