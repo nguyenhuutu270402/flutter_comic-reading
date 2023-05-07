@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
@@ -36,11 +37,21 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.network(
-                  data[index].avatar,
+                child: CachedNetworkImage(
+                  imageUrl: data[index].avatar,
+                  // imageUrl: "",
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    alignment: Alignment.center,
+                    color: Colors.grey,
+                    child: Text("Error"),
+                  ),
                 ),
               ),
               SizedBox(width: 16),
@@ -109,11 +120,22 @@ Widget buildFooter(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
-                child: Image.network(
-                  'https://firebasestorage.googleapis.com/v0/b/app-comic-reading.appspot.com/o/avatar%2F1678880613465_a0a963a1-2cb8-4a87-ba0f-b7ede566660c.jpeg?alt=media&token=5140dcb4-340a-4c5c-bbb4-f62154da4740',
+                child: CachedNetworkImage(
+                  imageUrl:
+                      'https://firebasestorage.googleapis.com/v0/b/app-comic-reading.appspot.com/o/avatar%2F1678880613465_a0a963a1-2cb8-4a87-ba0f-b7ede566660c.jpeg?alt=media&token=5140dcb4-340a-4c5c-bbb4-f62154da4740',
+                  // imageUrl: "",
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    alignment: Alignment.center,
+                    color: Colors.grey,
+                    child: Text("Error"),
+                  ),
                 ),
               ),
             ],
