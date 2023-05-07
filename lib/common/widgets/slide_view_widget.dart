@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/chi_tiet_page.dart';
@@ -88,11 +89,18 @@ class _SlideViewWigetState extends State<SlideViewWiget> {
                     alignment: Alignment.topLeft,
                     child: Row(
                       children: [
-                        Image.network(
-                          widget.data[index].imagelink.toString(),
+                        CachedNetworkImage(
+                          imageUrl: widget.data[index].imagelink!,
                           fit: BoxFit.cover,
-                          width: 100,
-                          height: 180,
+                          placeholder: (context, url) => Container(
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator(),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            alignment: Alignment.center,
+                            color: Colors.grey,
+                            child: Text("Image error"),
+                          ),
                         ),
                         Expanded(
                           child: Container(

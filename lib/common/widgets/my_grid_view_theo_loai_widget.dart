@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/chi_tiet_page.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +62,7 @@ class MyGridViewTheLoaiWidget extends StatelessWidget {
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(5),
             clipBehavior: Clip.antiAliasWithSaveLayer,
-            child: InkWell(
+            child: TouchOpacityWidget(
               onTap: () {
                 Navigator.push(
                   context,
@@ -79,11 +81,19 @@ class MyGridViewTheLoaiWidget extends StatelessWidget {
                         SizedBox(
                           height: screenHeight,
                           width: screenWidth,
-                          child: Ink.image(
-                            image: NetworkImage(
-                              data[index]['imagelink'],
-                            ),
+                          child: CachedNetworkImage(
+                            imageUrl: data[index]['imagelink'],
                             fit: BoxFit.cover,
+                            height: 100,
+                            placeholder: (context, url) => Container(
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              alignment: Alignment.center,
+                              color: Colors.grey,
+                              child: Text("Image error"),
+                            ),
                           ),
                         ),
                         Positioned(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
@@ -127,10 +128,20 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                         color: Colors.grey),
                                   ),
                                   SizedBox(height: 10),
-                                  Image.network(
-                                    ct_truyen.imagelink.toString(),
+                                  CachedNetworkImage(
+                                    imageUrl: ct_truyen.imagelink.toString(),
                                     width: screenWidth * 0.5,
                                     fit: BoxFit.contain,
+                                    placeholder: (context, url) => Container(
+                                      alignment: Alignment.center,
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        Container(
+                                      alignment: Alignment.center,
+                                      color: Colors.grey,
+                                      child: Text("Image error"),
+                                    ),
                                   ),
                                   SizedBox(height: 20),
                                   Row(
