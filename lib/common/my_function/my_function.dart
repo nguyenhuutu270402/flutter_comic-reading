@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/api/api_provider.dart';
+import 'package:comic_reading/common/widgets/comment_sliding_sheet_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -72,5 +73,18 @@ class MyFunction {
       await ApiProvider().kiemTraLichSu(userInfor['id'], idTruyen, idChuong);
       await ApiProvider().kiemTraLichSuXemChuong(userInfor['id'], idChuong);
     }
+  }
+
+  Future<dynamic> addBinhLuan(dynamic userInfor, int idTruyen, String noidung,
+      BuildContext context) async {
+    EasyLoading.show(status: 'Loading...');
+
+    if (userInfor != null) {
+      await ApiProvider().addBinhLuan(userInfor['id'], idTruyen, noidung);
+      final data = await ApiProvider().onGetListComment(idTruyen);
+      Navigator.pop(context);
+      showMySlidingSheet(context, data.results!, userInfor, idTruyen);
+    }
+    EasyLoading.dismiss();
   }
 }

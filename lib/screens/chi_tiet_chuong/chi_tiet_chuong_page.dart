@@ -47,7 +47,6 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
           .kiemTraTheoDoi(widget.userInfor['id'], widget.idTruyen);
       bloc.initData(widget.idChuong, widget.idTruyen, widget.userInfor['id']);
       isFollow = response.data['results'];
-      print(isFollow);
     } else {
       bloc.initData(widget.idChuong, widget.idTruyen, 1);
     }

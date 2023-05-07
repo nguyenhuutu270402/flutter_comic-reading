@@ -1,11 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
-void showMySlidingSheet(BuildContext context, List data) {
+void showMySlidingSheet(
+    BuildContext context, List data, dynamic userInfor, int idTruyen) {
   showSlidingBottomSheet(
     context,
     builder: (context) => SlidingSheetDialog(
@@ -14,10 +17,8 @@ void showMySlidingSheet(BuildContext context, List data) {
         snappings: [0.5, 0.9],
       ),
       builder: (context, state) => buildSheet(context, state, data),
-      footerBuilder: (context, state) => buildFooter(
-        context,
-        state,
-      ),
+      footerBuilder: (context, state) =>
+          buildFooter(context, state, data, userInfor, idTruyen),
       headerBuilder: (context, state) => buildHeader(context, state, data),
     ),
   );
@@ -38,7 +39,8 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: CachedNetworkImage(
-                  imageUrl: data[index].avatar,
+                  imageUrl:
+                      data[index].avatar != null ? data[index].avatar : "",
                   // imageUrl: "",
                   width: 40,
                   height: 40,
@@ -64,7 +66,9 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
                       children: [
                         Expanded(
                           child: Text(
-                            data[index].tennguoidung,
+                            data[index].tennguoidung != ""
+                                ? data[index].tennguoidung
+                                : "Vô danh",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -103,10 +107,9 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
   );
 }
 
-Widget buildFooter(
-  BuildContext context,
-  SheetState state,
-) {
+Widget buildFooter(BuildContext context, SheetState state, List data,
+    dynamic userInfor, int idTruyen) {
+  String valueComment = "";
   return Material(
     child: Container(
       height: 60,
@@ -121,9 +124,9 @@ Widget buildFooter(
               ClipRRect(
                 borderRadius: BorderRadius.circular(50),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      'https://firebasestorage.googleapis.com/v0/b/app-comic-reading.appspot.com/o/avatar%2F1678880613465_a0a963a1-2cb8-4a87-ba0f-b7ede566660c.jpeg?alt=media&token=5140dcb4-340a-4c5c-bbb4-f62154da4740',
-                  // imageUrl: "",
+                  imageUrl: userInfor['avatar'] != null
+                      ? userInfor['avatar']
+                      : "", // imageUrl: "",
                   width: 40,
                   height: 40,
                   fit: BoxFit.cover,
@@ -144,6 +147,9 @@ Widget buildFooter(
           Expanded(
             child: Container(
               child: TextField(
+                onChanged: (value) {
+                  valueComment = value;
+                },
                 decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent),
@@ -158,7 +164,10 @@ Widget buildFooter(
             ),
           ),
           TouchOpacityWidget(
-            onTap: () {},
+            onTap: () {
+              MyFunction()
+                  .addBinhLuan(userInfor, idTruyen, valueComment, context);
+            },
             child: Icon(
               Icons.send,
               color: AppColors.ogrange,

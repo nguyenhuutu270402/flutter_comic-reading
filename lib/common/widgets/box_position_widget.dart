@@ -9,6 +9,7 @@ import 'package:comic_reading/common/widgets/comment_sliding_sheet_widget.dart';
 import 'package:comic_reading/common/widgets/dia_log_list_chuong_widget.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/model/list_binh_luan.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class BoxPosition extends StatefulWidget {
   const BoxPosition(
@@ -46,11 +47,6 @@ class _BoxPositionState extends State<BoxPosition> {
   }
 
   void initData() async {
-    // if (widget.userInfor != null) {
-    //   final response = await ApiProvider().kiemTraTheoDoi(
-    //       widget.userInfor['id'], widget.listChuong[widget.index].idtruyen!);
-    //   isFollow.value = response.data['results'];
-    // }
     isFollow.value = widget.isFollow;
   }
 
@@ -192,7 +188,6 @@ class _BoxPositionState extends State<BoxPosition> {
                         builder: (context, value, child) {
                           return TouchOpacityWidget(
                             onTap: () async {
-                              print('tap favorite');
                               bool success = await MyFunction().onTheoDoi(
                                   widget.userInfor, isFollow.value, widget.id);
                               if (success) {
@@ -209,8 +204,26 @@ class _BoxPositionState extends State<BoxPosition> {
                           );
                         }),
                     TouchOpacityWidget(
-                      onTap: () {
-                        showMySlidingSheet(context, widget.listComment);
+                      onTap: () async {
+                        if (widget.userInfor == null) {
+                          Fluttertoast.showToast(
+                            msg: "Chưa đăng nhập",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Color.fromARGB(255, 52, 52, 52),
+                            textColor: Colors.white,
+                            fontSize: 14.0,
+                          );
+                          return;
+                        }
+                        final data = await ApiProvider().onGetListComment(
+                            widget.listChuong[widget.index].idtruyen!);
+                        showMySlidingSheet(
+                            context,
+                            data.results!,
+                            widget.userInfor,
+                            widget.listChuong[widget.index].idtruyen!);
                       },
                       child: Icon(Icons.message_outlined, color: Colors.green),
                     ),
