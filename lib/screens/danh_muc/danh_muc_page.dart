@@ -36,9 +36,27 @@ class _DanhMucPageState extends State<DanhMucPage> {
             bloc: bloc,
             builder: (context, state) {
               if (state is DanhMucLoading) {
-                return const Text('Loading');
+                return Container(
+                  alignment: Alignment.center,
+                  child: CircularProgressIndicator(),
+                );
               } else if (state is DanhMucFailure) {
-                return const Text('Failure');
+                return Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Có lỗi sảy ra',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        child: Text("Tải lại"),
+                      ),
+                    ],
+                  ),
+                );
               } else if (state is DanhMucSuccess) {
                 var userInfor = state.userInfor;
                 return Stack(

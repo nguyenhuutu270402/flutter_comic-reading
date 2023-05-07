@@ -32,25 +32,32 @@ class _TrangChuPageState extends State<TrangChuPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Trang chủ'),
-      //   actions: [
-      //     IconButton(
-      //       icon: Icon(Icons.search),
-      //       onPressed: () {
-      //         // Handle search action
-      //       },
-      //     ),
-      //   ],
-      // ),
       body: SafeArea(
         child: BlocBuilder(
           bloc: bloc,
           builder: (context, state) {
             if (state is TrangChuLoading) {
-              return const Text('Loading');
+              return Container(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             } else if (state is TrangChuFailure) {
-              return const Text('Failure');
+              return Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Có lỗi sảy ra',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Tải lại"),
+                    ),
+                  ],
+                ),
+              );
             } else if (state is TrangChuSuccess) {
               var data = state.data.results;
               var data2 = state.data2.results;

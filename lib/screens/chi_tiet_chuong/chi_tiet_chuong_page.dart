@@ -91,9 +91,27 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is ChiTietChuongLoading) {
-              return Text('Loading');
+              return Container(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             } else if (state is ChiTietChuongFailure) {
-              return Text('Failure');
+              return Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Có lỗi sảy ra',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Tải lại"),
+                    ),
+                  ],
+                ),
+              );
             } else if (state is ChiTietChuongSuccess) {
               var listImage = state.listImage.results;
               var listComment = state.listBinhLuan.results;

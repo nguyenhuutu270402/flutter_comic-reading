@@ -57,9 +57,27 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is TheLoaiLoading) {
-              return const Text('Loading');
+              return Container(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             } else if (state is TheLoaiFailure) {
-              return const Text('Failure');
+              return Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Có lỗi sảy ra',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Tải lại"),
+                    ),
+                  ],
+                ),
+              );
             } else if (state is TheLoaiSuccess) {
               var data = state.data.data["results"];
               if (data!.isEmpty) {

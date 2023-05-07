@@ -53,9 +53,27 @@ class _ChiTietPageState extends State<ChiTietPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is ChiTietLoading) {
-              return Text('Loading');
+              return Container(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator(),
+              );
             } else if (state is ChiTietFailure) {
-              return Text('Failure');
+              return Container(
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Có lỗi sảy ra',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Tải lại"),
+                    ),
+                  ],
+                ),
+              );
             } else if (state is ChiTietSuccess) {
               var ct_truyen = state.ct_truyen.results;
               var listTheLoai = state.listTheLoai.results;
