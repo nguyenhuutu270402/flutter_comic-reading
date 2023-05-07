@@ -47,36 +47,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
 
   @override
   Widget build(BuildContext context) {
-    String formatDateCapNhat(String ngaycapnhat) {
-      DateTime dateTimeData = DateTime.parse(ngaycapnhat);
-      return '[Cập nhật lúc: ${dateTimeData.hour.toString().padLeft(2, '0')}:${dateTimeData.minute.toString().padLeft(2, '0')} ${dateTimeData.day.toString().padLeft(2, '0')}/${dateTimeData.month.toString().padLeft(2, '0')}/${dateTimeData.year}]';
-    }
-
     double screenWidth = MediaQuery.of(context).size.width;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
-
-    // void onTheoDoi() async {
-    //   if (userInfor == null) {
-    //     Fluttertoast.showToast(
-    //       msg: "Chưa đăng nhập",
-    //       toastLength: Toast.LENGTH_SHORT,
-    //       gravity: ToastGravity.BOTTOM,
-    //       timeInSecForIosWeb: 1,
-    //       backgroundColor: Color.fromARGB(255, 52, 52, 52),
-    //       textColor: Colors.white,
-    //       fontSize: 14.0,
-    //     );
-    //     return;
-    //   }
-    //   EasyLoading.show(status: 'Loading...');
-    //   if (isFollow.value == false) {
-    //     await ApiProvider().addTheoDoi(userInfor['id'], widget.id);
-    //   } else {
-    //     await ApiProvider().deleteTheoDoi(userInfor['id'], widget.id);
-    //   }
-    //   isFollow.value = !isFollow.value;
-    //   EasyLoading.dismiss();
-    // }
 
     return Scaffold(
       body: SafeArea(
@@ -120,7 +92,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ),
                                   SizedBox(height: 3),
                                   Text(
-                                    formatDateCapNhat(
+                                    MyFunction().formatDateCapNhat(
                                         ct_truyen.ngaycapnhat.toString()),
                                     style: TextStyle(
                                         fontSize: 13,

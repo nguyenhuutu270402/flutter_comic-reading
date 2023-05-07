@@ -12,7 +12,15 @@ class MyFunction {
   Future<bool> onTheoDoi(
       dynamic userInfor, bool isFollow, dynamic idTruyen) async {
     if (userInfor == null) {
-      // show error message and return false
+      Fluttertoast.showToast(
+        msg: "Chưa đăng nhập",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 52, 52, 52),
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
       return false;
     }
     EasyLoading.show(status: 'Loading...');
@@ -25,7 +33,6 @@ class MyFunction {
       EasyLoading.dismiss();
       return true;
     } catch (e) {
-      // handle error and return false
       EasyLoading.dismiss();
       return false;
     }
