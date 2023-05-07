@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
@@ -68,6 +69,13 @@ class _DialogListChuongState extends State<DialogListChuong> {
           itemBuilder: (BuildContext context, int index) {
             return TouchOpacityWidget(
               onTap: () {
+                if (widget.listChuong != null && widget.listChuong.isNotEmpty) {
+                  MyFunction().addLuotXem(
+                    widget.userInfor,
+                    widget.listChuong[widget.index].id!,
+                    widget.listChuong[widget.index].idtruyen!,
+                  );
+                }
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
