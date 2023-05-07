@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
@@ -13,8 +12,6 @@ import 'package:comic_reading/common/widgets/list_view_chuong_widget.dart';
 import 'package:comic_reading/screens/the_loai/the_loai_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ChiTietPage extends StatefulWidget {
   const ChiTietPage({super.key, required this.id});
