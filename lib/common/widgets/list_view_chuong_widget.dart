@@ -31,7 +31,8 @@ class ListViewChuongWidget extends StatelessWidget {
                 builder: (context) => ChiTietChuongPage(
                     idChuong: listChuong[index].id!,
                     idTruyen: listChuong[index].idtruyen!,
-                    index: index),
+                    index: index,
+                    userInfor: userInfor),
               ),
             );
           },

@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_chuong.dart';
@@ -18,6 +19,7 @@ class BoxPosition extends StatelessWidget {
     required this.listComment,
     required this.id,
     required this.index,
+    required this.userInfor,
   });
 
   final double screenHeight;
@@ -27,6 +29,7 @@ class BoxPosition extends StatelessWidget {
   final List<Results> listComment;
   final int id;
   final int index;
+  final userInfor;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +71,7 @@ class BoxPosition extends StatelessWidget {
                           return DialogListChuong(
                             listChuong: listChuong,
                             index: index,
+                            userInfor: userInfor,
                           );
                         },
                       );
@@ -92,13 +96,20 @@ class BoxPosition extends StatelessWidget {
                     if (index < listChuong.length - 1)
                       TouchOpacityWidget(
                         onTap: () {
+                          if (listChuong != null && listChuong.isNotEmpty) {
+                            MyFunction().addLuotXem(
+                              userInfor,
+                              listChuong[index + 1].id!,
+                              listChuong[index + 1].idtruyen!,
+                            );
+                          }
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
-                                idChuong: listChuong[index + 1].id!,
-                                idTruyen: listChuong[index + 1].idtruyen!,
-                                index: index + 1,
-                              ),
+                                  idChuong: listChuong[index + 1].id!,
+                                  idTruyen: listChuong[index + 1].idtruyen!,
+                                  index: index + 1,
+                                  userInfor: userInfor),
                             ),
                           );
                         },
@@ -124,10 +135,10 @@ class BoxPosition extends StatelessWidget {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
-                                idChuong: listChuong[index - 1].id!,
-                                idTruyen: listChuong[index - 1].idtruyen!,
-                                index: index - 1,
-                              ),
+                                  idChuong: listChuong[index - 1].id!,
+                                  idTruyen: listChuong[index - 1].idtruyen!,
+                                  index: index - 1,
+                                  userInfor: userInfor),
                             ),
                           );
                         },

@@ -472,13 +472,17 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     height: 30,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        MyFunction().addLuotXem(
+                                        if (listChuong != null &&
+                                            listChuong.isNotEmpty) {
+                                          MyFunction().addLuotXem(
                                             userInfor,
-                                            int.parse(listChuong![
+                                            int.parse(listChuong[
                                                     listChuong.length - 1]
                                                 .id
                                                 .toString()),
-                                            widget.id);
+                                            widget.id,
+                                          );
+                                        }
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -490,6 +494,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                   .toString()),
                                               idTruyen: widget.id,
                                               index: listChuong.length - 1,
+                                              userInfor: userInfor,
                                             ),
                                           ),
                                         );

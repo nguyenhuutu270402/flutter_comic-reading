@@ -14,10 +14,12 @@ class ChiTietChuongPage extends StatefulWidget {
       {super.key,
       required this.idChuong,
       required this.index,
-      required this.idTruyen});
+      required this.idTruyen,
+      required this.userInfor});
   final int idChuong;
   final int idTruyen;
   final int index;
+  final userInfor;
 
   @override
   State<ChiTietChuongPage> createState() => _ChiTietChuongPageState();
@@ -128,14 +130,14 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                     ),
                     if (_showBoxPosition)
                       BoxPosition(
-                        screenHeight: screenHeight,
-                        myColors: myColors,
-                        listChuong: listChuong,
-                        screenWidth: screenWidth,
-                        listComment: listComment!,
-                        id: widget.idChuong,
-                        index: widget.index,
-                      ),
+                          screenHeight: screenHeight,
+                          myColors: myColors,
+                          listChuong: listChuong,
+                          screenWidth: screenWidth,
+                          listComment: listComment!,
+                          id: widget.idChuong,
+                          index: widget.index,
+                          userInfor: widget.userInfor),
                   ],
                 );
               }

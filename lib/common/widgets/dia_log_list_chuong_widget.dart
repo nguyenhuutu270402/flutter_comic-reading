@@ -10,10 +10,12 @@ class DialogListChuong extends StatefulWidget {
     Key? key,
     required this.listChuong,
     required this.index,
+    required this.userInfor,
   }) : super(key: key);
 
   final List<ResultsChuong> listChuong;
   final int index;
+  final userInfor;
 
   @override
   _DialogListChuongState createState() => _DialogListChuongState();
@@ -70,10 +72,10 @@ class _DialogListChuongState extends State<DialogListChuong> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => ChiTietChuongPage(
-                      idChuong: widget.listChuong[index].id!,
-                      idTruyen: widget.listChuong[index].idtruyen!,
-                      index: index,
-                    ),
+                        idChuong: widget.listChuong[index].id!,
+                        idTruyen: widget.listChuong[index].idtruyen!,
+                        index: index,
+                        userInfor: widget.userInfor),
                   ),
                 );
               },
