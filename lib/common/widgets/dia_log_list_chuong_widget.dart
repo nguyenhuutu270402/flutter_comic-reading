@@ -72,8 +72,8 @@ class _DialogListChuongState extends State<DialogListChuong> {
                 if (widget.listChuong != null && widget.listChuong.isNotEmpty) {
                   MyFunction().addLuotXem(
                     widget.userInfor,
-                    widget.listChuong[widget.index].id!,
-                    widget.listChuong[widget.index].idtruyen!,
+                    widget.listChuong[index].id!,
+                    widget.listChuong[index].idtruyen!,
                   );
                 }
                 Navigator.of(context).pop();

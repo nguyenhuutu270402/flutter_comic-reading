@@ -38,18 +38,6 @@ class BoxPosition extends StatefulWidget {
 }
 
 class _BoxPositionState extends State<BoxPosition> {
-  // ValueNotifier<bool> isFollow = ValueNotifier(false);
-
-  @override
-  void initState() {
-    super.initState();
-    initData();
-  }
-
-  void initData() async {
-    // isFollow.value = widget.isFollow;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -155,6 +143,14 @@ class _BoxPositionState extends State<BoxPosition> {
                     if (widget.index > 0)
                       TouchOpacityWidget(
                         onTap: () {
+                          if (widget.listChuong != null &&
+                              widget.listChuong.isNotEmpty) {
+                            MyFunction().addLuotXem(
+                              widget.userInfor,
+                              widget.listChuong[widget.index - 1].id!,
+                              widget.listChuong[widget.index - 1].idtruyen!,
+                            );
+                          }
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => ChiTietChuongPage(
