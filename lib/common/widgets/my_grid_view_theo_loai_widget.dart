@@ -84,7 +84,6 @@ class MyGridViewTheLoaiWidget extends StatelessWidget {
                           child: CachedNetworkImage(
                             imageUrl: data[index]['imagelink'],
                             fit: BoxFit.cover,
-                            height: 100,
                             placeholder: (context, url) => Container(
                               alignment: Alignment.center,
                               child: CircularProgressIndicator(),

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/box_position_widget.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/cubit/chi_tiet_chuong_cubit.dart';
@@ -100,9 +101,26 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return Container(
-                                  color: Colors.grey,
-                                  child: Image.network(
-                                      listImage[index].imagelink.toString()));
+                                color: Colors.grey,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      listImage[index].imagelink.toString(),
+                                  // imageUrl: "",
+                                  fit: BoxFit.cover,
+                                  placeholder: (context, url) => Container(
+                                    height: 200,
+                                    alignment: Alignment.center,
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                  errorWidget: (context, url, error) =>
+                                      Container(
+                                    height: 200,
+                                    alignment: Alignment.center,
+                                    color: Colors.grey,
+                                    child: Text("Image error"),
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         ],

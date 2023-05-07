@@ -86,7 +86,6 @@ class MyGridViewWidget extends StatelessWidget {
                             imageUrl: data[index].imagelink!,
                             // imageUrl: "",
                             fit: BoxFit.cover,
-                            height: 100,
                             placeholder: (context, url) => Container(
                               alignment: Alignment.center,
                               child: CircularProgressIndicator(),
