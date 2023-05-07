@@ -32,13 +32,13 @@ class BoxPosition extends StatefulWidget {
   final int id;
   final int index;
   final userInfor;
-  final bool isFollow;
+  final ValueNotifier<bool> isFollow;
   @override
   State<BoxPosition> createState() => _BoxPositionState();
 }
 
 class _BoxPositionState extends State<BoxPosition> {
-  ValueNotifier<bool> isFollow = ValueNotifier(false);
+  // ValueNotifier<bool> isFollow = ValueNotifier(false);
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _BoxPositionState extends State<BoxPosition> {
   }
 
   void initData() async {
-    isFollow.value = widget.isFollow;
+    // isFollow.value = widget.isFollow;
   }
 
   @override
@@ -184,21 +184,21 @@ class _BoxPositionState extends State<BoxPosition> {
                         ),
                       ),
                     ValueListenableBuilder<bool>(
-                        valueListenable: isFollow,
+                        valueListenable: widget.isFollow,
                         builder: (context, value, child) {
                           return TouchOpacityWidget(
                             onTap: () async {
                               bool success = await MyFunction().onTheoDoi(
                                   widget.userInfor,
-                                  isFollow.value,
+                                  widget.isFollow.value,
                                   widget.listChuong[widget.index].idtruyen!);
                               if (success) {
-                                isFollow.value = !isFollow.value;
+                                widget.isFollow.value = !widget.isFollow.value;
                               }
                               // isFollow.value = !isFollow.value;
                             },
                             child: Icon(
-                              isFollow.value == false
+                              widget.isFollow.value == false
                                   ? Icons.favorite_outline
                                   : Icons.favorite,
                               color: Colors.red,

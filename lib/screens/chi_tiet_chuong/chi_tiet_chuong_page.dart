@@ -29,7 +29,8 @@ class ChiTietChuongPage extends StatefulWidget {
 class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   late final ScrollController _scrollController;
   bool _showBoxPosition = true;
-  bool isFollow = false;
+  // bool isFollow = false;
+  ValueNotifier<bool> isFollow = ValueNotifier(false);
 
   Timer? _timer;
   var bloc = ChiTietChuongCubit();
@@ -46,7 +47,7 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
       final response = await ApiProvider()
           .kiemTraTheoDoi(widget.userInfor['id'], widget.idTruyen);
       bloc.initData(widget.idChuong, widget.idTruyen, widget.userInfor['id']);
-      isFollow = response.data['results'];
+      isFollow.value = response.data['results'];
     } else {
       bloc.initData(widget.idChuong, widget.idTruyen, 1);
     }
