@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
@@ -54,28 +55,28 @@ class _ChiTietPageState extends State<ChiTietPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
 
-    void onTheoDoi() async {
-      if (userInfor == null) {
-        Fluttertoast.showToast(
-          msg: "Chưa đăng nhập",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Color.fromARGB(255, 52, 52, 52),
-          textColor: Colors.white,
-          fontSize: 14.0,
-        );
-        return;
-      }
-      EasyLoading.show(status: 'Loading...');
-      if (isFollow.value == false) {
-        await ApiProvider().addTheoDoi(userInfor['id'], widget.id);
-      } else {
-        await ApiProvider().deleteTheoDoi(userInfor['id'], widget.id);
-      }
-      isFollow.value = !isFollow.value;
-      EasyLoading.dismiss();
-    }
+    // void onTheoDoi() async {
+    //   if (userInfor == null) {
+    //     Fluttertoast.showToast(
+    //       msg: "Chưa đăng nhập",
+    //       toastLength: Toast.LENGTH_SHORT,
+    //       gravity: ToastGravity.BOTTOM,
+    //       timeInSecForIosWeb: 1,
+    //       backgroundColor: Color.fromARGB(255, 52, 52, 52),
+    //       textColor: Colors.white,
+    //       fontSize: 14.0,
+    //     );
+    //     return;
+    //   }
+    //   EasyLoading.show(status: 'Loading...');
+    //   if (isFollow.value == false) {
+    //     await ApiProvider().addTheoDoi(userInfor['id'], widget.id);
+    //   } else {
+    //     await ApiProvider().deleteTheoDoi(userInfor['id'], widget.id);
+    //   }
+    //   isFollow.value = !isFollow.value;
+    //   EasyLoading.dismiss();
+    // }
 
     return Scaffold(
       body: SafeArea(
@@ -434,7 +435,18 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             valueListenable: isFollow,
                                             builder: (context, value, child) {
                                               return ElevatedButton(
-                                                onPressed: onTheoDoi,
+                                                onPressed: () async {
+                                                  bool success =
+                                                      await MyFunction()
+                                                          .onTheoDoi(
+                                                              userInfor,
+                                                              isFollow.value,
+                                                              widget.id);
+                                                  if (success) {
+                                                    isFollow.value =
+                                                        !isFollow.value;
+                                                  }
+                                                },
                                                 child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.center,
