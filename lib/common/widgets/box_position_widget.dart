@@ -189,7 +189,9 @@ class _BoxPositionState extends State<BoxPosition> {
                           return TouchOpacityWidget(
                             onTap: () async {
                               bool success = await MyFunction().onTheoDoi(
-                                  widget.userInfor, isFollow.value, widget.id);
+                                  widget.userInfor,
+                                  isFollow.value,
+                                  widget.listChuong[widget.index].idtruyen!);
                               if (success) {
                                 isFollow.value = !isFollow.value;
                               }
