@@ -32,6 +32,28 @@ class _TrangChuPageState extends State<TrangChuPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Trang chủ",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: myColors.whiteOrBlack,
+        actions: [
+          SizedBox(
+            width: 50,
+            child: TouchOpacityWidget(
+              onTap: () {
+                print("tap icon seacrh");
+              },
+              child: const Icon(
+                Icons.search,
+                size: 26,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: BlocBuilder(
           bloc: bloc,
@@ -65,66 +87,44 @@ class _TrangChuPageState extends State<TrangChuPage> {
               if (data!.isEmpty) {
                 return const Text('Empty');
               } else {
-                return Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            Container(
-                              width: screenWidth,
-                              margin: const EdgeInsets.only(top: 16, left: 10),
-                              alignment: Alignment.topLeft,
-                              child: const Text(
-                                'Truyện đề cử',
-                                style: TextStyle(
-                                    color: Colors.amber,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                            // slide view
-                            SlideViewWiget(data: data2!),
-                            Container(
-                              width: screenWidth,
-                              margin: const EdgeInsets.only(
-                                  top: 10, left: 10, bottom: 16),
-                              alignment: Alignment.topLeft,
-                              child: const Text(
-                                'Truyện mới cập nhật',
-                                style: TextStyle(
-                                    color: Colors.amber,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                            // GridView
-                            MyGridViewWidget(
-                                data: data,
-                                crossAxisCount: crossAxisCount,
-                                screenHeight: screenHeight,
-                                screenWidth: screenWidth),
-                          ],
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: screenWidth,
+                        margin: const EdgeInsets.only(top: 16, left: 10),
+                        alignment: Alignment.topLeft,
+                        child: const Text(
+                          'Truyện đề cử',
+                          style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
-                    ),
-                    //header bar
-                    HeaderBarWidget(
-                      screenWidth: screenWidth,
-                      myColors: myColors,
-                      title: 'Trang chủ',
-                      iconButtonRight: TouchOpacityWidget(
-                        onTap: () {
-                          print("tap icon seacrh");
-                        },
-                        child: const Icon(
-                          Icons.search,
-                          size: 26,
+                      // slide view
+                      SlideViewWiget(data: data2!),
+                      Container(
+                        width: screenWidth,
+                        margin: const EdgeInsets.only(
+                            top: 10, left: 10, bottom: 16),
+                        alignment: Alignment.topLeft,
+                        child: const Text(
+                          'Truyện mới cập nhật',
+                          style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
-                    ),
-                  ],
+                      // GridView
+                      MyGridViewWidget(
+                          data: data,
+                          crossAxisCount: crossAxisCount,
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth),
+                    ],
+                  ),
                 );
               }
             } else {

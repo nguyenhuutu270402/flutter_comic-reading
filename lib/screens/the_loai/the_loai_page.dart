@@ -50,8 +50,24 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
     if (screenWidth > 600) {
       crossAxisCount = 4;
     }
-    // return Container();
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          headerTitle,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: myColors.whiteOrBlack,
+        leading: TouchOpacityWidget(
+          child: Icon(
+            Icons.arrow_back,
+            color: myColors.blackOrWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SafeArea(
         child: BlocBuilder(
           bloc: bloc,
@@ -83,38 +99,11 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
               if (data!.isEmpty) {
                 return const Text('Empty');
               } else {
-                return Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            // GridView
-                            MyGridViewTheLoaiWidget(
-                                data: data,
-                                crossAxisCount: crossAxisCount,
-                                screenHeight: screenHeight,
-                                screenWidth: screenWidth),
-                          ],
-                        ),
-                      ),
-                    ),
-                    //header bar
-                    HeaderBarWidget(
-                      screenWidth: screenWidth,
-                      myColors: myColors,
-                      title: headerTitle,
-                      iconButtonLeft: TouchOpacityWidget(
-                        child: Icon(Icons.arrow_back,
-                            color: myColors.blackOrWhite),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ],
-                );
+                return MyGridViewTheLoaiWidget(
+                    data: data,
+                    crossAxisCount: crossAxisCount,
+                    screenHeight: screenHeight,
+                    screenWidth: screenWidth);
               }
             } else {
               return const SizedBox.shrink();

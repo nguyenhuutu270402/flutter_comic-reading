@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     // Set status bar color to red
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: Colors.grey,
+        statusBarColor: Colors.red,
       ),
     );
     return MaterialApp(
