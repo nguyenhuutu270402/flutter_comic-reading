@@ -1,5 +1,4 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
-import 'package:comic_reading/common/widgets/header_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_tac_gia.dart';
@@ -54,7 +53,8 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
       appBar: AppBar(
         title: Text(
           headerTitle,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: myColors.blackOrWhite),
         ),
         centerTitle: true,
         backgroundColor: myColors.whiteOrBlack,

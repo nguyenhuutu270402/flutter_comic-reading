@@ -35,7 +35,8 @@ class _DanhMucPageState extends State<DanhMucPage> {
       appBar: AppBar(
         title: Text(
           "Danh mục",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: myColors.blackOrWhite),
         ),
         centerTitle: true,
         backgroundColor: myColors.whiteOrBlack,

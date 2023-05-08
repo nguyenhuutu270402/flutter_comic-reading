@@ -1,5 +1,4 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
-import 'package:comic_reading/common/widgets/header_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_widget.dart';
 import 'package:comic_reading/common/widgets/slide_view_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
@@ -35,7 +34,8 @@ class _TrangChuPageState extends State<TrangChuPage> {
       appBar: AppBar(
         title: Text(
           "Trang chủ",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: myColors.blackOrWhite),
         ),
         centerTitle: true,
         backgroundColor: myColors.whiteOrBlack,

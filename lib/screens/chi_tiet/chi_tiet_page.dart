@@ -51,7 +51,8 @@ class _ChiTietPageState extends State<ChiTietPage> {
       appBar: AppBar(
         title: Text(
           "Thông tin truyện",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: myColors.blackOrWhite),
         ),
         centerTitle: true,
         backgroundColor: myColors.whiteOrBlack,
