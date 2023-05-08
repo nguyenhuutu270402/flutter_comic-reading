@@ -13,8 +13,11 @@ class ApiProvider {
 
   // chạy sever trên local
   // mở cmd gõ ipconfig copy dòng IPv4 Address quăn vô http://IPv4 Address:3000/
-  final baseUrl = 'http://192.168.43.213:3000/api';
-
+  // ở nhà
+  // final baseUrl = 'http://192.168.43.213:3000/api';
+  //công ty
+  final baseUrl = 'http://192.168.1.20:3000/api';
+  // host
   // final baseUrl = 'https://app-comic-reading.onrender.com/api';
 
   Future<Response> checkRegister(String email) async {
