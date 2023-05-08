@@ -46,9 +46,10 @@ class _TrangChuPageState extends State<TrangChuPage> {
               onTap: () {
                 print("tap icon seacrh");
               },
-              child: const Icon(
+              child: Icon(
                 Icons.search,
                 size: 26,
+                color: myColors.blackOrWhite,
               ),
             ),
           ),
