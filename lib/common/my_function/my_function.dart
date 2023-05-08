@@ -82,8 +82,8 @@ class MyFunction {
     if (userInfor != null) {
       await ApiProvider().addBinhLuan(userInfor['id'], idTruyen, noidung);
       final data = await ApiProvider().onGetListComment(idTruyen);
-      Navigator.pop(context);
-      showMySlidingSheet(context, data.results!, userInfor, idTruyen);
+      // Navigator.pop(context);
+      // showMySlidingSheet(context, data.results!, userInfor, idTruyen);
     }
     EasyLoading.dismiss();
   }
