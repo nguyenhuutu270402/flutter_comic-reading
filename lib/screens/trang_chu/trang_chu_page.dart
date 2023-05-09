@@ -22,7 +22,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
   var data2;
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
-  int _currentMax = 0;
+  int _currentMax = 4;
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
   }
 
   void _loadMoreItems() {
-    setState(() {});
+    // setState(() {});
 
     for (int i = _currentMax; i < _currentMax + 2; i++) {
       if (i < mainData.length) {
@@ -57,6 +57,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
     if (_currentMax > mainData.length) {
       _currentMax = mainData.length;
     }
+    data.notifyListeners();
   }
 
   @override
@@ -123,7 +124,11 @@ class _TrangChuPageState extends State<TrangChuPage> {
           } else if (state is TrangChuSuccess) {
             mainData = state.data.results;
             data2 = state.data2.results;
-
+            for (var i = 0; i < 4; i++) {
+              if (mainData.length > i) {
+                data.value.add(mainData[i]);
+              }
+            }
             if (data.value == []) {
               return const Text('Empty');
             } else {
@@ -164,11 +169,17 @@ class _TrangChuPageState extends State<TrangChuPage> {
                       ],
                     ),
                   ),
-                  MyGridViewWidget(
-                      data: data.value,
-                      crossAxisCount: crossAxisCount,
-                      screenHeight: screenHeight,
-                      screenWidth: screenWidth),
+                  ValueListenableBuilder(
+                    valueListenable: data,
+                    builder: (context, value, child) {
+                      return MyGridViewWidget(
+                          data: data.value,
+                          crossAxisCount: crossAxisCount,
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth,
+                          currentMax: _currentMax);
+                    },
+                  ),
                 ],
               );
             }

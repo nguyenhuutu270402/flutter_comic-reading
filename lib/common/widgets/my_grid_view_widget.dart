@@ -12,12 +12,14 @@ class MyGridViewWidget extends StatelessWidget {
     required this.crossAxisCount,
     required this.screenHeight,
     required this.screenWidth,
+    required this.currentMax,
   });
 
   final List<dynamic> data;
   final int crossAxisCount;
   final double screenHeight;
   final double screenWidth;
+  final int currentMax;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +131,10 @@ class MyGridViewWidget extends StatelessWidget {
                   ),
                 ),
               );
+            } else if (currentMax >= data.length) {
+              return Text("Hết rồi ba");
             } else {
+              print(currentMax);
               return _buildLoader();
             }
           },
