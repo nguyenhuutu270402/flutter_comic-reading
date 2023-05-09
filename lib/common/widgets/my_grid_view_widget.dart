@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/chi_tiet_page.dart';
-import 'package:comic_reading/screens/trang_chu/model/truyen.dart';
 import 'package:flutter/material.dart';
 
 class MyGridViewWidget extends StatelessWidget {
@@ -132,7 +131,7 @@ class MyGridViewWidget extends StatelessWidget {
                 ),
               );
             } else if (currentMax > data.length) {
-              return Text("Hết rồi ba");
+              return Text("Hết rồi!!!!!!!!!!");
             } else {
               print(currentMax);
               return _buildLoader();
