@@ -29,8 +29,11 @@ class ChiTietChuongPage extends StatefulWidget {
 }
 
 class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
-  bool _showBoxPosition = true;
+  // bool _showBoxPosition = true;
+  ValueNotifier<bool> isShowBoxPosition = ValueNotifier(true);
+
   ValueNotifier<bool> isFollow = ValueNotifier(false);
+
   ValueNotifier<dynamic> listComment = ValueNotifier([]);
 
   Timer? _timer;
@@ -106,77 +109,103 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
             if (listImage!.isEmpty) {
               return Text('Empty listImage');
             } else {
-              return CustomScrollView(
-                slivers: [
-                  SliverAppBar(
-                    floating: true,
-                    snap: true,
-                    title: Text(
-                      "Chapter ${listChuong![widget.index].sochuong}",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: myColors.blackOrWhite),
-                    ),
-                    centerTitle: true,
-                    backgroundColor: myColors.whiteOrBlack,
-                    leading: TouchOpacityWidget(
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: myColors.blackOrWhite,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    actions: [
-                      TouchOpacityWidget(
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return DialogListChuong(
-                                listChuong: listChuong,
-                                index: widget.index,
-                                userInfor: widget.userInfor,
+              return Stack(
+                children: [
+                  CustomScrollView(
+                    slivers: [
+                      SliverAppBar(
+                        floating: true,
+                        snap: true,
+                        title: Text(
+                          "Chapter ${listChuong![widget.index].sochuong}",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: myColors.blackOrWhite),
+                        ),
+                        centerTitle: true,
+                        backgroundColor: myColors.whiteOrBlack,
+                        leading: TouchOpacityWidget(
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: myColors.blackOrWhite,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        actions: [
+                          TouchOpacityWidget(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return DialogListChuong(
+                                    listChuong: listChuong,
+                                    index: widget.index,
+                                    userInfor: widget.userInfor,
+                                  );
+                                },
                               );
                             },
-                          );
-                        },
-                        child: SizedBox(
-                          width: 50,
-                          child: Icon(Icons.list, color: myColors.blackOrWhite),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SliverToBoxAdapter(
-                    child: ListView.builder(
-                      itemCount: listImage.length,
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          color: Colors.grey,
-                          child: CachedNetworkImage(
-                            imageUrl: listImage[index].imagelink.toString(),
-                            // imageUrl: "",
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => Container(
-                              height: 200,
-                              alignment: Alignment.center,
-                              child: CircularProgressIndicator(),
-                            ),
-                            errorWidget: (context, url, error) => Container(
-                              height: 200,
-                              alignment: Alignment.center,
-                              color: Colors.grey,
-                              child: Text("Image error"),
+                            child: SizedBox(
+                              width: 50,
+                              child: Icon(Icons.list,
+                                  color: myColors.blackOrWhite),
                             ),
                           ),
-                        );
-                      },
-                    ),
-                  )
+                        ],
+                      ),
+                      SliverToBoxAdapter(
+                        child: ListView.builder(
+                          itemCount: listImage.length,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              color: Colors.grey,
+                              child: CachedNetworkImage(
+                                imageUrl: listImage[index].imagelink.toString(),
+                                // imageUrl: "",
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => Container(
+                                  height: 200,
+                                  alignment: Alignment.center,
+                                  child: CircularProgressIndicator(),
+                                ),
+                                errorWidget: (context, url, error) => Container(
+                                  height: 200,
+                                  alignment: Alignment.center,
+                                  color: Colors.grey,
+                                  child: Text("Image error"),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: listComment,
+                    builder: (context, value, child) {
+                      return ValueListenableBuilder(
+                        valueListenable: isShowBoxPosition,
+                        builder: (context, value, child) {
+                          return BoxPosition(
+                              screenHeight: screenHeight,
+                              myColors: myColors,
+                              listChuong: listChuong,
+                              screenWidth: screenWidth,
+                              listComment: listComment.value,
+                              id: widget.idChuong,
+                              index: widget.index,
+                              userInfor: widget.userInfor,
+                              isFollow: isFollow,
+                              updateListComment: updateListComment);
+                        },
+                      );
+                    },
+                  ),
                 ],
               );
             }
@@ -188,28 +217,3 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-                        // if (_showBoxPosition)
-                        //   ValueListenableBuilder(
-                        //     valueListenable: listComment,
-                        //     builder: (context, value, child) {
-                        //       return BoxPosition(
-                        //           screenHeight: screenHeight,
-                        //           myColors: myColors,
-                        //           listChuong: listChuong,
-                        //           screenWidth: screenWidth,
-                        //           listComment: listComment.value,
-                        //           id: widget.idChuong,
-                        //           index: widget.index,
-                        //           userInfor: widget.userInfor,
-                        //           isFollow: isFollow,
-                        //           updateListComment: updateListComment);
-                        //     },
-                        //   ),
