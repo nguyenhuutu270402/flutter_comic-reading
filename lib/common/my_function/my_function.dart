@@ -78,13 +78,14 @@ class MyFunction {
   Future<dynamic> addBinhLuan(dynamic userInfor, int idTruyen, String noidung,
       BuildContext context) async {
     EasyLoading.show(status: 'Loading...');
-
+    var data;
     if (userInfor != null) {
       await ApiProvider().addBinhLuan(userInfor['id'], idTruyen, noidung);
-      final data = await ApiProvider().onGetListComment(idTruyen);
+      data = await ApiProvider().onGetListComment(idTruyen);
       // Navigator.pop(context);
       // showMySlidingSheet(context, data.results!, userInfor, idTruyen);
     }
     EasyLoading.dismiss();
+    return data.results;
   }
 }

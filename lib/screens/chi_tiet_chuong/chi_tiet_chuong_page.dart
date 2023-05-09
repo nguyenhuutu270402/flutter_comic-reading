@@ -29,8 +29,8 @@ class ChiTietChuongPage extends StatefulWidget {
 class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   late final ScrollController _scrollController;
   bool _showBoxPosition = true;
-  // bool isFollow = false;
   ValueNotifier<bool> isFollow = ValueNotifier(false);
+  ValueNotifier<dynamic> listComment = ValueNotifier([]);
 
   Timer? _timer;
   var bloc = ChiTietChuongCubit();
@@ -53,6 +53,15 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
     }
   }
 
+  void updateListComment(data) async {
+    listComment.value = data;
+    listComment.notifyListeners();
+
+    // setState(() {});
+    print("co vao day nha $data");
+    print("list add>:  ${listComment.value}");
+  }
+
   @override
   void dispose() {
     _scrollController.removeListener(_scrollListener);
@@ -61,23 +70,24 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   }
 
   void _scrollListener() {
-    if (_scrollController.position.userScrollDirection ==
-        ScrollDirection.forward) {
-      _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
-      _timer = Timer(Duration(milliseconds: 1000), () {
-        _showBoxPosition = true;
-        setState(() {});
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      });
-    } else if (_scrollController.position.userScrollDirection ==
-        ScrollDirection.reverse) {
-      _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
-      _timer = Timer(Duration(milliseconds: 1000), () {
-        _showBoxPosition = false;
-        setState(() {});
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-      });
-    }
+    print(">> ctchuong>> : ${listComment.value}");
+    // if (_scrollController.position.userScrollDirection ==
+    //     ScrollDirection.forward) {
+    //   _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
+    //   _timer = Timer(Duration(milliseconds: 1000), () {
+    //     _showBoxPosition = true;
+    //     setState(() {});
+    //     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    //   });
+    // } else if (_scrollController.position.userScrollDirection ==
+    //     ScrollDirection.reverse) {
+    //   _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
+    //   _timer = Timer(Duration(milliseconds: 1000), () {
+    //     _showBoxPosition = false;
+    //     setState(() {});
+    //     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    //   });
+    // }
   }
 
   @override
@@ -115,7 +125,7 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
               );
             } else if (state is ChiTietChuongSuccess) {
               var listImage = state.listImage.results;
-              var listComment = state.listBinhLuan.results;
+              listComment.value = state.listBinhLuan.results;
               var listChuong = state.listChuong.results;
 
               if (listImage!.isEmpty) {
@@ -162,16 +172,22 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                       ),
                     ),
                     if (_showBoxPosition)
-                      BoxPosition(
-                          screenHeight: screenHeight,
-                          myColors: myColors,
-                          listChuong: listChuong,
-                          screenWidth: screenWidth,
-                          listComment: listComment!,
-                          id: widget.idChuong,
-                          index: widget.index,
-                          userInfor: widget.userInfor,
-                          isFollow: isFollow),
+                      ValueListenableBuilder(
+                        valueListenable: listComment,
+                        builder: (context, value, child) {
+                          return BoxPosition(
+                              screenHeight: screenHeight,
+                              myColors: myColors,
+                              listChuong: listChuong,
+                              screenWidth: screenWidth,
+                              listComment: listComment.value,
+                              id: widget.idChuong,
+                              index: widget.index,
+                              userInfor: widget.userInfor,
+                              isFollow: isFollow,
+                              updateListComment: updateListComment);
+                        },
+                      ),
                   ],
                 );
               }

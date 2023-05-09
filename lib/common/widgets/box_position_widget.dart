@@ -22,7 +22,8 @@ class BoxPosition extends StatefulWidget {
       required this.id,
       required this.index,
       required this.userInfor,
-      required this.isFollow});
+      required this.isFollow,
+      required this.updateListComment});
 
   final double screenHeight;
   final CustomThemeExtension myColors;
@@ -33,6 +34,7 @@ class BoxPosition extends StatefulWidget {
   final int index;
   final userInfor;
   final ValueNotifier<bool> isFollow;
+  final Function(dynamic) updateListComment;
   @override
   State<BoxPosition> createState() => _BoxPositionState();
 }
@@ -215,13 +217,14 @@ class _BoxPositionState extends State<BoxPosition> {
                           );
                           return;
                         }
-                        final data = await ApiProvider().onGetListComment(
-                            widget.listChuong[widget.index].idtruyen!);
+                        // final data = await ApiProvider().onGetListComment(
+                        //     widget.listChuong[widget.index].idtruyen!);
                         showMySlidingSheet(
                             context,
-                            data.results!,
+                            widget.listComment,
                             widget.userInfor,
-                            widget.listChuong[widget.index].idtruyen!);
+                            widget.listChuong[widget.index].idtruyen!,
+                            widget.updateListComment);
                       },
                       child: Icon(Icons.message_outlined, color: Colors.green),
                     ),
