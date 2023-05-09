@@ -4,6 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/box_position_widget.dart';
+import 'package:comic_reading/common/widgets/dia_log_list_chuong_widget.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/cubit/chi_tiet_chuong_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -27,7 +29,6 @@ class ChiTietChuongPage extends StatefulWidget {
 }
 
 class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
-  late final ScrollController _scrollController;
   bool _showBoxPosition = true;
   ValueNotifier<bool> isFollow = ValueNotifier(false);
   ValueNotifier<dynamic> listComment = ValueNotifier([]);
@@ -37,8 +38,6 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    _scrollController.addListener(_scrollListener);
     initData();
   }
 
@@ -64,30 +63,7 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
 
   @override
   void dispose() {
-    _scrollController.removeListener(_scrollListener);
-    _scrollController.dispose();
     super.dispose();
-  }
-
-  void _scrollListener() {
-    print(">> ctchuong>> : ${listComment.value}");
-    // if (_scrollController.position.userScrollDirection ==
-    //     ScrollDirection.forward) {
-    //   _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
-    //   _timer = Timer(Duration(milliseconds: 1000), () {
-    //     _showBoxPosition = true;
-    //     setState(() {});
-    //     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    //   });
-    // } else if (_scrollController.position.userScrollDirection ==
-    //     ScrollDirection.reverse) {
-    //   _timer?.cancel(); // Hủy bỏ đối tượng Timer hiện tại (nếu có)
-    //   _timer = Timer(Duration(milliseconds: 1000), () {
-    //     _showBoxPosition = false;
-    //     setState(() {});
-    //     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    //   });
-    // }
   }
 
   @override
@@ -97,106 +73,143 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
 
     return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder(
-          bloc: bloc,
-          builder: (context, state) {
-            if (state is ChiTietChuongLoading) {
-              return Container(
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is ChiTietChuongFailure) {
-              return Container(
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Có lỗi sảy ra',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Tải lại"),
-                    ),
-                  ],
-                ),
-              );
-            } else if (state is ChiTietChuongSuccess) {
-              var listImage = state.listImage.results;
-              listComment.value = state.listBinhLuan.results;
-              var listChuong = state.listChuong.results;
+      body: BlocBuilder(
+        bloc: bloc,
+        builder: (context, state) {
+          if (state is ChiTietChuongLoading) {
+            return Container(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is ChiTietChuongFailure) {
+            return Container(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Có lỗi sảy ra',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Tải lại"),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is ChiTietChuongSuccess) {
+            var listImage = state.listImage.results;
+            listComment.value = state.listBinhLuan.results;
+            var listChuong = state.listChuong.results;
 
-              if (listImage!.isEmpty) {
-                return Text('Empty listImage');
-              }
-              if (listChuong!.isEmpty) {
-                return Text('Empty listChuong');
-              } else {
-                return Stack(
-                  children: [
-                    SingleChildScrollView(
-                      controller: _scrollController,
-                      child: Column(
-                        children: [
-                          ListView.builder(
-                            itemCount: listImage.length,
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                color: Colors.grey,
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      listImage[index].imagelink.toString(),
-                                  // imageUrl: "",
-                                  fit: BoxFit.cover,
-                                  placeholder: (context, url) => Container(
-                                    height: 200,
-                                    alignment: Alignment.center,
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                  errorWidget: (context, url, error) =>
-                                      Container(
-                                    height: 200,
-                                    alignment: Alignment.center,
-                                    color: Colors.grey,
-                                    child: Text("Image error"),
-                                  ),
-                                ),
+            if (listImage!.isEmpty) {
+              return Text('Empty listImage');
+            } else {
+              return CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    floating: true,
+                    snap: true,
+                    title: Text(
+                      "Chapter ${listChuong![widget.index].sochuong}",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: myColors.blackOrWhite),
+                    ),
+                    centerTitle: true,
+                    backgroundColor: myColors.whiteOrBlack,
+                    leading: TouchOpacityWidget(
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: myColors.blackOrWhite,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    actions: [
+                      TouchOpacityWidget(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return DialogListChuong(
+                                listChuong: listChuong,
+                                index: widget.index,
+                                userInfor: widget.userInfor,
                               );
                             },
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (_showBoxPosition)
-                      ValueListenableBuilder(
-                        valueListenable: listComment,
-                        builder: (context, value, child) {
-                          return BoxPosition(
-                              screenHeight: screenHeight,
-                              myColors: myColors,
-                              listChuong: listChuong,
-                              screenWidth: screenWidth,
-                              listComment: listComment.value,
-                              id: widget.idChuong,
-                              index: widget.index,
-                              userInfor: widget.userInfor,
-                              isFollow: isFollow,
-                              updateListComment: updateListComment);
+                          );
                         },
+                        child: SizedBox(
+                          width: 50,
+                          child: Icon(Icons.list, color: myColors.blackOrWhite),
+                        ),
                       ),
-                  ],
-                );
-              }
-            } else {
-              return const SizedBox.shrink();
+                    ],
+                  ),
+                  SliverToBoxAdapter(
+                    child: ListView.builder(
+                      itemCount: listImage.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          color: Colors.grey,
+                          child: CachedNetworkImage(
+                            imageUrl: listImage[index].imagelink.toString(),
+                            // imageUrl: "",
+                            fit: BoxFit.cover,
+                            placeholder: (context, url) => Container(
+                              height: 200,
+                              alignment: Alignment.center,
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              height: 200,
+                              alignment: Alignment.center,
+                              color: Colors.grey,
+                              child: Text("Image error"),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
+              );
             }
-          },
-        ),
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+                        // if (_showBoxPosition)
+                        //   ValueListenableBuilder(
+                        //     valueListenable: listComment,
+                        //     builder: (context, value, child) {
+                        //       return BoxPosition(
+                        //           screenHeight: screenHeight,
+                        //           myColors: myColors,
+                        //           listChuong: listChuong,
+                        //           screenWidth: screenWidth,
+                        //           listComment: listComment.value,
+                        //           id: widget.idChuong,
+                        //           index: widget.index,
+                        //           userInfor: widget.userInfor,
+                        //           isFollow: isFollow,
+                        //           updateListComment: updateListComment);
+                        //     },
+                        //   ),

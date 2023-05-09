@@ -47,53 +47,53 @@ class _BoxPositionState extends State<BoxPosition> {
         height: widget.screenHeight,
         child: Stack(
           children: [
-            Container(
-              height: 50,
-              color: widget.myColors.whiteOrBlack,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TouchOpacityWidget(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: SizedBox(
-                      width: 50,
-                      child: Icon(Icons.arrow_back,
-                          color: widget.myColors.blackOrWhite),
-                    ),
-                  ),
-                  Text(
-                    'Chapter ${widget.listChuong[widget.index].sochuong}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  TouchOpacityWidget(
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return DialogListChuong(
-                            listChuong: widget.listChuong,
-                            index: widget.index,
-                            userInfor: widget.userInfor,
-                          );
-                        },
-                      );
-                    },
-                    child: SizedBox(
-                      width: 50,
-                      child:
-                          Icon(Icons.list, color: widget.myColors.blackOrWhite),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Container(
+            //   height: 50,
+            //   color: widget.myColors.whiteOrBlack,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [
+            //       TouchOpacityWidget(
+            //         onTap: () {
+            //           Navigator.pop(context);
+            //         },
+            //         child: SizedBox(
+            //           width: 50,
+            //           child: Icon(Icons.arrow_back,
+            //               color: widget.myColors.blackOrWhite),
+            //         ),
+            //       ),
+            //       Text(
+            //         'Chapter ${widget.listChuong[widget.index].sochuong}',
+            //         maxLines: 1,
+            //         overflow: TextOverflow.ellipsis,
+            //         style: const TextStyle(
+            //           fontSize: 18,
+            //           fontWeight: FontWeight.w600,
+            //         ),
+            //       ),
+            //       TouchOpacityWidget(
+            //         onTap: () {
+            //           showDialog(
+            //             context: context,
+            //             builder: (BuildContext context) {
+            //               return DialogListChuong(
+            //                 listChuong: widget.listChuong,
+            //                 index: widget.index,
+            //                 userInfor: widget.userInfor,
+            //               );
+            //             },
+            //           );
+            //         },
+            //         child: SizedBox(
+            //           width: 50,
+            //           child:
+            //               Icon(Icons.list, color: widget.myColors.blackOrWhite),
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             Positioned(
               bottom: 0,
               child: Container(
