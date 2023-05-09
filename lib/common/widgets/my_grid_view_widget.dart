@@ -14,7 +14,7 @@ class MyGridViewWidget extends StatelessWidget {
     required this.screenWidth,
   });
 
-  final List<Results> data;
+  final List<dynamic> data;
   final int crossAxisCount;
   final double screenHeight;
   final double screenWidth;

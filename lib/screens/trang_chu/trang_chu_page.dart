@@ -15,13 +15,14 @@ class TrangChuPage extends StatefulWidget {
 
 class _TrangChuPageState extends State<TrangChuPage> {
   var bloc = TrangChuCubit();
-  var data;
+  // var data = [];
+  ValueNotifier<List> data = ValueNotifier([]);
   var mainData;
 
   var data2;
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
-  int _currentMax = 4;
+  int _currentMax = 0;
 
   @override
   void initState() {
@@ -44,32 +45,18 @@ class _TrangChuPageState extends State<TrangChuPage> {
   }
 
   void _loadMoreItems() {
-    // if (!_isLoading) {
-    //   setState(() {
-    //     _isLoading = true;
-    //   });
+    setState(() {});
 
-    //   for (int i = _currentMax; i < _currentMax + 2; i++) {
-    //     if (i < mainData.length) {
-    //       print(mainData[i]);
-
-    //       data.add(mainData[i]);
-    //     }
-    //     _currentMax = _currentMax + 2;
-    //     if (_currentMax > mainData.length) {
-    //       _currentMax = mainData.length;
-    //     }
-    //   }
-
-    //   // Thêm dữ liệu mới vào danh sách
-    //   Future.delayed(Duration(seconds: 2), () {
-    //     setState(() {
-    //       // data.addAll(newItems);
-    //       print("loading datathooiiiii");
-    //       _isLoading = false;
-    //     });
-    //   });
-    // }
+    for (int i = _currentMax; i < _currentMax + 2; i++) {
+      if (i < mainData.length) {
+        data..value.add(mainData[i]);
+        // print(data);
+      }
+    }
+    _currentMax = _currentMax + 2;
+    if (_currentMax > mainData.length) {
+      _currentMax = mainData.length;
+    }
   }
 
   @override
@@ -136,8 +123,8 @@ class _TrangChuPageState extends State<TrangChuPage> {
           } else if (state is TrangChuSuccess) {
             mainData = state.data.results;
             data2 = state.data2.results;
-            print(mainData[1]);
-            if (data == []) {
+
+            if (data.value == []) {
               return const Text('Empty');
             } else {
               return CustomScrollView(
@@ -178,7 +165,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
                     ),
                   ),
                   MyGridViewWidget(
-                      data: mainData,
+                      data: data.value,
                       crossAxisCount: crossAxisCount,
                       screenHeight: screenHeight,
                       screenWidth: screenWidth),
