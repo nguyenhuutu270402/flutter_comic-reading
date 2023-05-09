@@ -131,7 +131,7 @@ class MyGridViewWidget extends StatelessWidget {
                   ),
                 ),
               );
-            } else if (currentMax >= data.length) {
+            } else if (currentMax > data.length) {
               return Text("Hết rồi ba");
             } else {
               print(currentMax);

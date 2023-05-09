@@ -54,9 +54,9 @@ class _TrangChuPageState extends State<TrangChuPage> {
       }
     }
     _currentMax = _currentMax + 2;
-    if (_currentMax > mainData.length) {
-      _currentMax = mainData.length;
-    }
+    // if (_currentMax > mainData.length) {
+    //   _currentMax = mainData.length;
+    // }
     data.notifyListeners();
   }
 
