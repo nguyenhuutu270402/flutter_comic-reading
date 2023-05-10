@@ -47,12 +47,15 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
       bloc.initData(widget.idChuong, widget.idTruyen, widget.userInfor['id']);
       isFollow.value = response.data['results'];
     } else {
-      bloc.initData(widget.idChuong, widget.idTruyen, 1);
+      bloc.initData(widget.idChuong, widget.idTruyen, 0);
     }
   }
 
   void updateListComment(data) async {
-    listComment.value.insertAll(0, data.toSet().toList());
+    listComment.value.insertAll(
+        0,
+        data.where((item2) =>
+            !listComment.value.any((item1) => item1.id == item2.id)));
     listComment.notifyListeners();
   }
 

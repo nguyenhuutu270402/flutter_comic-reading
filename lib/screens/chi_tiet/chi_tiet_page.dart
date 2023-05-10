@@ -34,7 +34,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
     if (userInfor != null) {
       bloc.initData(widget.id, userInfor['id']);
     } else {
-      bloc.initData(widget.id, 1);
+      bloc.initData(widget.id, 0);
     }
   }
 
