@@ -20,9 +20,15 @@ class TheLoaiPage extends StatefulWidget {
 class _TheLoaiPageState extends State<TheLoaiPage> {
   var bloc = TheLoaiCubit();
   String headerTitle = "";
+  ValueNotifier<List> data = ValueNotifier([]);
+  var mainData;
+  final ScrollController _scrollController = ScrollController();
+  int _currentMax = 4;
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_onScroll);
+
     initData();
   }
 
@@ -41,6 +47,29 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
   }
 
   @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 50) {
+      _loadMoreItems();
+    }
+  }
+
+  void _loadMoreItems() {
+    for (int i = _currentMax; i < _currentMax + 2; i++) {
+      if (i < mainData.length) {
+        data..value.add(mainData[i]);
+      }
+    }
+    _currentMax = _currentMax + 2;
+    data.notifyListeners();
+  }
+
+  @override
   Widget build(BuildContext context) {
     int crossAxisCount = 2;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -50,66 +79,83 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          headerTitle,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: myColors.blackOrWhite),
-        ),
-        centerTitle: true,
-        backgroundColor: myColors.whiteOrBlack,
-        leading: TouchOpacityWidget(
-          child: Icon(
-            Icons.arrow_back,
-            color: myColors.blackOrWhite,
-          ),
-          onTap: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: SafeArea(
-        child: BlocBuilder(
-          bloc: bloc,
-          builder: (context, state) {
-            if (state is TheLoaiLoading) {
-              return Container(
-                alignment: Alignment.center,
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is TheLoaiFailure) {
-              return Container(
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Có lỗi sảy ra',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Tải lại"),
-                    ),
-                  ],
-                ),
-              );
-            } else if (state is TheLoaiSuccess) {
-              var data = state.data.data["results"];
-              if (data!.isEmpty) {
-                return const Text('Empty');
-              } else {
-                return MyGridViewTheLoaiWidget(
-                    data: data,
-                    crossAxisCount: crossAxisCount,
-                    screenHeight: screenHeight,
-                    screenWidth: screenWidth);
+      body: BlocBuilder(
+        bloc: bloc,
+        builder: (context, state) {
+          if (state is TheLoaiLoading) {
+            return Container(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is TheLoaiFailure) {
+            return Container(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Có lỗi sảy ra',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Tải lại"),
+                  ),
+                ],
+              ),
+            );
+          } else if (state is TheLoaiSuccess) {
+            mainData = state.data.data["results"];
+            for (var i = 0; i < _currentMax; i++) {
+              if (mainData.length > i) {
+                data.value.add(mainData[i]);
               }
-            } else {
-              return const SizedBox.shrink();
             }
-          },
-        ),
+            if (data.value.isEmpty) {
+              return const Text('Empty');
+            } else {
+              return CustomScrollView(
+                controller: _scrollController,
+                slivers: [
+                  SliverAppBar(
+                    floating: true,
+                    snap: true,
+                    title: Text(
+                      headerTitle,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: myColors.blackOrWhite),
+                    ),
+                    centerTitle: true,
+                    backgroundColor: myColors.whiteOrBlack,
+                    leading: TouchOpacityWidget(
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: myColors.blackOrWhite,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: data,
+                    builder: (context, value, child) {
+                      return MyGridViewTheLoaiWidget(
+                          data: data.value,
+                          crossAxisCount: crossAxisCount,
+                          screenHeight: screenHeight,
+                          screenWidth: screenWidth,
+                          currentMax: _currentMax);
+                    },
+                  ),
+                ],
+              );
+            }
+          } else {
+            return const SizedBox.shrink();
+          }
+        },
       ),
     );
   }

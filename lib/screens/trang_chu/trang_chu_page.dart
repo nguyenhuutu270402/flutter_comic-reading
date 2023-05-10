@@ -22,7 +22,6 @@ class _TrangChuPageState extends State<TrangChuPage> {
 
   var data2;
   final ScrollController _scrollController = ScrollController();
-  bool _isLoading = false;
   int _currentMax = 4;
 
   @override
@@ -40,7 +39,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
 
   void _onScroll() {
     if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 50) {
+        _scrollController.position.maxScrollExtent - 20) {
       _loadMoreItems();
     }
   }
@@ -100,7 +99,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
             } else if (state is TrangChuSuccess) {
               mainData = state.data.results;
               data2 = state.data2.results;
-              for (var i = 0; i < 4; i++) {
+              for (var i = 0; i < _currentMax; i++) {
                 if (mainData.length > i) {
                   data.value.add(mainData[i]);
                 }
