@@ -11,6 +11,7 @@ import 'package:comic_reading/common/widgets/dia_log_list_chuong_widget.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/model/list_binh_luan.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sliding_sheet/sliding_sheet.dart';
 
 class BoxPosition extends StatefulWidget {
   const BoxPosition(
@@ -44,6 +45,8 @@ class BoxPosition extends StatefulWidget {
 }
 
 class _BoxPositionState extends State<BoxPosition> {
+  late SheetController sheetController = SheetController();
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -184,7 +187,8 @@ class _BoxPositionState extends State<BoxPosition> {
                               widget.listComment,
                               widget.userInfor,
                               widget.listChuong[widget.index].idtruyen!,
-                              widget.updateListComment);
+                              widget.updateListComment,
+                              sheetController);
                         },
                         child:
                             Icon(Icons.message_outlined, color: Colors.green),

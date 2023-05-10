@@ -52,12 +52,8 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
   }
 
   void updateListComment(data) async {
-    listComment.value = data;
+    listComment.value.insertAll(0, data.toSet().toList());
     listComment.notifyListeners();
-
-    // setState(() {});
-    print("co vao day nha $data");
-    print("list add>:  ${listComment.value}");
   }
 
   @override

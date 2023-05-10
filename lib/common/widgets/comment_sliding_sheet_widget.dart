@@ -6,18 +6,24 @@ import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
-void showMySlidingSheet(BuildContext context, List data, dynamic userInfor,
-    int idTruyen, Function(dynamic) updateListComment) {
+void showMySlidingSheet(
+    BuildContext context,
+    List data,
+    dynamic userInfor,
+    int idTruyen,
+    Function(dynamic) updateListComment,
+    SheetController sheetController) {
   showSlidingBottomSheet(
     context,
     builder: (context) => SlidingSheetDialog(
+      controller: sheetController,
       cornerRadius: 8,
       snapSpec: SnapSpec(
         snappings: [0.5, 0.9],
       ),
       builder: (context, state) => buildSheet(context, state, data),
-      footerBuilder: (context, state) => buildFooter(
-          context, state, data, userInfor, idTruyen, updateListComment),
+      footerBuilder: (context, state) => buildFooter(context, state, data,
+          userInfor, idTruyen, updateListComment, sheetController),
       headerBuilder: (context, state) => buildHeader(context, state, data),
     ),
   );
@@ -106,8 +112,14 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
   );
 }
 
-Widget buildFooter(BuildContext context, SheetState state, List data,
-    dynamic userInfor, int idTruyen, Function(dynamic) updateListComment) {
+Widget buildFooter(
+    BuildContext context,
+    SheetState state,
+    List data,
+    dynamic userInfor,
+    int idTruyen,
+    Function(dynamic) updateListComment,
+    SheetController sheetController) {
   String valueComment = "";
   return Material(
     child: Container(
@@ -166,7 +178,9 @@ Widget buildFooter(BuildContext context, SheetState state, List data,
             onTap: () async {
               final newData = await MyFunction()
                   .addBinhLuan(userInfor, idTruyen, valueComment, context);
-              updateListComment(newData);
+              await updateListComment(newData);
+
+              sheetController.rebuild();
             },
             child: Icon(
               Icons.send,
