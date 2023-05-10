@@ -82,7 +82,7 @@ Widget buildSheet(BuildContext context, SheetState state, List data) {
                           ),
                         ),
                         Text(
-                          '01/03/2023',
+                          MyFunction().formatDateTime(data[index].ngaybinhluan),
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 12,
@@ -121,6 +121,8 @@ Widget buildFooter(
     Function(dynamic) updateListComment,
     SheetController sheetController) {
   String valueComment = "";
+  TextEditingController _textFieldController = TextEditingController();
+
   return Material(
     child: Container(
       height: 60,
@@ -158,6 +160,7 @@ Widget buildFooter(
           Expanded(
             child: Container(
               child: TextField(
+                controller: _textFieldController,
                 onChanged: (value) {
                   valueComment = value;
                 },
@@ -179,7 +182,7 @@ Widget buildFooter(
               final newData = await MyFunction()
                   .addBinhLuan(userInfor, idTruyen, valueComment, context);
               await updateListComment(newData);
-
+              _textFieldController.clear();
               sheetController.rebuild();
             },
             child: Icon(
