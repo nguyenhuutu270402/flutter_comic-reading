@@ -29,14 +29,10 @@ class ChiTietChuongPage extends StatefulWidget {
 }
 
 class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
-  // bool _showBoxPosition = true;
-  ValueNotifier<bool> isShowBoxPosition = ValueNotifier(true);
-
   ValueNotifier<bool> isFollow = ValueNotifier(false);
-
   ValueNotifier<dynamic> listComment = ValueNotifier([]);
+  final ScrollController _scrollController = ScrollController();
 
-  Timer? _timer;
   var bloc = ChiTietChuongCubit();
   @override
   void initState() {
@@ -112,6 +108,7 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
               return Stack(
                 children: [
                   CustomScrollView(
+                    controller: _scrollController,
                     slivers: [
                       SliverAppBar(
                         floating: true,
@@ -188,21 +185,18 @@ class _ChiTietChuongPageState extends State<ChiTietChuongPage> {
                   ValueListenableBuilder(
                     valueListenable: listComment,
                     builder: (context, value, child) {
-                      return ValueListenableBuilder(
-                        valueListenable: isShowBoxPosition,
-                        builder: (context, value, child) {
-                          return BoxPosition(
-                              screenHeight: screenHeight,
-                              myColors: myColors,
-                              listChuong: listChuong,
-                              screenWidth: screenWidth,
-                              listComment: listComment.value,
-                              id: widget.idChuong,
-                              index: widget.index,
-                              userInfor: widget.userInfor,
-                              isFollow: isFollow,
-                              updateListComment: updateListComment);
-                        },
+                      return BoxPosition(
+                        screenHeight: screenHeight,
+                        myColors: myColors,
+                        listChuong: listChuong,
+                        screenWidth: screenWidth,
+                        listComment: listComment.value,
+                        id: widget.idChuong,
+                        index: widget.index,
+                        userInfor: widget.userInfor,
+                        isFollow: isFollow,
+                        updateListComment: updateListComment,
+                        controller: _scrollController,
                       );
                     },
                   ),
