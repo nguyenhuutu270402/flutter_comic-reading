@@ -279,7 +279,6 @@ class ApiProvider {
       };
       final response =
           await dio.post('$baseUrl/lay-list-truyen-theo-loai', data: data);
-      print(response);
       return response;
     } catch (e) {
       print("API error layListTruyenTheoLoai: $e");
