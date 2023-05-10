@@ -36,7 +36,6 @@ class _XepHangPageState extends State<XepHangPage> {
             return Text('Failure');
           } else if (state is XepHangSuccess) {
             var data = state.data.data["results"];
-            print(data);
             return CustomScrollView(
               slivers: [
                 SliverAppBar(
@@ -52,18 +51,29 @@ class _XepHangPageState extends State<XepHangPage> {
                   centerTitle: true,
                   backgroundColor: myColors.whiteOrBlack,
                 ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      if (index < items.length) {
-                        return ListTile(
-                          title: Text(items[index]),
-                        );
-                      } else {
-                        return _buildLoader();
-                      }
-                    },
-                    childCount: items.length + 1,
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        if (index < data.length) {
+                          return TouchOpacityWidget(
+                            child: Container(
+                              margin: EdgeInsets.symmetric(vertical: 5),
+                              color: Colors.grey,
+                              height: 200,
+                            ),
+                          );
+
+                          return ListTile(
+                            title: Text(data[index]["tentruyen"]),
+                          );
+                        } else {
+                          return _buildLoader();
+                        }
+                      },
+                      childCount: data.length + 1,
+                    ),
                   ),
                 ),
               ],
