@@ -14,10 +14,11 @@ class YeuThichCubit extends Cubit<YeuThichState> {
     try {
       emit(YeuThichLoading());
       final userInfor = await mySharedPrefes.readUserInfo();
-      String lastquery =
-          "WHERE theodoi.idnguoidung = ${1} GROUP BY truyen.id ORDER BY MAX(chuong.ngaycapnhat) desc ";
       var data;
       if (userInfor != null) {
+        String lastquery =
+            "WHERE theodoi.idnguoidung = ${userInfor["id"]} GROUP BY truyen.id ORDER BY MAX(chuong.ngaycapnhat) desc ";
+
         data = await apiProvider.layListTruyenTheoLoai(lastquery);
       }
       emit(YeuThichSuccess(data: data, userInfor: userInfor));

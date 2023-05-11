@@ -2,8 +2,6 @@ import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
 import 'package:comic_reading/screens/yeu_thich/cubit/yeu_thich_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class YeuThichPage extends StatefulWidget {
@@ -50,6 +48,14 @@ class _YeuThichPageState extends State<YeuThichPage> {
     data.notifyListeners();
   }
 
+  Future<void> _refreshData() async {
+    data.value.clear();
+    _currentMax = 4;
+    bloc.initData();
+    data.notifyListeners();
+    print("remake");
+  }
+
   @override
   Widget build(BuildContext context) {
     int crossAxisCount = 2;
@@ -79,7 +85,9 @@ class _YeuThichPageState extends State<YeuThichPage> {
                       style: TextStyle(fontSize: 18),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        bloc.initData();
+                      },
                       child: Text("Tải lại"),
                     ),
                   ],
@@ -95,40 +103,43 @@ class _YeuThichPageState extends State<YeuThichPage> {
                   }
                 }
               }
-              return CustomScrollView(
-                controller: _scrollController,
-                slivers: [
-                  SliverAppBar(
-                    floating: true,
-                    snap: true,
-                    pinned: true,
-                    title: Text(
-                      "Theo dõi",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: myColors.blackOrWhite),
+              return RefreshIndicator(
+                onRefresh: _refreshData,
+                child: CustomScrollView(
+                  controller: _scrollController,
+                  slivers: [
+                    SliverAppBar(
+                      floating: true,
+                      snap: true,
+                      pinned: true,
+                      title: Text(
+                        "Theo dõi",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: myColors.blackOrWhite),
+                      ),
+                      centerTitle: true,
+                      backgroundColor: myColors.whiteOrBlack,
                     ),
-                    centerTitle: true,
-                    backgroundColor: myColors.whiteOrBlack,
-                  ),
-                  userInfor == null
-                      ? SliverToBoxAdapter(
-                          child: Container(
-                            child: Text("Chưa đăng nhập"),
-                          ),
-                        )
-                      : ValueListenableBuilder(
-                          valueListenable: data,
-                          builder: (context, value, child) {
-                            return MyGridViewTheLoaiWidget(
-                                data: data.value,
-                                crossAxisCount: crossAxisCount,
-                                screenHeight: screenHeight,
-                                screenWidth: screenWidth,
-                                currentMax: _currentMax);
-                          },
-                        )
-                ],
+                    userInfor == null
+                        ? SliverToBoxAdapter(
+                            child: Container(
+                              child: Text("Chưa đăng nhập"),
+                            ),
+                          )
+                        : ValueListenableBuilder(
+                            valueListenable: data,
+                            builder: (context, value, child) {
+                              return MyGridViewTheLoaiWidget(
+                                  data: data.value,
+                                  crossAxisCount: crossAxisCount,
+                                  screenHeight: screenHeight,
+                                  screenWidth: screenWidth,
+                                  currentMax: _currentMax);
+                            },
+                          )
+                  ],
+                ),
               );
             }
             return const SizedBox.shrink();
