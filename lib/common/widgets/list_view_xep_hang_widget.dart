@@ -8,6 +8,18 @@ class ListViewXepHangWidget extends StatelessWidget {
   final data;
   final screenWidth;
 
+  Color setBackgroundColor(int index) {
+    if (index == 0) {
+      return Color(0XFF1e81c4);
+    } else if (index == 1) {
+      return Color(0xFFa4ce3c);
+    } else if (index == 2) {
+      return Color(0xFFfbc908);
+    } else {
+      return Color(0xFFd4d4d2).withOpacity(0.8);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
@@ -20,7 +32,7 @@ class ListViewXepHangWidget extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 5),
                   padding: EdgeInsets.all(10),
-                  color: Colors.grey,
+                  color: setBackgroundColor(index),
                   height: 170,
                   child: Row(
                     children: [
