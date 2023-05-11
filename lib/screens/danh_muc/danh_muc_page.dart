@@ -154,17 +154,6 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                 print("Lịch sử");
                               },
                             ),
-                            ItemKhacWidget(
-                              icon: Icon(
-                                Icons.manage_search_sharp,
-                                size: 28,
-                                color: Colors.green,
-                              ),
-                              title: "Tìm truyện",
-                              onTap: () {
-                                print("Tìm truyện");
-                              },
-                            ),
                             if (userInfor == null)
                               ItemKhacWidget(
                                 icon: Icon(
@@ -174,7 +163,6 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                 ),
                                 title: "Đăng nhập",
                                 onTap: () {
-                                  // pushReplacement
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
