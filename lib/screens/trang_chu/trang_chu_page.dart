@@ -2,6 +2,7 @@ import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_widget.dart';
 import 'package:comic_reading/common/widgets/slide_view_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
+import 'package:comic_reading/screens/tim_kiem/tim_kiem_page.dart';
 import 'package:comic_reading/screens/trang_chu/cubit/trang_chu_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -126,6 +127,11 @@ class _TrangChuPageState extends State<TrangChuPage> {
                           width: 50,
                           child: TouchOpacityWidget(
                             onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TimKiemPage(),
+                                  ));
                               print("tap icon seacrh");
                             },
                             child: Icon(

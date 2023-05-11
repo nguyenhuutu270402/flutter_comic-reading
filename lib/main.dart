@@ -2,7 +2,6 @@ import 'package:comic_reading/common/theme/dark_theme.dart';
 import 'package:comic_reading/common/theme/light_theme.dart';
 import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
@@ -29,8 +28,8 @@ void configLoading() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static const isDarkTheme = true;
-  // static const isDarkTheme = false;
+  // static const isDarkTheme = true;
+  static const isDarkTheme = false;
 
   // This widget is the root of your application.
   @override
