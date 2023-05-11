@@ -103,7 +103,7 @@ class MyGridViewWidget extends StatelessWidget {
                               width: screenWidth,
                               alignment: Alignment.topLeft,
                               child: Text(
-                                data[index].tentruyen!,
+                                data[index].tentruyen!.toString().toUpperCase(),
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
