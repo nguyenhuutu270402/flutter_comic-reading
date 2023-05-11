@@ -132,7 +132,6 @@ class MyGridViewTheLoaiWidget extends StatelessWidget {
             } else if (currentMax > data.length) {
               return Text("Hết rồi!!!!!!!!!!");
             } else {
-              print(currentMax);
               return _buildLoader();
             }
           },
