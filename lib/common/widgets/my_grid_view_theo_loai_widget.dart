@@ -129,11 +129,12 @@ class MyGridViewTheLoaiWidget extends StatelessWidget {
                   ),
                 ),
               );
-            } else if (currentMax > data.length) {
-              return Text("Hết rồi!!!!!!!!!!");
-            } else {
-              return _buildLoader();
             }
+            // else if (currentMax > data.length) {
+            //   return Text("Hết rồi!!!!!!!!!!");
+            // } else {
+            //   return _buildLoader();
+            // }
           },
           childCount: data.length + 1,
         ),
