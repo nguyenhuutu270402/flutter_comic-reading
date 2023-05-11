@@ -5,6 +5,7 @@ import 'package:comic_reading/common/widgets/box_thong_tin_tai_khoan.dart';
 import 'package:comic_reading/common/widgets/item_khac_widget.dart';
 import 'package:comic_reading/screens/dang_nhap/dang_nhap_page.dart';
 import 'package:comic_reading/screens/danh_muc/cubit/danh_muc_cubit.dart';
+import 'package:comic_reading/screens/tai_khoan/tai_khoan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -96,7 +97,13 @@ class _DanhMucPageState extends State<DanhMucPage> {
                             if (userInfor != null)
                               BoxThongTinTaiKhoan(
                                 userInfor: userInfor,
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TaiKhoanPage(),
+                                      ));
+                                },
                               )
                             else
                               Row(
