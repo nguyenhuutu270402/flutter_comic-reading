@@ -131,7 +131,7 @@ class ListViewXepHangWidget extends StatelessWidget {
 
   Widget _buildLoader() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 32),
+      padding: EdgeInsets.symmetric(vertical: 100),
       alignment: Alignment.center,
       child: CircularProgressIndicator(),
     );

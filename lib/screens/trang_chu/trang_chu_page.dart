@@ -39,7 +39,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
 
   void _onScroll() {
     if (_scrollController.position.pixels >=
-        _scrollController.position.maxScrollExtent - 20) {
+        _scrollController.position.maxScrollExtent - 0) {
       _loadMoreItems();
     }
   }

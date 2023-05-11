@@ -57,9 +57,29 @@ class _XepHangPageState extends State<XepHangPage> {
         bloc: bloc,
         builder: (context, state) {
           if (state is XepHangLoading) {
-            return Text('Loading');
+            return Container(
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            );
           } else if (state is XepHangFailure) {
-            return Text('Failure');
+            return Container(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Có lỗi sảy ra',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      bloc.initData();
+                    },
+                    child: Text("Tải lại"),
+                  ),
+                ],
+              ),
+            );
           } else if (state is XepHangSuccess) {
             mainData = state.data.data["results"];
 
@@ -74,7 +94,6 @@ class _XepHangPageState extends State<XepHangPage> {
                 SliverAppBar(
                   floating: true,
                   snap: true,
-                  // pinned: true,
                   title: Text(
                     "Xếp hạng",
                     style: TextStyle(
