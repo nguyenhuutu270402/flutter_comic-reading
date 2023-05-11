@@ -12,13 +12,39 @@ class XepHangPage extends StatefulWidget {
 }
 
 class _XepHangPageState extends State<XepHangPage> {
-  final List<String> items = List.generate(20, (index) => 'Item ${index + 1}');
+  ValueNotifier<List> data = ValueNotifier([]);
+  var mainData;
+  final ScrollController _scrollController = ScrollController();
+  int _currentMax = 4;
   var bloc = XepHangCubit();
   @override
   void initState() {
     super.initState();
-    // _scrollController.addListener(_onScroll);
+    _scrollController.addListener(_onScroll);
     bloc.initData();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 20) {
+      _loadMoreItems();
+    }
+  }
+
+  void _loadMoreItems() {
+    for (int i = _currentMax; i < _currentMax + 2; i++) {
+      if (i < mainData.length) {
+        data..value.add(mainData[i]);
+      }
+    }
+    _currentMax = _currentMax + 2;
+    data.notifyListeners();
   }
 
   @override
@@ -35,8 +61,15 @@ class _XepHangPageState extends State<XepHangPage> {
           } else if (state is XepHangFailure) {
             return Text('Failure');
           } else if (state is XepHangSuccess) {
-            var data = state.data.data["results"];
+            mainData = state.data.data["results"];
+
+            for (var i = 0; i < _currentMax; i++) {
+              if (mainData.length > i) {
+                data.value.add(mainData[i]);
+              }
+            }
             return CustomScrollView(
+              controller: _scrollController,
               slivers: [
                 SliverAppBar(
                   floating: true,
@@ -51,10 +84,16 @@ class _XepHangPageState extends State<XepHangPage> {
                   centerTitle: true,
                   backgroundColor: myColors.whiteOrBlack,
                 ),
-                ListViewXepHangWidget(
-                  data: data,
-                  screenWidth: screenWidth,
-                ),
+                ValueListenableBuilder(
+                  valueListenable: data,
+                  builder: (context, value, child) {
+                    return ListViewXepHangWidget(
+                      data: data.value,
+                      screenWidth: screenWidth,
+                      currentMax: _currentMax,
+                    );
+                  },
+                )
               ],
             );
           } else {

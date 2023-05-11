@@ -1,12 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
+import 'package:comic_reading/screens/chi_tiet/chi_tiet_page.dart';
 import 'package:flutter/material.dart';
 
 class ListViewXepHangWidget extends StatelessWidget {
   ListViewXepHangWidget(
-      {super.key, required this.data, required this.screenWidth});
-  final data;
-  final screenWidth;
+      {super.key,
+      required this.data,
+      required this.screenWidth,
+      required this.currentMax});
+  final List<dynamic> data;
+  final double screenWidth;
+  final int currentMax;
 
   Color setBackgroundColor(int index) {
     if (index == 0) {
@@ -29,6 +34,15 @@ class ListViewXepHangWidget extends StatelessWidget {
           (context, index) {
             if (index < data.length) {
               return TouchOpacityWidget(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ChiTietPage(
+                          id: int.parse(data[index]["id"].toString())),
+                    ),
+                  );
+                },
                 child: Container(
                   margin: EdgeInsets.symmetric(vertical: 5),
                   padding: EdgeInsets.all(10),
@@ -103,6 +117,8 @@ class ListViewXepHangWidget extends StatelessWidget {
                   ),
                 ),
               );
+            } else if (currentMax > data.length) {
+              return Text("Hết rồi!!!!!!!!!!");
             } else {
               return _buildLoader();
             }
