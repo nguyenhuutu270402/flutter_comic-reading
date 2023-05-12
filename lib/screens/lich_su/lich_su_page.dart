@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/my_grid_view_lich_su_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
 import 'package:comic_reading/screens/lich_su/cubit/lich_su_cubit.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _LichSuPageState extends State<LichSuPage> {
   ValueNotifier<List> data = ValueNotifier([]);
   var mainData;
   final ScrollController _scrollController = ScrollController();
-  int _currentMax = 4;
+  int _currentMax = 5;
   @override
   void initState() {
     super.initState();
@@ -50,7 +51,7 @@ class _LichSuPageState extends State<LichSuPage> {
 
   Future<void> _refreshData() async {
     data.value.clear();
-    _currentMax = 4;
+    _currentMax = 5;
     bloc.initData();
     data.notifyListeners();
     print("remake");
@@ -97,6 +98,7 @@ class _LichSuPageState extends State<LichSuPage> {
               var userInfor = state.userInfor;
               if (userInfor != null) {
                 mainData = state.data.data["results"];
+                print(mainData.length);
                 for (var i = 0; i < _currentMax; i++) {
                   if (mainData.length > i) {
                     data.value.add(mainData[i]);
@@ -113,7 +115,7 @@ class _LichSuPageState extends State<LichSuPage> {
                       snap: true,
                       pinned: true,
                       title: Text(
-                        "Theo dõi",
+                        "Lịch sử",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: myColors.blackOrWhite),
@@ -130,7 +132,7 @@ class _LichSuPageState extends State<LichSuPage> {
                         : ValueListenableBuilder(
                             valueListenable: data,
                             builder: (context, value, child) {
-                              return MyGridViewTheLoaiWidget(
+                              return MyGridViewLichSuWidget(
                                   data: data.value,
                                   crossAxisCount: crossAxisCount,
                                   screenHeight: screenHeight,
