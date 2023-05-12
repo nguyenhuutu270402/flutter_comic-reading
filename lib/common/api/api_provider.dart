@@ -338,4 +338,14 @@ class ApiProvider {
       rethrow;
     }
   }
+
+  Future<Response> getListTheLoai() async {
+    try {
+      final response = await dio.get('$baseUrl/get-list-the-loai');
+      return response;
+    } catch (e) {
+      print("API error getListTheLoai: $e");
+      rethrow;
+    }
+  }
 }
