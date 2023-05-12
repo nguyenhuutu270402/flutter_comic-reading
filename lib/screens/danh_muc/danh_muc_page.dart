@@ -5,6 +5,7 @@ import 'package:comic_reading/common/widgets/box_thong_tin_tai_khoan.dart';
 import 'package:comic_reading/common/widgets/item_khac_widget.dart';
 import 'package:comic_reading/screens/dang_nhap/dang_nhap_page.dart';
 import 'package:comic_reading/screens/danh_muc/cubit/danh_muc_cubit.dart';
+import 'package:comic_reading/screens/doi_mat_khau/doi_mat_khau_page.dart';
 import 'package:comic_reading/screens/lich_su/lich_su_page.dart';
 import 'package:comic_reading/screens/tags/tags_page.dart';
 import 'package:comic_reading/screens/tai_khoan/tai_khoan.dart';
@@ -213,11 +214,12 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                     ),
                                     title: "Đổi mật khẩu",
                                     onTap: () async {
-                                      // Navigator.of(context).pushReplacement(
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => BottomNav(),
-                                      //   ),
-                                      // );
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              DoiMatKhauPage(),
+                                        ),
+                                      );
                                     },
                                   ),
                                   ItemKhacWidget(

@@ -18,7 +18,6 @@ class TaiKhoanPage extends StatefulWidget {
 
 class _TaiKhoanPageState extends State<TaiKhoanPage> {
   File? _image;
-  // ValueNotifier<File>? _image;
   Future _pickImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
