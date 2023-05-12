@@ -216,8 +216,9 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                     onTap: () async {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              DoiMatKhauPage(),
+                                          builder: (context) => DoiMatKhauPage(
+                                            userInfor: userInfor,
+                                          ),
                                         ),
                                       );
                                     },

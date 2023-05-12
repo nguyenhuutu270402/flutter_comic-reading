@@ -1,9 +1,11 @@
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DoiMatKhauPage extends StatefulWidget {
-  const DoiMatKhauPage({super.key, this.userInfor});
+  const DoiMatKhauPage({super.key, required this.userInfor});
   final userInfor;
   @override
   State<DoiMatKhauPage> createState() => _DoiMatKhauPageState();
@@ -14,11 +16,30 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
   ValueNotifier<bool> isShowMatKhauMoi = ValueNotifier(false);
   ValueNotifier<bool> isShowMatKhauLai = ValueNotifier(false);
 
+  void _onDoiMatKhau(String matKhauCu, String matKhauMoi, String matKhauLai) {
+    if (matKhauCu.toString() != widget.userInfor["matkhau"].toString()) {
+      Fluttertoast.showToast(
+        msg: "Mật khẩu cũ không đúng",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 52, 52, 52),
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+    }
+    // ApiProvider().updatePasswordUser(matkhau, widget.userInfor["id"]);
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
+    String matKhauCu = "";
+    String matKhauMoi = "";
+    String matKhauLai = "";
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -45,7 +66,7 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
                     builder: (context, value, child) {
                       return TextField(
                         onChanged: (value) {
-                          print(value);
+                          matKhauCu = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Mật khẩu cũ',
@@ -83,7 +104,7 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
                     builder: (context, value, child) {
                       return TextField(
                         onChanged: (value) {
-                          print(value);
+                          matKhauMoi = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Mật khẩu mới',
@@ -121,7 +142,7 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
                     builder: (context, value, child) {
                       return TextField(
                         onChanged: (value) {
-                          print(value);
+                          matKhauLai = value;
                         },
                         decoration: InputDecoration(
                           hintText: 'Xác nhận mật khẩu',
@@ -152,6 +173,26 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
                         obscureText: !value,
                       );
                     },
+                  ),
+                  SizedBox(height: 26),
+                  ElevatedButton(
+                    onPressed: () {
+                      // print("$matKhauCu / $matKhauMoi / $matKhauLai");
+                      _onDoiMatKhau(matKhauCu, matKhauMoi, matKhauLai);
+                    },
+                    child: Text(
+                      "Lưu",
+                      style: TextStyle(
+                        fontSize: 17,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      fixedSize: Size(screenWidth, 50),
+                    ),
                   ),
                 ],
               ),
