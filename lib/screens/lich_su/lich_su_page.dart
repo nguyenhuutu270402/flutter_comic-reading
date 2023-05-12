@@ -61,7 +61,6 @@ class _LichSuPageState extends State<LichSuPage> {
 
   Future<void> _onDeleteLichSu(int idTruyen) async {
     await ApiProvider().deleteLichSu(userInfor["id"], idTruyen);
-    // print("delete lsu $idTruyen");
     _refreshData();
   }
 
