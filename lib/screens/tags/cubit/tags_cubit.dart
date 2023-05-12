@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
+import 'package:comic_reading/screens/chi_tiet/model/list_the_loai.dart';
 import 'package:meta/meta.dart';
 
 part 'tags_state.dart';

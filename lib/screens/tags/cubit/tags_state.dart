@@ -13,7 +13,7 @@ class TagsFailure extends TagsState {
 }
 
 class TagsSuccess extends TagsState {
-  dynamic data;
+  final ListTheLoai data;
 
   TagsSuccess({required this.data});
 }

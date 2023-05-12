@@ -328,7 +328,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                 builder: (context) =>
                                                     TheLoaiPage(
                                                   theLoai: listTheLoai[index],
-                                                  // tacGia: null,
+                                                  tacGia: null,
                                                 ),
                                               ),
                                             );

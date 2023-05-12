@@ -6,6 +6,7 @@ import 'package:comic_reading/common/widgets/item_khac_widget.dart';
 import 'package:comic_reading/screens/dang_nhap/dang_nhap_page.dart';
 import 'package:comic_reading/screens/danh_muc/cubit/danh_muc_cubit.dart';
 import 'package:comic_reading/screens/lich_su/lich_su_page.dart';
+import 'package:comic_reading/screens/tags/tags_page.dart';
 import 'package:comic_reading/screens/tai_khoan/tai_khoan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,7 @@ class _DanhMucPageState extends State<DanhMucPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
     final mySharedPrefes = MySharedPrefes();
+
     return Scaffold(
       body: BlocBuilder(
           bloc: bloc,
@@ -149,7 +151,11 @@ class _DanhMucPageState extends State<DanhMucPage> {
                               ),
                               title: "Thể loại",
                               onTap: () {
-                                print("Thể loại");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TagsPage()),
+                                );
                               },
                             ),
                             ItemKhacWidget(
