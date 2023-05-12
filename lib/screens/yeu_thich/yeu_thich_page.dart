@@ -53,7 +53,6 @@ class _YeuThichPageState extends State<YeuThichPage> {
     _currentMax = 4;
     bloc.initData();
     data.notifyListeners();
-    print("remake");
   }
 
   @override

@@ -42,8 +42,6 @@ class DialogDanhGia extends StatelessWidget {
       }
       EasyLoading.dismiss();
       Navigator.of(context).pop();
-
-      // print("${sosao} :sosao: ${response.data['results']}");
     }
 
     return AlertDialog(

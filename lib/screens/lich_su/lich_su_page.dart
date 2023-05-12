@@ -1,6 +1,7 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_lich_su_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/lich_su/cubit/lich_su_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,7 +55,6 @@ class _LichSuPageState extends State<LichSuPage> {
     _currentMax = 5;
     bloc.initData();
     data.notifyListeners();
-    print("remake");
   }
 
   @override
@@ -98,7 +98,6 @@ class _LichSuPageState extends State<LichSuPage> {
               var userInfor = state.userInfor;
               if (userInfor != null) {
                 mainData = state.data.data["results"];
-                print(mainData.length);
                 for (var i = 0; i < _currentMax; i++) {
                   if (mainData.length > i) {
                     data.value.add(mainData[i]);
@@ -122,6 +121,15 @@ class _LichSuPageState extends State<LichSuPage> {
                       ),
                       centerTitle: true,
                       backgroundColor: myColors.whiteOrBlack,
+                      leading: TouchOpacityWidget(
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: myColors.blackOrWhite,
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
                     ),
                     userInfor == null
                         ? SliverToBoxAdapter(

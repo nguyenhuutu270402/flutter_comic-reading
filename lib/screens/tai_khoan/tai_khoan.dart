@@ -134,7 +134,6 @@ class _TaiKhoanPageState extends State<TaiKhoanPage> {
                           SizedBox(height: 16),
                           TouchOpacityWidget(
                             onTap: () {
-                              print("chon anh");
                               _pickImage(ImageSource.gallery);
                             },
                             child: Container(

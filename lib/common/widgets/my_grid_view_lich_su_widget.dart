@@ -74,9 +74,7 @@ class MyGridViewLichSuWidget extends StatelessWidget {
                               right: 0,
                               left: 0,
                               child: TouchOpacityWidget(
-                                onTap: () {
-                                  print("xoas");
-                                },
+                                onTap: () {},
                                 child: Container(
                                   alignment: Alignment.center,
                                   height: 30,

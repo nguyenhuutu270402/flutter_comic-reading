@@ -164,7 +164,6 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                     MaterialPageRoute(
                                       builder: (context) => LichSuPage(),
                                     ));
-                                print("Lịch sử");
                               },
                             ),
                             if (userInfor == null)

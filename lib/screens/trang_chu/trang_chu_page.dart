@@ -132,7 +132,6 @@ class _TrangChuPageState extends State<TrangChuPage> {
                                   MaterialPageRoute(
                                     builder: (context) => TimKiemPage(),
                                   ));
-                              print("tap icon seacrh");
                             },
                             child: Icon(
                               Icons.search,
