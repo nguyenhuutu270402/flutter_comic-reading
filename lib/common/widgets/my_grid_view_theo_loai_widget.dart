@@ -136,7 +136,7 @@ class MyGridViewTheLoaiWidget extends StatelessWidget {
             //   return _buildLoader();
             // }
           },
-          childCount: data.length + 1,
+          childCount: data.length,
         ),
       ),
     );
