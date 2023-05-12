@@ -11,6 +11,7 @@ class MyGridViewLichSuWidget extends StatelessWidget {
     required this.screenHeight,
     required this.screenWidth,
     required this.currentMax,
+    required this.onDeleteLichSu,
   });
 
   final List<dynamic> data;
@@ -18,6 +19,7 @@ class MyGridViewLichSuWidget extends StatelessWidget {
   final double screenHeight;
   final double screenWidth;
   final int currentMax;
+  final Function(int) onDeleteLichSu;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +76,9 @@ class MyGridViewLichSuWidget extends StatelessWidget {
                               right: 0,
                               left: 0,
                               child: TouchOpacityWidget(
-                                onTap: () {},
+                                onTap: () {
+                                  onDeleteLichSu(data[index]["id"]);
+                                },
                                 child: Container(
                                   alignment: Alignment.center,
                                   height: 30,

@@ -28,8 +28,8 @@ void configLoading() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // static const isDarkTheme = true;
-  static const isDarkTheme = false;
+  static const isDarkTheme = true;
+  // static const isDarkTheme = false;
 
   // This widget is the root of your application.
   @override

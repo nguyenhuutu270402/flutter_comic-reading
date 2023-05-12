@@ -1,3 +1,4 @@
+import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_lich_su_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
@@ -17,6 +18,7 @@ class _LichSuPageState extends State<LichSuPage> {
   var bloc = LichSuCubit();
   ValueNotifier<List> data = ValueNotifier([]);
   var mainData;
+  var userInfor;
   final ScrollController _scrollController = ScrollController();
   int _currentMax = 5;
   @override
@@ -57,6 +59,12 @@ class _LichSuPageState extends State<LichSuPage> {
     data.notifyListeners();
   }
 
+  Future<void> _onDeleteLichSu(int idTruyen) async {
+    await ApiProvider().deleteLichSu(userInfor["id"], idTruyen);
+    // print("delete lsu $idTruyen");
+    _refreshData();
+  }
+
   @override
   Widget build(BuildContext context) {
     int crossAxisCount = 2;
@@ -95,7 +103,7 @@ class _LichSuPageState extends State<LichSuPage> {
                 ),
               );
             } else if (state is LichSuSuccess) {
-              var userInfor = state.userInfor;
+              userInfor = state.userInfor;
               if (userInfor != null) {
                 mainData = state.data.data["results"];
                 for (var i = 0; i < _currentMax; i++) {
@@ -141,11 +149,13 @@ class _LichSuPageState extends State<LichSuPage> {
                             valueListenable: data,
                             builder: (context, value, child) {
                               return MyGridViewLichSuWidget(
-                                  data: data.value,
-                                  crossAxisCount: crossAxisCount,
-                                  screenHeight: screenHeight,
-                                  screenWidth: screenWidth,
-                                  currentMax: _currentMax);
+                                data: data.value,
+                                crossAxisCount: crossAxisCount,
+                                screenHeight: screenHeight,
+                                screenWidth: screenWidth,
+                                currentMax: _currentMax,
+                                onDeleteLichSu: _onDeleteLichSu,
+                              );
                             },
                           )
                   ],
