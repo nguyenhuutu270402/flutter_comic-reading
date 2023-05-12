@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
-import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/tai_khoan/cubit/tai_khoan_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class TaiKhoanPage extends StatefulWidget {
   const TaiKhoanPage({super.key});
@@ -14,6 +17,24 @@ class TaiKhoanPage extends StatefulWidget {
 }
 
 class _TaiKhoanPageState extends State<TaiKhoanPage> {
+  File? _image;
+  // ValueNotifier<File>? _image;
+  Future _pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+      File? img = File(image.path);
+      setState(() {
+        _image = img;
+        print("image>>>> : $_image");
+        // Navigator.of(context).pop();
+      });
+    } on PlatformException catch (e) {
+      print(e);
+      Navigator.of(context).pop();
+    }
+  }
+
   var bloc = TaiKhoanCubit();
   @override
   void initState() {
@@ -72,53 +93,93 @@ class _TaiKhoanPageState extends State<TaiKhoanPage> {
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            userInfor["avatar"] != null
-                                ? CachedNetworkImage(
-                                    imageUrl: userInfor["avatar"].toString(),
-                                    width: screenWidth * 0.5,
-                                    fit: BoxFit.contain,
-                                    placeholder: (context, url) => Container(
-                                      alignment: Alignment.center,
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                    errorWidget: (context, url, error) =>
-                                        Container(
-                                      alignment: Alignment.center,
-                                      color: Colors.grey,
-                                      child: Text("Image error"),
-                                    ),
-                                  )
-                                : Icon(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          if (userInfor["avatar"] != null)
+                            CachedNetworkImage(
+                              imageUrl: userInfor["avatar"].toString(),
+                              width: screenWidth * 0.5,
+                              fit: BoxFit.contain,
+                              placeholder: (context, url) => Container(
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator(),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                alignment: Alignment.center,
+                                color: Colors.grey,
+                                child: Text("Image error"),
+                              ),
+                            )
+                          else
+                            _image == null
+                                ? Icon(
                                     Icons.person,
                                     size: 80,
+                                  )
+                                : CircleAvatar(
+                                    backgroundImage: FileImage(_image!),
+                                    radius: 200,
                                   ),
-                            TouchOpacityWidget(
-                              onTap: () {
-                                print("chon anh");
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 5),
-                                decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Text(
-                                  "Chọn ảnh",
-                                ),
+                          TouchOpacityWidget(
+                            onTap: () {
+                              print("chon anh");
+                              _pickImage(ImageSource.gallery);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Text(
+                                "Chọn ảnh",
                               ),
                             ),
-                            TextField(
-                              onChanged: (value) {
-                                print(value);
-                              },
-                              decoration: InputDecoration(),
+                          ),
+                          SizedBox(height: 30),
+                          TextField(
+                            onChanged: (value) {
+                              print(value);
+                            },
+                            decoration: InputDecoration(
+                              hintText: 'Tên của bạn',
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 16),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: Colors.grey),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.edit,
+                                color: Colors.green,
+                              ),
+                              hintStyle: TextStyle(color: Colors.grey),
                             ),
-                          ],
-                        )),
-                  )
+                          ),
+                          SizedBox(height: 30),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Lưu",
+                              style: TextStyle(
+                                fontSize: 17,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                              fixedSize: Size(110, 40),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               );
             }
