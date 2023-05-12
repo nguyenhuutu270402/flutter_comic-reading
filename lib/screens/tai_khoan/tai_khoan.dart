@@ -96,31 +96,42 @@ class _TaiKhoanPageState extends State<TaiKhoanPage> {
                       padding: EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          if (userInfor["avatar"] != null)
-                            CachedNetworkImage(
-                              imageUrl: userInfor["avatar"].toString(),
-                              width: screenWidth * 0.5,
-                              fit: BoxFit.contain,
-                              placeholder: (context, url) => Container(
-                                alignment: Alignment.center,
-                                child: CircularProgressIndicator(),
-                              ),
-                              errorWidget: (context, url, error) => Container(
-                                alignment: Alignment.center,
-                                color: Colors.grey,
-                                child: Text("Image error"),
+                          if (userInfor["avatar"] != null && _image == null)
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(200),
+                              child: CachedNetworkImage(
+                                imageUrl: userInfor["avatar"].toString(),
+                                width: 100,
+                                height: 100,
+                                fit: BoxFit.contain,
+                                placeholder: (context, url) => Container(
+                                  alignment: Alignment.center,
+                                  child: CircularProgressIndicator(),
+                                ),
+                                errorWidget: (context, url, error) => Container(
+                                  alignment: Alignment.center,
+                                  color: Colors.grey,
+                                  child: Text("Image error"),
+                                ),
                               ),
                             )
                           else
                             _image == null
                                 ? Icon(
                                     Icons.person,
-                                    size: 80,
+                                    size: 100,
                                   )
-                                : CircleAvatar(
-                                    backgroundImage: FileImage(_image!),
-                                    radius: 200,
+                                : SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: CircleAvatar(
+                                      backgroundImage: FileImage(
+                                        _image!,
+                                      ),
+                                      radius: 200,
+                                    ),
                                   ),
+                          SizedBox(height: 16),
                           TouchOpacityWidget(
                             onTap: () {
                               print("chon anh");
