@@ -1,7 +1,10 @@
+import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class DoiMatKhauPage extends StatefulWidget {
@@ -16,8 +19,20 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
   ValueNotifier<bool> isShowMatKhauMoi = ValueNotifier(false);
   ValueNotifier<bool> isShowMatKhauLai = ValueNotifier(false);
 
-  void _onDoiMatKhau(String matKhauCu, String matKhauMoi, String matKhauLai) {
-    if (matKhauCu.toString() != widget.userInfor["matkhau"].toString()) {
+  void _onDoiMatKhau(
+      String matKhauCu, String matKhauMoi, String matKhauLai) async {
+    if (matKhauCu.isEmpty || matKhauMoi.isEmpty || matKhauLai.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "Vui lòng nhập đầy đủ",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 52, 52, 52),
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+      return;
+    } else if (matKhauCu.toString() != widget.userInfor["matkhau"].toString()) {
       Fluttertoast.showToast(
         msg: "Mật khẩu cũ không đúng",
         toastLength: Toast.LENGTH_SHORT,
@@ -27,8 +42,52 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
         textColor: Colors.white,
         fontSize: 14.0,
       );
+      return;
+    } else if (matKhauMoi.length < 6) {
+      Fluttertoast.showToast(
+        msg: "Mật khẩu phải có ít nhất 6 ký tự",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 52, 52, 52),
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+      return;
+    } else if (matKhauMoi != matKhauLai) {
+      Fluttertoast.showToast(
+        msg: "Mật khẩu không trùng khớp",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Color.fromARGB(255, 52, 52, 52),
+        textColor: Colors.white,
+        fontSize: 14.0,
+      );
+      return;
     }
-    // ApiProvider().updatePasswordUser(matkhau, widget.userInfor["id"]);
+    Fluttertoast.showToast(
+      msg: "Đổi mật khẩu thành công",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Color.fromARGB(255, 52, 52, 52),
+      textColor: Colors.white,
+      fontSize: 14.0,
+    );
+    EasyLoading.show(status: 'Loading...');
+
+    await ApiProvider().updatePasswordUser(matKhauMoi, widget.userInfor["id"]);
+    widget.userInfor["matkhau"] = matKhauMoi;
+    await MySharedPrefes().saveUserInfo(widget.userInfor);
+
+    EasyLoading.dismiss();
+    Navigator.pop(context);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => BottomNav(),
+      ),
+    );
   }
 
   @override
