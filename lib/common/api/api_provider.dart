@@ -286,11 +286,11 @@ class ApiProvider {
     }
   }
 
-  Future<SearchTruyen> getListLichSuTheoIdNguoiDung(int id) async {
+  Future<Response> getListLichSuTheoIdNguoiDung(int id) async {
     try {
       var url = '$baseUrl/get-list-lich-su-theo-id-nguoi-dung/$id';
-      var res = await dio.get(url);
-      return SearchTruyen.fromJson(res.data);
+      var response = await dio.get(url);
+      return response;
     } catch (e) {
       print("API error getListLichSuTheoIdNguoiDung: $e");
       rethrow;

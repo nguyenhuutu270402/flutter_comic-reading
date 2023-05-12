@@ -26,7 +26,7 @@ class _TaiKhoanPageState extends State<TaiKhoanPage> {
       File? img = File(image.path);
       setState(() {
         _image = img;
-        print("image>>>> : $_image");
+        print("image>>>> : ${_image!}");
         // Navigator.of(context).pop();
       });
     } on PlatformException catch (e) {
