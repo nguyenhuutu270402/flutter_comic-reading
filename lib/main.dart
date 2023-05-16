@@ -1,11 +1,20 @@
+import 'package:comic_reading/common/extension/change_theme_model.dart';
 import 'package:comic_reading/common/theme/dark_theme.dart';
 import 'package:comic_reading/common/theme/light_theme.dart';
 import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) {
+        return ChangeThemeModel();
+      },
+      child: MyApp(),
+    ),
+  );
   configLoading();
 }
 
@@ -39,7 +48,9 @@ class MyApp extends StatelessWidget {
       title: 'Comic Reading',
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      themeMode: isDarkTheme == true ? ThemeMode.dark : ThemeMode.light,
+      themeMode: Provider.of<ChangeThemeModel>(context).isDarkMode == false
+          ? ThemeMode.light
+          : ThemeMode.dark,
       home: BottomNav(),
       builder: EasyLoading.init(),
     );

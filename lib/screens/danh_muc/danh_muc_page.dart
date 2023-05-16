@@ -1,4 +1,5 @@
 import 'package:comic_reading/bottom_nav/bottom_nav.dart';
+import 'package:comic_reading/common/extension/change_theme_model.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/widgets/box_thong_tin_tai_khoan.dart';
@@ -12,6 +13,7 @@ import 'package:comic_reading/screens/tai_khoan/tai_khoan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 class DanhMucPage extends StatefulWidget {
   const DanhMucPage({super.key});
@@ -242,6 +244,28 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                 ],
                               ),
                           ],
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 6, vertical: 10),
+                          child: Row(
+                            children: [
+                              Consumer<ChangeThemeModel>(
+                                builder: (context, themeModel, _) {
+                                  return Transform.scale(
+                                    scale: 1,
+                                    child: Switch(
+                                      value: themeModel.isDarkMode,
+                                      onChanged: (value) {
+                                        themeModel.toggleTheme();
+                                      },
+                                    ),
+                                  );
+                                },
+                              ),
+                              Text("Giao diện tối"),
+                            ],
+                          ),
                         ),
                       ],
                     ),
