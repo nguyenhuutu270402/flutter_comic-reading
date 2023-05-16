@@ -16,9 +16,9 @@ class ApiProvider {
   // ở nhà
   // final baseUrl = 'http://192.168.43.213:3000/api';
   //công ty
-  final baseUrl = 'http://192.168.1.26:3000/api';
+  // final baseUrl = 'http://192.168.1.26:3000/api';
   // host
-  // final baseUrl = 'https://app-comic-reading.onrender.com/api';
+  final baseUrl = 'https://app-comic-reading.onrender.com/api';
 
   Future<Response> checkRegister(String email) async {
     try {

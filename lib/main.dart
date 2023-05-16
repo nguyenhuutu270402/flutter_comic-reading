@@ -28,8 +28,8 @@ void configLoading() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  static const isDarkTheme = true;
-  // static const isDarkTheme = false;
+  // static const isDarkTheme = true;
+  static const isDarkTheme = false;
 
   // This widget is the root of your application.
   @override
@@ -37,9 +37,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Comic Reading',
-      theme: isDarkTheme == false ? lightTheme() : darkTheme(),
-      // darkTheme: isDarkTheme == true ? lightTheme() : darkTheme(),
-      themeMode: ThemeMode.system,
+      theme: lightTheme(),
+      darkTheme: darkTheme(),
+      themeMode: isDarkTheme == true ? ThemeMode.dark : ThemeMode.light,
       home: BottomNav(),
       builder: EasyLoading.init(),
     );
