@@ -23,7 +23,7 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
   ValueNotifier<List> data = ValueNotifier([]);
   var mainData;
   final ScrollController _scrollController = ScrollController();
-  int _currentMax = 4;
+  int _currentMax = 5;
   @override
   void initState() {
     super.initState();

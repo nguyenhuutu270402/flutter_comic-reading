@@ -23,7 +23,7 @@ class _TrangChuPageState extends State<TrangChuPage> {
 
   var data2;
   final ScrollController _scrollController = ScrollController();
-  int _currentMax = 4;
+  int _currentMax = 5;
 
   @override
   void initState() {

@@ -18,7 +18,7 @@ class _TimKiemPageState extends State<TimKiemPage> {
   var mainData;
 
   final ScrollController _scrollController = ScrollController();
-  int _currentMax = 4;
+  int _currentMax = 5;
   Timer? searchTimer;
 
   @override
@@ -58,7 +58,7 @@ class _TimKiemPageState extends State<TimKiemPage> {
             "WHERE concat(tentruyen, '', tenkhac) LIKE '%${search}%' GROUP BY truyen.id ORDER BY MAX(chuong.ngaycapnhat) desc";
         var response = await ApiProvider().layListTruyenTheoLoai(qr);
         mainData = response.data["results"];
-        _currentMax = 4;
+        _currentMax = 5;
         data.value = [];
         for (var i = 0; i < _currentMax; i++) {
           if (mainData.length > i) {

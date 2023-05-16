@@ -16,7 +16,7 @@ class _YeuThichPageState extends State<YeuThichPage> {
   ValueNotifier<List> data = ValueNotifier([]);
   var mainData;
   final ScrollController _scrollController = ScrollController();
-  int _currentMax = 4;
+  int _currentMax = 5;
   @override
   void initState() {
     super.initState();
@@ -50,7 +50,7 @@ class _YeuThichPageState extends State<YeuThichPage> {
 
   Future<void> _refreshData() async {
     data.value.clear();
-    _currentMax = 4;
+    _currentMax = 5;
     bloc.initData();
     data.notifyListeners();
   }

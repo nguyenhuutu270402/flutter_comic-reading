@@ -53,7 +53,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
           if (state is ChiTietLoading) {
             return Container(
               alignment: Alignment.center,
-              child: CircularProgressIndicator(),
+              child: const CircularProgressIndicator(),
             );
           } else if (state is ChiTietFailure) {
             return Container(
@@ -61,13 +61,13 @@ class _ChiTietPageState extends State<ChiTietPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Có lỗi sảy ra',
                     style: TextStyle(fontSize: 18),
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("Tải lại"),
+                    child: const Text("Tải lại"),
                   ),
                 ],
               ),
@@ -79,7 +79,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
             var listChuong = state.listChuong.results;
             isFollow.value = state.isFollow.data['results'];
             if (ct_truyen == null) {
-              return Text('Empty');
+              return const Text('Empty');
             } else {
               return CustomScrollView(
                 slivers: [
@@ -108,44 +108,44 @@ class _ChiTietPageState extends State<ChiTietPage> {
                     child: Column(
                       children: [
                         Padding(
-                          padding:
-                              EdgeInsets.only(left: 16, right: 16, top: 16),
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, top: 16),
                           child: Column(
                             children: [
                               Text(
                                 ct_truyen.tentruyen.toString().toUpperCase(),
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(height: 3),
+                              const SizedBox(height: 3),
                               Text(
                                 MyFunction().formatDateCapNhat(
                                     ct_truyen.ngaycapnhat.toString()),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.italic,
                                     color: Colors.grey),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               CachedNetworkImage(
                                 imageUrl: ct_truyen.imagelink.toString(),
                                 width: screenWidth * 0.5,
                                 fit: BoxFit.contain,
                                 placeholder: (context, url) => Container(
                                   alignment: Alignment.center,
-                                  child: CircularProgressIndicator(),
+                                  child: const CircularProgressIndicator(),
                                 ),
                                 errorWidget: (context, url, error) => Container(
                                   alignment: Alignment.center,
                                   color: Colors.grey,
-                                  child: Text("Image error"),
+                                  child: const Text("Image error"),
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -153,12 +153,12 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     flex: 3,
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.add,
                                           size: 16,
                                           color: Colors.grey,
                                         ),
-                                        Text(
+                                        const Text(
                                           '   Tên khác',
                                           style: TextStyle(
                                               color: Colors.grey,
@@ -172,7 +172,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     flex: 7,
                                     child: Text(
                                       ct_truyen.tenkhac.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
                                         height: 1.5,
@@ -181,7 +181,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -189,12 +189,12 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     flex: 3,
                                     child: Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.person,
                                           size: 16,
                                           color: Colors.grey,
                                         ),
-                                        Text(
+                                        const Text(
                                           '   Tác giả',
                                           style: TextStyle(
                                             color: Colors.grey,
@@ -230,7 +230,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             index == listTacGia.length - 1
                                                 ? '${listTacGia[index].tentacgia}'
                                                 : '${listTacGia[index].tentacgia} - ',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 14,
                                               color: AppColors.blue,
                                               height: 1.5,
@@ -242,7 +242,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -253,12 +253,12 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.signal_cellular_alt,
                                           size: 16,
                                           color: Colors.grey,
                                         ),
-                                        Text(
+                                        const Text(
                                           '   Tình trạng',
                                           style: TextStyle(
                                             color: Colors.grey,
@@ -275,7 +275,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                       ct_truyen.tinhtrang == 1
                                           ? 'Đang tiến hành'
                                           : 'Hoàn thành',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
                                         height: 1.5,
@@ -284,7 +284,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -295,12 +295,12 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.local_offer,
                                           size: 16,
                                           color: Colors.grey,
                                         ),
-                                        Text(
+                                        const Text(
                                           '   Thể loại',
                                           style: TextStyle(
                                             color: Colors.grey,
@@ -337,7 +337,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             index == listTheLoai.length - 1
                                                 ? '${listTheLoai[index].tentheloai.toString()}'
                                                 : '${listTheLoai[index].tentheloai.toString()} - ',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 14,
                                               color: AppColors.blue,
                                               height: 1.5,
@@ -349,7 +349,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -360,12 +360,12 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                           CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.remove_red_eye,
                                           size: 16,
                                           color: Colors.grey,
                                         ),
-                                        Text(
+                                        const Text(
                                           '   Lượt xem',
                                           style: TextStyle(
                                             color: Colors.grey,
@@ -380,7 +380,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     flex: 7,
                                     child: Text(
                                       ct_truyen.tongluotxem.toString(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.grey,
                                         fontSize: 14,
                                         height: 1.5,
@@ -389,7 +389,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Container(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
@@ -406,20 +406,20 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                           },
                                         );
                                       },
-                                      child: Text(
+                                      child: const Text(
                                         'Đánh giá: ',
                                         style: TextStyle(color: AppColors.blue),
                                       ),
                                     ),
                                     Text(
                                       '${ct_truyen.sosaotrungbinh ?? 0}/5 - ${ct_truyen.tongdanhgia} lượt đánh giá',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.grey, fontSize: 14),
                                     )
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Container(
                                 alignment: Alignment.topLeft,
                                 height: 30,
@@ -440,26 +440,6 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                                     !isFollow.value;
                                               }
                                             },
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.favorite,
-                                                  color: Colors.white,
-                                                  size: 18,
-                                                ),
-                                                Text(
-                                                    isFollow.value == false
-                                                        ? 'Theo dõi'
-                                                        : 'Bỏ theo dõi',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14)),
-                                              ],
-                                            ),
                                             style: ElevatedButton.styleFrom(
                                               backgroundColor:
                                                   isFollow.value == false
@@ -471,12 +451,32 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                               ),
                                               // fixedSize: Size(110, 30),
                                             ),
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                const Icon(
+                                                  Icons.favorite,
+                                                  color: Colors.white,
+                                                  size: 18,
+                                                ),
+                                                Text(
+                                                    isFollow.value == false
+                                                        ? 'Theo dõi'
+                                                        : 'Bỏ theo dõi',
+                                                    style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 14)),
+                                              ],
+                                            ),
                                           );
                                         }),
                                     Text(
                                       '   ${ct_truyen.tongtheodoi.toString()}',
                                     ),
-                                    Text(
+                                    const Text(
                                       ' Lượt theo dõi',
                                       style: TextStyle(
                                         color: Colors.grey,
@@ -486,7 +486,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Container(
                                 alignment: Alignment.topLeft,
                                 height: 30,
@@ -518,7 +518,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                       ),
                                     );
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Đọc từ đầu',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 14),
@@ -528,14 +528,14 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5.0),
                                     ),
-                                    fixedSize: Size(110, 30),
+                                    fixedSize: const Size(110, 30),
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Container(
                                 alignment: Alignment.topLeft,
-                                padding: EdgeInsets.only(bottom: 2),
+                                padding: const EdgeInsets.only(bottom: 2),
                                 decoration: const BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -544,12 +544,12 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.description,
                                       color: AppColors.blue,
                                       size: 20,
                                     ),
-                                    Text(
+                                    const Text(
                                       'NỘI DUNG',
                                       style: TextStyle(
                                           color: AppColors.blue,
@@ -559,7 +559,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               ValueListenableBuilder<bool>(
                                   valueListenable: isShowMota,
                                   builder: (context, value, child) {
@@ -573,7 +573,7 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                             overflow: value
                                                 ? null
                                                 : TextOverflow.ellipsis,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 14, height: 1.3),
                                           ),
                                         ),
@@ -600,10 +600,10 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                       ],
                                     );
                                   }),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Container(
                                 alignment: Alignment.topLeft,
-                                padding: EdgeInsets.only(bottom: 2),
+                                padding: const EdgeInsets.only(bottom: 2),
                                 decoration: const BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -612,12 +612,12 @@ class _ChiTietPageState extends State<ChiTietPage> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.description,
                                       color: AppColors.blue,
                                       size: 20,
                                     ),
-                                    Text(
+                                    const Text(
                                       'DANH SÁCH CHƯƠNG',
                                       style: TextStyle(
                                           color: AppColors.blue,

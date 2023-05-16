@@ -15,7 +15,7 @@ class _XepHangPageState extends State<XepHangPage> {
   ValueNotifier<List> data = ValueNotifier([]);
   var mainData;
   final ScrollController _scrollController = ScrollController();
-  int _currentMax = 4;
+  int _currentMax = 5;
   var bloc = XepHangCubit();
   @override
   void initState() {
