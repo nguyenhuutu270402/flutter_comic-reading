@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/list_view_xep_hang_widget.dart';
 import 'package:comic_reading/screens/xep_hang/cubit/xep_hang_cubit.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,7 @@ class _XepHangPageState extends State<XepHangPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
     return Scaffold(
+      appBar: const CustomAppBarWidget(tiltle: "Xếp hạng"),
       body: BlocBuilder(
         bloc: bloc,
         builder: (context, state) {
@@ -91,18 +93,18 @@ class _XepHangPageState extends State<XepHangPage> {
             return CustomScrollView(
               controller: _scrollController,
               slivers: [
-                SliverAppBar(
-                  floating: true,
-                  snap: true,
-                  title: Text(
-                    "Xếp hạng",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: myColors.blackOrWhite),
-                  ),
-                  centerTitle: true,
-                  backgroundColor: myColors.whiteOrBlack,
-                ),
+                // SliverAppBar(
+                //   floating: true,
+                //   snap: true,
+                //   title: Text(
+                //     "Xếp hạng",
+                //     style: TextStyle(
+                //         fontWeight: FontWeight.bold,
+                //         color: myColors.blackOrWhite),
+                //   ),
+                //   centerTitle: true,
+                //   backgroundColor: myColors.whiteOrBlack,
+                // ),
                 ValueListenableBuilder(
                   valueListenable: data,
                   builder: (context, value, child) {

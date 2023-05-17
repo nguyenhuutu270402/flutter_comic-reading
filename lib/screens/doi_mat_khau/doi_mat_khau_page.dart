@@ -2,6 +2,7 @@ import 'package:comic_reading/bottom_nav/bottom_nav.dart';
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -100,20 +101,32 @@ class _DoiMatKhauPageState extends State<DoiMatKhauPage> {
     String matKhauLai = "";
 
     return Scaffold(
+      appBar: CustomAppBarWidget(
+        tiltle: "Đổi mật khẩu",
+        leading: TouchOpacityWidget(
+          child: Icon(
+            Icons.arrow_back,
+            color: myColors.blackOrWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            floating: true,
-            snap: true,
-            pinned: true,
-            title: Text(
-              "Đổi mật khẩu",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, color: myColors.blackOrWhite),
-            ),
-            centerTitle: true,
-            backgroundColor: myColors.whiteOrBlack,
-          ),
+          // SliverAppBar(
+          //   floating: true,
+          //   snap: true,
+          //   pinned: true,
+          //   title: Text(
+          //     "Đổi mật khẩu",
+          //     style: TextStyle(
+          //         fontWeight: FontWeight.bold, color: myColors.blackOrWhite),
+          //   ),
+          //   centerTitle: true,
+          //   backgroundColor: myColors.whiteOrBlack,
+          // ),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),

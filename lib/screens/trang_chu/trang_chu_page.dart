@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_widget.dart';
 import 'package:comic_reading/common/widgets/slide_view_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
@@ -65,6 +66,28 @@ class _TrangChuPageState extends State<TrangChuPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
+      appBar: CustomAppBarWidget(
+        tiltle: "Trang chủ",
+        actions: [
+          SizedBox(
+            width: 50,
+            child: TouchOpacityWidget(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TimKiemPage(),
+                    ));
+              },
+              child: Icon(
+                Icons.search,
+                size: 26,
+                color: myColors.blackOrWhite,
+              ),
+            ),
+          ),
+        ],
+      ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light.copyWith(
             // statusBarColor:
@@ -111,37 +134,37 @@ class _TrangChuPageState extends State<TrangChuPage> {
                 return CustomScrollView(
                   controller: _scrollController,
                   slivers: [
-                    SliverAppBar(
-                      floating: true,
-                      snap: true,
-                      title: Text(
-                        "Trang chủ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: myColors.blackOrWhite),
-                      ),
-                      centerTitle: true,
-                      backgroundColor: myColors.whiteOrBlack,
-                      actions: [
-                        SizedBox(
-                          width: 50,
-                          child: TouchOpacityWidget(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TimKiemPage(),
-                                  ));
-                            },
-                            child: Icon(
-                              Icons.search,
-                              size: 26,
-                              color: myColors.blackOrWhite,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // SliverAppBar(
+                    //   floating: true,
+                    //   snap: true,
+                    //   title: Text(
+                    //     "Trang chủ",
+                    //     style: TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //         color: myColors.blackOrWhite),
+                    //   ),
+                    //   centerTitle: true,
+                    //   backgroundColor: myColors.whiteOrBlack,
+                    //   actions: [
+                    //     SizedBox(
+                    //       width: 50,
+                    //       child: TouchOpacityWidget(
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                 builder: (context) => TimKiemPage(),
+                    //               ));
+                    //         },
+                    //         child: Icon(
+                    //           Icons.search,
+                    //           size: 26,
+                    //           color: myColors.blackOrWhite,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     SliverToBoxAdapter(
                       child: Column(
                         children: [

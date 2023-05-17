@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/tai_khoan/cubit/tai_khoan_cubit.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,18 @@ class _TaiKhoanPageState extends State<TaiKhoanPage> {
     double screenHeight = MediaQuery.of(context).size.height;
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
     return Scaffold(
+      appBar: CustomAppBarWidget(
+        tiltle: "Tài khoản",
+        leading: TouchOpacityWidget(
+          child: Icon(
+            Icons.arrow_back,
+            color: myColors.blackOrWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: BlocBuilder(
           bloc: bloc,
           builder: (context, state) {
@@ -77,19 +90,19 @@ class _TaiKhoanPageState extends State<TaiKhoanPage> {
 
               return CustomScrollView(
                 slivers: [
-                  SliverAppBar(
-                    floating: true,
-                    snap: true,
-                    pinned: true,
-                    title: Text(
-                      "Tài khoản",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: myColors.blackOrWhite),
-                    ),
-                    centerTitle: true,
-                    backgroundColor: myColors.whiteOrBlack,
-                  ),
+                  // SliverAppBar(
+                  //   floating: true,
+                  //   snap: true,
+                  //   pinned: true,
+                  //   title: Text(
+                  //     "Tài khoản",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: myColors.blackOrWhite),
+                  //   ),
+                  //   centerTitle: true,
+                  //   backgroundColor: myColors.whiteOrBlack,
+                  // ),
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.all(10),

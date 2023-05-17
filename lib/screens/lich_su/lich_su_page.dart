@@ -1,5 +1,6 @@
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_lich_su_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
@@ -74,6 +75,18 @@ class _LichSuPageState extends State<LichSuPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
+      appBar: CustomAppBarWidget(
+        tiltle: "Lịch sử",
+        leading: TouchOpacityWidget(
+          child: Icon(
+            Icons.arrow_back,
+            color: myColors.blackOrWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: BlocBuilder(
           bloc: bloc,
           builder: (context, state) {
@@ -116,28 +129,28 @@ class _LichSuPageState extends State<LichSuPage> {
                 child: CustomScrollView(
                   controller: _scrollController,
                   slivers: [
-                    SliverAppBar(
-                      floating: true,
-                      snap: true,
-                      pinned: true,
-                      title: Text(
-                        "Lịch sử",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: myColors.blackOrWhite),
-                      ),
-                      centerTitle: true,
-                      backgroundColor: myColors.whiteOrBlack,
-                      leading: TouchOpacityWidget(
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: myColors.blackOrWhite,
-                        ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
+                    // SliverAppBar(
+                    //   floating: true,
+                    //   snap: true,
+                    //   pinned: true,
+                    //   title: Text(
+                    //     "Lịch sử",
+                    //     style: TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //         color: myColors.blackOrWhite),
+                    //   ),
+                    //   centerTitle: true,
+                    //   backgroundColor: myColors.whiteOrBlack,
+                    //   leading: TouchOpacityWidget(
+                    //     child: Icon(
+                    //       Icons.arrow_back,
+                    //       color: myColors.blackOrWhite,
+                    //     ),
+                    //     onTap: () {
+                    //       Navigator.pop(context);
+                    //     },
+                    //   ),
+                    // ),
                     userInfor == null
                         ? SliverToBoxAdapter(
                             child: Container(

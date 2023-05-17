@@ -3,6 +3,7 @@ import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/my_function/my_function.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/utils/app_colors.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/cubit/chi_tiet_cubit.dart';
 import 'package:comic_reading/screens/chi_tiet_chuong/chi_tiet_chuong_page.dart';
@@ -47,6 +48,18 @@ class _ChiTietPageState extends State<ChiTietPage> {
     final myColors = Theme.of(context).extension<CustomThemeExtension>()!;
 
     return Scaffold(
+      appBar: CustomAppBarWidget(
+        tiltle: "Thông tin truyện",
+        leading: TouchOpacityWidget(
+          child: Icon(
+            Icons.arrow_back,
+            color: myColors.blackOrWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: BlocBuilder(
         bloc: bloc,
         builder: (context, state) {
@@ -83,27 +96,27 @@ class _ChiTietPageState extends State<ChiTietPage> {
             } else {
               return CustomScrollView(
                 slivers: [
-                  SliverAppBar(
-                    floating: true,
-                    snap: true,
-                    title: Text(
-                      "Thông tin truyện",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: myColors.blackOrWhite),
-                    ),
-                    centerTitle: true,
-                    backgroundColor: myColors.whiteOrBlack,
-                    leading: TouchOpacityWidget(
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: myColors.blackOrWhite,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
+                  // SliverAppBar(
+                  //   floating: true,
+                  //   snap: true,
+                  //   title: Text(
+                  //     "Thông tin truyện",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: myColors.blackOrWhite),
+                  //   ),
+                  //   centerTitle: true,
+                  //   backgroundColor: myColors.whiteOrBlack,
+                  //   leading: TouchOpacityWidget(
+                  //     child: Icon(
+                  //       Icons.arrow_back,
+                  //       color: myColors.blackOrWhite,
+                  //     ),
+                  //     onTap: () {
+                  //       Navigator.pop(context);
+                  //     },
+                  //   ),
+                  // ),
                   SliverToBoxAdapter(
                     child: Column(
                       children: [

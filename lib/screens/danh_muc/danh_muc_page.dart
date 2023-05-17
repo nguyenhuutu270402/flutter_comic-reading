@@ -3,6 +3,7 @@ import 'package:comic_reading/common/extension/change_theme_model.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/shared_prefes/shared_prefes.dart';
 import 'package:comic_reading/common/widgets/box_thong_tin_tai_khoan.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/item_khac_widget.dart';
 import 'package:comic_reading/screens/dang_nhap/dang_nhap_page.dart';
 import 'package:comic_reading/screens/danh_muc/cubit/danh_muc_cubit.dart';
@@ -38,6 +39,7 @@ class _DanhMucPageState extends State<DanhMucPage> {
     final mySharedPrefes = MySharedPrefes();
 
     return Scaffold(
+      appBar: const CustomAppBarWidget(tiltle: "Danh mục"),
       body: BlocBuilder(
           bloc: bloc,
           builder: (context, state) {
@@ -68,19 +70,19 @@ class _DanhMucPageState extends State<DanhMucPage> {
 
               return CustomScrollView(
                 slivers: [
-                  SliverAppBar(
-                    floating: true,
-                    snap: true,
-                    pinned: true,
-                    title: Text(
-                      "Danh mục",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: myColors.blackOrWhite),
-                    ),
-                    centerTitle: true,
-                    backgroundColor: myColors.whiteOrBlack,
-                  ),
+                  // SliverAppBar(
+                  //   floating: true,
+                  //   snap: true,
+                  //   pinned: true,
+                  //   title: Text(
+                  //     "Danh mục",
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: myColors.blackOrWhite),
+                  //   ),
+                  //   centerTitle: true,
+                  //   backgroundColor: myColors.whiteOrBlack,
+                  // ),
                   SliverToBoxAdapter(
                     child: Column(
                       children: [

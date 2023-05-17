@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/chi_tiet/model/list_tac_gia.dart';
@@ -79,6 +80,18 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
+      appBar: CustomAppBarWidget(
+        tiltle: headerTitle,
+        leading: TouchOpacityWidget(
+          child: Icon(
+            Icons.arrow_back,
+            color: myColors.blackOrWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: BlocBuilder(
         bloc: bloc,
         builder: (context, state) {
@@ -117,27 +130,27 @@ class _TheLoaiPageState extends State<TheLoaiPage> {
               return CustomScrollView(
                 controller: _scrollController,
                 slivers: [
-                  SliverAppBar(
-                    floating: true,
-                    snap: true,
-                    title: Text(
-                      headerTitle,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: myColors.blackOrWhite),
-                    ),
-                    centerTitle: true,
-                    backgroundColor: myColors.whiteOrBlack,
-                    leading: TouchOpacityWidget(
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: myColors.blackOrWhite,
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
+                  // SliverAppBar(
+                  //   floating: true,
+                  //   snap: true,
+                  //   title: Text(
+                  //     headerTitle,
+                  //     style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: myColors.blackOrWhite),
+                  //   ),
+                  //   centerTitle: true,
+                  //   backgroundColor: myColors.whiteOrBlack,
+                  //   leading: TouchOpacityWidget(
+                  //     child: Icon(
+                  //       Icons.arrow_back,
+                  //       color: myColors.blackOrWhite,
+                  //     ),
+                  //     onTap: () {
+                  //       Navigator.pop(context);
+                  //     },
+                  //   ),
+                  // ),
                   ValueListenableBuilder(
                     valueListenable: data,
                     builder: (context, value, child) {
