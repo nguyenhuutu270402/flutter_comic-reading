@@ -1,4 +1,5 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
 import 'package:comic_reading/screens/yeu_thich/cubit/yeu_thich_cubit.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +66,7 @@ class _YeuThichPageState extends State<YeuThichPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
+      appBar: const CustomAppBarWidget(tiltle: "Theo dõi"),
       body: BlocBuilder(
           bloc: bloc,
           builder: (context, state) {
@@ -107,19 +109,19 @@ class _YeuThichPageState extends State<YeuThichPage> {
                 child: CustomScrollView(
                   controller: _scrollController,
                   slivers: [
-                    SliverAppBar(
-                      floating: true,
-                      snap: true,
-                      pinned: true,
-                      title: Text(
-                        "Theo dõi",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: myColors.blackOrWhite),
-                      ),
-                      centerTitle: true,
-                      backgroundColor: myColors.whiteOrBlack,
-                    ),
+                    // SliverAppBar(
+                    //   floating: true,
+                    //   snap: true,
+                    //   pinned: true,
+                    //   title: Text(
+                    //     "Theo dõi",
+                    //     style: TextStyle(
+                    //         fontWeight: FontWeight.bold,
+                    //         color: myColors.blackOrWhite),
+                    //   ),
+                    //   centerTitle: true,
+                    //   backgroundColor: myColors.whiteOrBlack,
+                    // ),
                     userInfor == null
                         ? SliverToBoxAdapter(
                             child: Container(
