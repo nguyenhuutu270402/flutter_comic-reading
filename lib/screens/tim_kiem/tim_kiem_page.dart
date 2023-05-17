@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:comic_reading/common/api/api_provider.dart';
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
+import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
 import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:flutter/material.dart';
@@ -79,45 +80,58 @@ class _TimKiemPageState extends State<TimKiemPage> {
       crossAxisCount = 4;
     }
     return Scaffold(
+      appBar: CustomAppBarWidget(
+        isAppBarSearch: true,
+        onTimKiem: _timkiem,
+        leading: TouchOpacityWidget(
+          child: Icon(
+            Icons.arrow_back,
+            color: myColors.blackOrWhite,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          SliverAppBar(
-            centerTitle: true,
-            titleSpacing: 0,
-            backgroundColor: myColors.whiteOrBlack,
-            elevation: 2,
-            floating: true,
-            snap: true,
-            title: TextField(
-              onChanged: (value) {
-                _timkiem(value);
-              },
-              decoration: InputDecoration(
-                hintText: 'Tìm kiếm',
-                filled: true,
-                fillColor: myColors.whiteOrBlack,
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                ),
-                hintStyle: TextStyle(color: Colors.grey),
-              ),
-            ),
-            leading: TouchOpacityWidget(
-              child: Icon(
-                Icons.arrow_back,
-                color: myColors.blackOrWhite,
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            actions: [
-              Container(
-                width: 10,
-              )
-            ],
-          ),
+          // SliverAppBar(
+          //   centerTitle: true,
+          //   titleSpacing: 0,
+          //   backgroundColor: myColors.whiteOrBlack,
+          //   elevation: 2,
+          //   floating: true,
+          //   snap: true,
+          //   title: TextField(
+          //     onChanged: (value) {
+          //       _timkiem(value);
+          //     },
+          //     decoration: InputDecoration(
+          //       hintText: 'Tìm kiếm',
+          //       filled: true,
+          //       fillColor: myColors.whiteOrBlack,
+          //       border: OutlineInputBorder(
+          //         borderSide: BorderSide.none,
+          //       ),
+          //       hintStyle: TextStyle(color: Colors.grey),
+          //     ),
+          //   ),
+          //   leading: TouchOpacityWidget(
+          //     child: Icon(
+          //       Icons.arrow_back,
+          //       color: myColors.blackOrWhite,
+          //     ),
+          //     onTap: () {
+          //       Navigator.pop(context);
+          //     },
+          //   ),
+          //   actions: [
+          //     Container(
+          //       width: 10,
+          //     )
+          //   ],
+          // ),
           ValueListenableBuilder(
             valueListenable: data,
             builder: (context, value, child) {
