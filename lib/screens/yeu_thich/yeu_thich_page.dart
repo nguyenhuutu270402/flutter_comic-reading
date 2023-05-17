@@ -1,6 +1,7 @@
 import 'package:comic_reading/common/extension/custom_theme_extension.dart';
 import 'package:comic_reading/common/widgets/custom_app_bar_widget.dart';
 import 'package:comic_reading/common/widgets/my_grid_view_theo_loai_widget.dart';
+import 'package:comic_reading/common/widgets/touch_opacity_widget.dart';
 import 'package:comic_reading/screens/yeu_thich/cubit/yeu_thich_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -124,8 +125,11 @@ class _YeuThichPageState extends State<YeuThichPage> {
                     // ),
                     userInfor == null
                         ? SliverToBoxAdapter(
-                            child: Container(
-                              child: Text("Chưa đăng nhập"),
+                            child: TouchOpacityWidget(
+                              onTap: _refreshData,
+                              child: Container(
+                                child: Text("Chưa đăng nhập"),
+                              ),
                             ),
                           )
                         : ValueListenableBuilder(

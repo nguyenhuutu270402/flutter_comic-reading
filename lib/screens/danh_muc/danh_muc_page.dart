@@ -203,8 +203,14 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => DangNhapPage()),
-                                  );
+                                      builder: (context) => DangNhapPage(),
+                                    ),
+                                  ).then((value) {
+                                    if (value == "reload") {
+                                      bloc.initData();
+                                    }
+                                    print("sau khi dang nhap ne>> $value");
+                                  });
                                 },
                               )
                             else
@@ -236,11 +242,7 @@ class _DanhMucPageState extends State<DanhMucPage> {
                                     title: "Đăng xuất",
                                     onTap: () async {
                                       await mySharedPrefes.removeUserInfo();
-                                      Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(
-                                          builder: (context) => BottomNav(),
-                                        ),
-                                      );
+                                      bloc.initData();
                                     },
                                   ),
                                 ],

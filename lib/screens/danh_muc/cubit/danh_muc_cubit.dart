@@ -18,4 +18,9 @@ class DanhMucCubit extends Cubit<DanhMucState> {
       emit(DanhMucFailure(error: e.toString()));
     }
   }
+
+  Future<dynamic> removeUserInfo() async {
+    // final prefs = await SharedPreferences.getInstance();
+    // prefs.remove('nguoidung');
+  }
 }

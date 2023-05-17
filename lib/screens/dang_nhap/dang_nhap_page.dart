@@ -75,12 +75,12 @@ class _DangNhapPageState extends State<DangNhapPage> {
         fontSize: 14.0,
       );
       EasyLoading.dismiss();
-      Navigator.pop(context);
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => BottomNav(),
-        ),
-      );
+      Navigator.pop(context, "reload");
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(
+      //     builder: (context) => BottomNav(),
+      //   ),
+      // );
     }
 
     return Scaffold(
